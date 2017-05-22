@@ -1,0 +1,411 @@
+@font-face {
+  font-family: 'Open Sans';
+  src: url('../fonts/OpenSans-Bold.ttf') format('trutype'),
+  src: url('../fonts/OpenSans-Bold.ttf') format('trutype'),
+  src: url('../fonts/OpenSans-BoldItalic.ttf') format('trutype'),
+  src: url('../fonts/OpenSans-ExtraBold.ttf') format('trutype'),
+  src: url('../fonts/OpenSans-ExtraBoldItalic.ttf') format('trutype'),
+  src: url('../fonts/OpenSans-Italic.ttf') format('trutype'),
+  src: url('../fonts/OpenSans-Light.ttf') format('trutype'),
+  src: url('../fonts/OpenSans-LightItalic.ttf') format('trutype'),
+  src: url('../fonts/OpenSans-Regular.ttf') format('trutype'),
+  src: url('../fonts/OpenSans-Semibold.ttf') format('trutype'),
+  src: url('../fonts/OpenSans-SemiboldItalic.ttf')format('trutype');
+  font-weight: normal;
+  font-style: normal;
+}
+html, body{
+  color: #000;
+  background-color: #fff;
+  font-size: 18px;
+  font-weight: 100;
+  letter-spacing: 0.5px;
+  font-family: 'Open Sans', sans-serif;
+}
+h1{
+  font-size: 60px;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 3px;
+  margin-bottom: 30px;
+}
+h2{
+  font-size: 40px;
+  text-transform: uppercase;
+  font-weight: lighter;
+  letter-spacing: 3px;
+  margin-bottom: 30px;
+}
+h3{
+  font-size: 2rem;
+  font-weight: 400;
+  letter-spacing: 3px;
+}
+h4{
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: 3px;
+}
+h5{
+  font-size: 20px;
+  font-weight: 400;
+  letter-spacing: 3px;
+}
+h6{
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: 1px;
+}
+p{
+  margin: 0px;
+}
+ul li{
+  list-style: none;
+}
+input[type=text] {
+    width: 100%;
+    height: 30px;
+    margin: none;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 0;
+}
+input[type=number] {
+    width: 70%;
+    height: 30px;
+    margin: none;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 0;
+}
+.kecil input[type=number] {
+    width: 100px;
+    height: 30px;
+    margin: none;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 0;
+}
+input[type=text]:focus, input[type=number]:focus{
+    background-color: none;
+    border: 1px solid #444;
+}
+select {
+    width: 160px;
+    height: 30px;
+    border-radius: 0px;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+    overflow: scroll;
+}
+.kecil select {
+    width: 130px;
+    height: 30px;
+    border-radius: 0px;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+    overflow: scroll;
+}
+
+select.selectpicker {
+      display: block;
+      margin: 0 auto;
+      padding-left: 20px;
+}
+.pagination{
+  margin: 0px;
+  font-size: 10px;
+}
+.form-group.required .control-label:after {
+  color: #d00;
+  content: "*";
+}
+.container-fluid{
+  padding: 0px;
+}
+.row{
+  margin: 0px;
+}
+.break{
+  min-height: 70px;
+  background-color: black
+}
+.navbar-brand img{
+  max-width: 45px;
+}
+.navbar {
+  margin-bottom: 0;
+  background-color: #fff;
+  z-index: 9999;
+  border: none;
+  font-size: 12px !important;
+  line-height: 1.42857143 !important;
+  letter-spacing: 1px;
+  border-radius: 0;
+  font-weight: 500;
+  min-height: 70px;
+  box-shadow: 0px 1px 0px 0px rgba(0,0,0,0.066);
+}
+.navbar li a{
+  color: #000 !important;
+  text-transform: uppercase;
+  padding-top: 25px;
+  padding-bottom: 25px;
+}
+.navbar-nav{
+  padding-left: 30px;
+}
+.navbar .navbar-brand{
+  color: #000 !important;
+}
+.navbar-nav li a:hover, .navbar-nav li.active a {
+  color: #fff !important;
+  background-color: #337ab7 !important;
+}
+.navbar-default .navbar-toggle {
+  border-color: transparent;
+  color: #fff !important;
+}
+.navbar-header{
+  padding-left: 0px;;
+}
+.jumbotron{
+  background-color: #118DF0;
+  background: url(../images/background.jpg) no-repeat center bottom fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 100vh;
+  padding: 0px;
+  margin: 0px;
+}
+.landing{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  text-align: center;
+}
+.landing h1{
+  color: #fff;
+  text-shadow: 1px 1px 1px #000;
+}
+.landing h2, .landing p{
+  color: #000;
+}
+footer{
+  background-color: #f6f6f6;
+  font-size: 14px;
+  font-weight: 400;
+  padding: 10px 30px;
+}
+footer a{
+  color: #00B3AA;
+}
+.address{
+  font-size: 1.5rem;
+  font-weight: 400;
+}
+
+/* login page */
+.menu{
+  background-color: #337ab7;
+  height: 100vh;
+  padding: 20px 10px;
+  font-weight: 300;
+  font-size: 14px;
+  color: #fff;
+}
+.menu img{
+  width: 30%;
+}
+.menu input{
+  color: #000;
+}
+.menu ul li{
+  list-style-type: none;
+}
+.menu a:active{
+  background-color: #444;
+
+}
+.warning{
+  display: block;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  color: yellow;
+  font-size: 12px;
+}
+.login{
+  padding: 100px;
+}
+.content{
+  background-color: #F7F7F7;
+  /*background: url(../images/background3.jpg) no-repeat center center fixed;*/
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 100vh;
+  padding: 20px;
+  text-align: center
+}
+.content2{
+  font-size: 12px;
+}
+.content3{
+  font-size: 12px;
+  margin: 30px 0 0 0;
+}
+.content3 ul{
+  display: inline;
+  padding: 0;
+}
+.content3 ul li{
+  display: inline-block;
+  padding: 10px 0;
+  width: 100%;
+  position: relative;
+  border-bottom: 1px solid #444;
+  box-sizing: border-box;
+}
+.content4{
+  padding-top: 20px;
+  font-size: 14px;
+}
+
+.barang{
+  background-color: #2196f3;
+  color: #fff;
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+.barang a{
+  color: #fff;
+  font-size: 40px;
+}
+.charts{
+  margin-bottom: 10px;
+}
+.bold{
+  font-weight: bold;
+}
+.menu input[type=text], .menu input[type=email], .menu input[type=password]{
+  padding: 10px 20px;
+  width: 90%;
+  margin: 8px 0px;
+  height: 30px;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+.menu button{
+  background-color: #4CAF50;
+  color: #fff;
+  padding: 5px 0;
+  width: 90%;
+  border: none;
+  cursor: pointer;
+}
+.menu button:hover{
+  opacity: 0.8;
+}
+.menu a{
+  text-decoration: none;
+  display: block;
+  width: 100%;
+  padding: 10px 20px;
+  background-color: #fff;
+  color: #444;
+  margin: 5px 0;
+}
+.menu a:hover{
+  text-decoration: none;
+  display: block;
+  background-color: #444;
+  width: 100%;
+  padding: 10px 20px;
+  color: #fff;
+}
+.trandmark{
+  padding-top: 10px;
+  font-size: 10px;
+  font-weight: 300;
+}
+/* home page */
+hr{
+  border-top: 1px dashed #8c8b8b;
+}
+/* search */
+.search{
+  background-color: #f9f9f9;
+  height: 100vh;
+  padding: 100px 200px;
+}
+.custom-search-input{
+    padding: 3px;
+    border: solid 1px #E4E4E4;
+    border-radius: 6px;
+    background-color: #fff;
+    text-align: center;
+}
+.custom-search-input input{
+    border: 0;
+    box-shadow: none;
+}
+.custom-search-input button{
+    margin: 2px 0 0 0;
+    background: none;
+    box-shadow: none;
+    border: 0;
+    color: #666666;
+    padding: 0 8px 0 10px;
+    border-left: solid 1px #ccc;
+}
+.custom-search-input button:hover{
+  border: 0;
+  box-shadow: none;
+}
+.btn-info:hover{
+    color: #118DF0;
+    background-color: #fff;
+    border-color: #269abc;
+}
+.btn-info:active{
+  color: #fff;
+  background-color: #31b0d5;
+  border-color: red;
+}
+.custom-search-input .glyphicon-search{
+    font-size: 23px;
+}
+
+/*Report*/
+.report{
+  font-size: 11px;
+}
+
+.vertical-alignment-helper {
+    display:table;
+    height: 100%;
+    width: 100%;
+    pointer-events:none;
+}
+.vertical-align-center {
+    /* To center vertically */
+    display: table-cell;
+    vertical-align: middle;
+    pointer-events:none;
+}
+.modal-content {
+    /* Bootstrap sets the size of the modal in the modal-dialog class, we need to inherit it */
+    width:inherit;
+    height:inherit;
+    /* To center horizontally */
+    margin: 0 auto;
+    pointer-events:all;
+}
+.ok{
+  margin-bottom: 15px;
+}
