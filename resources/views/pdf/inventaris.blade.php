@@ -5,7 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>@yield('title')</title>
-  <style media="screen">
+  <style>
     table{
       border-collapse: collapse;
     }
@@ -23,17 +23,13 @@
       <table class="table table-striped table-bordered">
       <thead style="text-align:center">
         <tr>
-          <th rowspan="2">NO</th>
-          <th rowspan="2">GOLONGAN</th>
-          <th rowspan="2">KODE BIDANG</th>
-          <th rowspan="2">NAMA BIDANG BARANG</th>
-          <th rowspan="2">JUMLAH BARANG</th>
-          <th colspan="2">JUMLAH HARGA DALAM RIBUAN (Rp.)</th>
-          <th rowspan="2">KETERANGAN</th>
-        </tr>
-        <tr>
-          <th>Bidang</th>
-          <th>Golongan</th>
+          <th>NO</th>
+          <th>GOLONGAN</th>
+          <th>KODE BIDANG</th>
+          <th>NAMA BIDANG BARANG</th>
+          <th>JUMLAH BARANG</th>
+          <th>JUMLAH HARGA DALAM RIBUAN (Rp.)</th>
+          <th>KETERANGAN</th>
         </tr>
       </thead>
       <tbody>
@@ -47,12 +43,9 @@
           <td><strong>{{ $barang->bidang_barang_name }}</strong><br>{{ $barang->kelompok_barang_name }}</td>
           <td class="number">{{ $barang->total_barang }}</td>
           <td class="number">{{ number_format($barang->total_price) }}</td>
-            @foreach ($golongans as $golongan)
-              <!-- @if($golongan->golongan_barang_code === $barang->golongan_barang_code) -->
+            <!-- @foreach ($golongans as $golongan)
               <td class="number">{{ number_format($barangs->where('golongan_barang_code',$golongan->golongan_barang_code)->sum('total_price')) }}</td>
-              <!-- @else
-              @endif -->
-            @endforeach
+            @endforeach -->
           <td>{{ $barang->status_name}},{{$barang->kondisi_name  }}</td>
         </tr>
         @endforeach
@@ -60,9 +53,8 @@
       <thead>
         <tr>
           <th colspan="3">&nbsp;</th>
-          <th>JUMLAH ASET</th>
+          <th>Total</th>
           <th class="number">{{ $barangs->sum('total_barang')}}</th>
-          <th>TOTAL ASET</th>
           <th class="number">{{ number_format($barangs->sum('total_price'))}}</th>
           <th>&nbsp;</th>
         </tr>

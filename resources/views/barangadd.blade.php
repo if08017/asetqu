@@ -107,9 +107,9 @@
               var bidang_id = e.target.value;
               $.get('/barang/ajax-bidang?bidang_id=' + bidang_id, function(data){
                 console.log(data);
-                // $('.bidang').empty();
-                // $('.kelompok').empty();
-                // $('.subkelompok').empty();
+                $('.bidang').empty();
+                $('.kelompok').empty();
+                $('.subkelompok').empty();
                 $.each(data,function(index, bidangObj){
                   $('.bidang').append('<option value="'+bidangObj.id+'">'+bidangObj.name+'</option>');
                 });
@@ -129,8 +129,8 @@
               var kelompok_id = e.target.value;
               $.get('/barang/ajax-kelompok?kelompok_id=' + kelompok_id, function(data){
                 console.log(data);
-                // $('.kelompok').empty();
-                // $('.subkelompok').empty();
+                $('.kelompok').empty();
+                $('.subkelompok').empty();
                 $.each(data,function(index, kelompokObj){
                   $('.kelompok').append('<option value="'+kelompokObj.id+'">'+kelompokObj.name+'</option>');
                 });
@@ -150,7 +150,7 @@
               var subkelompok_id = e.target.value;
               $.get('/barang/ajax-sub-kelompok?subkelompok_id=' + subkelompok_id, function(data){
                 console.log(data);
-                // $('.subkelompok').empty();
+                $('.subkelompok').empty();
                 $.each(data,function(index, subkelompokObj){
                   $('.subkelompok').append('<option value="'+subkelompokObj.id+'">'+subkelompokObj.name+'</option>');
                 });

@@ -49,7 +49,7 @@ class HomeController extends Controller
               ->title('Aktifitas input barang Harian')
               //->labels(['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'])
               //->values([100,50,25])
-              ->elementLabel('Grafik harian')
+              ->elementLabel('Total')
               ->dimensions(0,300)
               ->responsive(false)
               //->groupByDay();
@@ -57,16 +57,18 @@ class HomeController extends Controller
       $years = Charts::database(Barang::all(),'bar', 'highcharts')
               ->dateFormat('j F y')
               ->title('Aktifitas Tahunan')
-                ->elementLabel('Grafik tahunan')
-              ->dimensions(0,200)
-              ->responsive(false)
-              ->groupByYear();
-      $charts2 = Charts::database(Barang::all(),'pie', 'highcharts')
-              ->title('Pie Chart Kategori')
               ->elementLabel('Total')
               ->dimensions(0,200)
               ->responsive(false)
-              ->groupBy('golongan_barang_id');
+              ->groupByYear();
+      $charts2 = Charts::database(Barang::join('golongan_barang','golongan_barang_id','=','golongan_barang.id')
+              ->select('barang.*','golongan_barang.name as golongan_barang_name')
+              ->get(),'line', 'highcharts')
+              ->title('Line Kategori')
+              ->elementLabel('Total')
+              ->dimensions(0,200)
+              ->responsive(false)
+              ->groupBy('golongan_barang_name');
       return view('home', ['barangs' => $barangs, 'charts' => $charts, 'charts2' => $charts2, 'years' => $years]);
     }
     public function search(Request $request){
