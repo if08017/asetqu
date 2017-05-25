@@ -63,7 +63,7 @@ class HomeController extends Controller
               ->groupByYear();
       $charts2 = Charts::database(Barang::join('golongan_barang','golongan_barang_id','=','golongan_barang.id')
               ->select('barang.*','golongan_barang.name as golongan_barang_name')
-              ->get(),'line', 'highcharts')
+              ->get(),'area', 'highcharts')
               ->title('Line Kategori')
               ->elementLabel('Total')
               ->dimensions(0,200)

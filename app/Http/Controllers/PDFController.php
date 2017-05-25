@@ -9,6 +9,7 @@ use PDF;
 use App\Models\Barang;
 use App\Models\Report;
 use App\Models\Pegawai;
+use App\Models\Ruangan;
 
 class PDFController extends Controller
 {
@@ -22,7 +23,8 @@ class PDFController extends Controller
     $barangs = Barang::join('golongan_barang','golongan_barang_id','=','golongan_barang.id')
     ->join('bidang_barang','bidang_barang_id','=','bidang_barang.id')
     ->join('kelompok_barang','kelompok_barang_id','=','kelompok_barang.id')
-    ->select('barang.*', DB::raw('COUNT(barang.id) as total_barang'), DB::raw('SUM(barang.price) as total_price'),'golongan_barang.code as golongan_barang_code', 'bidang_barang.code as bidang_barang_code', 'bidang_barang.name as bidang_barang_name','kelompok_barang.code as kelompok_barang_code', DB::raw('GROUP_CONCAT(kelompok_barang.name) as kelompok_barang_name'))
+    ->select('barang.*', DB::raw('COUNT(barang.id) as total_barang'), DB::raw('SUM(barang.price) as total_price'),'golongan_barang.code as golongan_barang_code', 'bidang_barang.code as bidang_barang_code', 'bidang_barang.name as bidang_barang_name','kelompok_barang.code as kelompok_barang_code', DB::raw('GROUP_CONCAT(DISTINCT(kelompok_barang.name)) as kelompok_barang_name'))
+    ->whereYear('barang.created_at','=',date('Y'))
     ->groupBy('kelompok_barang_code')
     // , 'bidang_barang_id', 'kelompok_barang_id','bidang_barang_name', 'kelompok_barang_name', 'golongan_barang_code', 'bidang_barang_code')
     ->orderBy('golongan_barang_code', 'asc')
@@ -45,6 +47,7 @@ class PDFController extends Controller
       ->join('bidang_barang','bidang_barang_id','=','bidang_barang.id')
       ->join('kelompok_barang','kelompok_barang_id','=','kelompok_barang.id')
       ->select('barang.*', DB::raw('COUNT(barang.id) as total_barang'), DB::raw('SUM(barang.price) as total_price'),'golongan_barang.code as golongan_barang_code', 'bidang_barang.code as bidang_barang_code', 'bidang_barang.name as bidang_barang_name','kelompok_barang.code as kelompok_barang_code', DB::raw('GROUP_CONCAT(DISTINCT(kelompok_barang.name)) as kelompok_barang_name'))
+      ->whereYear('barang.created_at','=',date('Y'))
       ->groupBy('bidang_barang_code')
       // , 'bidang_barang_id', 'kelompok_barang_id','bidang_barang_name', 'kelompok_barang_name', 'golongan_barang_code', 'bidang_barang_code')
       ->orderBy('golongan_barang_code', 'asc')
@@ -57,7 +60,7 @@ class PDFController extends Controller
       ->orderBy('golongan_barang_code', 'asc')
       ->get();
 
-      $pdf=PDF::loadView('pdf.inventaris', ['barangs' => $barangs, 'golongans' => $golongans]);
+      $pdf=PDF::loadView('pdf.inventaris', ['barangs' => $barangs, 'golongans' => $golongans])->setPaper('a4', 'landscape');
       return $pdf->download('Inventaris Tahun Ini.pdf');
     }
     elseif($id == 2) {
@@ -72,7 +75,15 @@ class PDFController extends Controller
       return $pdf->download('Inventaris Aset Aktif dan usulan penghapusan.pdf');
     }
     elseif ($id == 3) {
-      return 'c';
+      $barangs = Barang::join('pegawai','pegawai_id','=','pegawai.id')
+      ->join('ruangan','ruangan_id','=','ruangan.id')
+      ->select('barang.*','pegawai.name as pegawai_name','ruangan.code as ruangan_code')
+      ->where('status_name','Dalam usulan penghapusan')
+      ->orderBy('code', 'asc')
+      ->get();
+
+      $pdf=PDF::loadView('pdf.inventaris3', ['barangs' => $barangs])->setPaper('a4', 'landscape');
+      return $pdf->stream('Inventaris Aset Aktif dan usulan penghapusan.pdf');
     }
   }
   public function inventaris_bulanan(){

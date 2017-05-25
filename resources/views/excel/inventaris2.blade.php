@@ -6,12 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>@yield('title')</title>
   <style>
-    body{
-      font-size: 11px;
-    }
     table{
       border-collapse: collapse;
-      margin: 0 auto;
     }
     td, th{
       border: 1px solid #333;
@@ -33,7 +29,7 @@
       <thead style="text-align:center">
         <tr>
           <th>No</th>
-          <th>Kode Barang</th>
+          <th>Kode Karang</th>
           <th>Nama Barang</th>
           <th>Merek/Tipe</th>
           <th>Ukuran</th>

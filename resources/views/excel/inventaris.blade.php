@@ -6,12 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Inventaris tahunan</title>
   <style>
-    body{
-      font-size: 11px;
-    }
     table{
       border-collapse: collapse;
-      margin: 0 auto;
     }
     td, th{
       border: 1px solid #333;
@@ -27,13 +23,13 @@
       <table class="table table-striped table-bordered">
       <thead style="text-align:center">
         <tr>
-          <th>No</th>
-          <th>Kode Golongan</th>
-          <th>Kode Bidang</th>
-          <th>Nama Bidang Barang</th>
-          <th>Jumlah Barang</th>
-          <th>Jumlah Harga Dalam Ribuan(Rp.)</th>
-          <th>Keterangan</th>
+          <th>NO</th>
+          <th>GOLONGAN</th>
+          <th>KODE BIDANG</th>
+          <th>NAMA BIDANG BARANG</th>
+          <th>JUMLAH BARANG</th>
+          <th>JUMLAH HARGA DALAM RIBUAN (Rp.)</th>
+          <th>KETERANGAN</th>
         </tr>
       </thead>
       <tbody>

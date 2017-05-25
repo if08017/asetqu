@@ -25,24 +25,41 @@
       text-align: center;
       padding: 20px;
     }
+    .atas tr>td{
+      border: none;
+      text-align: left;
+      padding: 5px;
+    }
   </style>
 </head>
 <body>
     <div class="table-responsive report">
       <table class="table table-striped table-bordered">
+        <thead class="atas">
+          <tr>
+            <td>&nbsp;</td>
+            <td colspan="2">OPD</td>
+            <td colspan="4">OPD</td>
+          </tr>
+          <tr>
+            <td colspan="3">&nbsp;</td>
+          </tr>
+          <tr>
+            <td colspan="4">PAINAN, 09 Desember 2016</td>
+          </tr>
+        </thead>
       <thead style="text-align:center">
         <tr>
           <th>No</th>
           <th>Kode Barang</th>
           <th>Nama Barang</th>
-          <th>Merek/Tipe</th>
-          <th>Ukuran</th>
-          <th>Bahan</th>
-          <th>Tahun Pembuatan</th>
-          <th>Nomor/Identitas</th>
-          <th>Asal Usul</th>
-          <th>Harga</th>
-          <th>Pengguna</th>
+          <th>Kode Lokasi</th>
+          <th>Merek / Tipe</th>
+          <th>Dokumen Kepemilikan</th>
+          <th>Tahun Pembelian</th>
+          <th>Harga Perolehan</th>
+          <th>Keadaan Barang</th>
+          <th>Status</th>
           <th>Keterangan</th>
         </tr>
       </thead>
@@ -54,14 +71,13 @@
           <td><strong>{{$a}}</strong></td>
           <td class="number">{{ $barang->code }}</td>
           <td>{{ $barang->name }}</td>
+          <td>{{ $barang->ruangan_code }}</td>
           <td>{{ $barang->brand }}</td>
-          <td class="number">{{ $barang->size }}</td>
-          <td>{{ $barang->material }}</td>
-          <td>{{ $barang->year_created }}</td>
-          <td>{{ $barang->number }}</td>
-          <td>{{ $barang->source }}</td>
-          <td>{{ $barang->price }}</td>
           <td>{{ $barang->pegawai_name }}</td>
+          <td>{{ $barang->year_created }}</td>
+          <td class="number">{{ $barang->price }}</td>
+          <td>{{ $barang->kondisi_name }}</td>
+          <td>{{ $barang->status_name }}</td>
           <td>{{ $barang->description }}</td>
         </tr>
         @endforeach
@@ -69,17 +85,17 @@
       <thead class="signature">
         <tr>
           <td colspan="4">Mengetahui</td>
-          <td colspan="4">&nbsp;</td>
+          <td colspan="3">&nbsp;</td>
           <td colspan="4">PAINAN, 09 Desember 2016</td>
         </tr>
         <tr>
           <td colspan="4">&nbsp;</td>
-          <td colspan="4">&nbsp;</td>
+          <td colspan="3">&nbsp;</td>
           <td colspan="4">&nbsp;</td>
         </tr>
         <tr>
           <td colspan="4">Ir. Erizon, MT <br> NIP. 19630323 199003 1 005	</td>
-          <td colspan="4"></td>
+          <td colspan="3"></td>
           <td colspan="4">WETRI MULYADEVITA, A.Md <br> NIP. 19800708 200902 2 003</td>
         </tr>
       </thead>
