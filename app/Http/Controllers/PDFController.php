@@ -77,12 +77,25 @@ class PDFController extends Controller
     elseif ($id == 3) {
       $barangs = Barang::join('pegawai','pegawai_id','=','pegawai.id')
       ->join('ruangan','ruangan_id','=','ruangan.id')
-      ->select('barang.*','pegawai.name as pegawai_name','ruangan.code as ruangan_code')
+      ->join('receipt','receipt_id','=','receipt.id')
+      ->select('barang.*','pegawai.name as pegawai_name','ruangan.code as ruangan_code','receipt.code as receipt_code')
       ->where('status_name','Dalam usulan penghapusan')
       ->orderBy('code', 'asc')
       ->get();
 
       $pdf=PDF::loadView('pdf.inventaris3', ['barangs' => $barangs])->setPaper('a4', 'landscape');
+      return $pdf->stream('Inventaris Aset Dalam Usulan Penghapusan.pdf');
+    }
+    elseif ($id == 4) {
+      $barangs = Barang::join('pegawai','pegawai_id','=','pegawai.id')
+      ->join('ruangan','ruangan_id','=','ruangan.id')
+      ->join('receipt','receipt_id','=','receipt.id')
+      ->select('barang.*','pegawai.name as pegawai_name','ruangan.code as ruangan_code','receipt.code as receipt_code')
+      ->where('status_name','Dalam usulan penghapusan')
+      ->orderBy('code', 'asc')
+      ->get();
+
+      $pdf=PDF::loadView('pdf.inventaris4', ['barangs' => $barangs])->setPaper('a4', 'landscape');
       return $pdf->stream('Inventaris Aset Aktif dan usulan penghapusan.pdf');
     }
   }
