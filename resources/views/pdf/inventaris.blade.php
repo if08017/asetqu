@@ -20,11 +20,26 @@
     .number{
       text-align: center;
     }
+    .signature tr>td{
+      border: none;
+      text-align: center;
+      padding: 20px;
+    }
+    .atas tr>td{
+      border: none;
+      text-align: left;
+      padding: 5px;
+    }
   </style>
 </head>
 <body>
     <div class="table-responsive report">
       <table class="table table-striped table-bordered">
+        <thead class="atas">
+          <tr>
+            <td colspan="7" style="text-align:center; padding: 10px;">DAFTAR BARANG INVENTARIS<br>{{ date('Y')}}</td>
+          </tr>
+        </thead>
       <thead style="text-align:center">
         <tr>
           <th>No</th>

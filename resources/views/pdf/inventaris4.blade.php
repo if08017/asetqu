@@ -66,7 +66,7 @@
           <th>Tahun Pembuatan</th>
           <th>Nomor / Identitas</th>
           <th>Asal Usul</th>
-          <th>Keadaan Barang</th>
+          <th>Harga</th>
           <th>Pengguna</th>
           <th>Status</th>
           <th>Keterangan</th>
@@ -77,7 +77,7 @@
         @foreach ($barangs as $barang)
         @php ($a++)
         <tr>
-          <td><strong>{{$a}}</strong></td>
+          <td class="number"><strong>{{$a}}</strong></td>
           <td class="number">{{ $barang->code }}</td>
           <td>{{ $barang->name }}</td>
           <td>{{ $barang->brand }}</td>
@@ -86,7 +86,7 @@
           <td class="number">{{ $barang->year_created }}</td>
           <td>{{ $barang->receipt_code }}</td>
           <td>{{ $barang->source }}</td>
-          <td>{{ $barang->kondisi_name }}</td>
+          <td class="number">{{ $barang->price }}</td>
           <td>{{ $barang->pegawai_name }}</td>
           <td>{{ $barang->status_name }}</td>
           <td>{{ $barang->description }}</td>

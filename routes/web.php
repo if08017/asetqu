@@ -20,7 +20,11 @@ Route::get('/excel', 'ExcelController@index');
 Route::get('/inventaris', 'PDFController@inventaris_all');
 
 Route::get('/laporan', 'ReportController@index');
-Route::get('/laporan/{id}/pdf', 'PDFController@inventaris_pdf');
+Route::get('/laporan/inventaris/pdf', 'PDFController@inventaris_pertahun');
+Route::get('/laporan/inventaris_aset_usulan/pdf', 'PDFController@inventaris_aktif_usulan');
+Route::get('/laporan/inventaris_usulan/pdf', 'PDFController@inventaris_usulan');
+Route::get('/laporan/inventaris_mutasi_hapus/pdf', 'PDFController@inventaris_mutasi_hapus');
+Route::post('/laporan/inventaris_perpengguna/pdf', 'PDFController@inventaris_perpengguna');
 Route::get('/laporan/{id}/excel', 'ExcelController@inventaris_excel');
 Route::get('/laporan/inventaris/{id}/pdf', 'PDFController@inventaris_all');
 Route::get('/laporan/inventaris/mingguan', 'PDFController@inventaris_mingguan');
