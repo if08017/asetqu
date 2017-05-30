@@ -5,7 +5,6 @@
       <h5>Rincian barang dengan kode {{$barang->code}}</h5>
       <div class="text-right">
         <a class="btn btn-sm btn-primary" href="/barang"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>kembali</a>
-        <a class="btn btn-sm btn-success" href="/barang"><span class="glyphicon glyphicon-export" aria-hidden="true"></span>export PDF</a>
         <a class="btn btn-sm btn-warning" href="/barang/{{$barang->id}}/edit"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span>edit</a>
         <a class="btn btn-sm btn-danger" href="/barang/{{$barang->id}}/delete"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span>delete</a>
       </div>
@@ -18,6 +17,8 @@
             </tr>
           </thead>
           <tbody>
+            <tr><td>Gambar</td><td><img src="/images/inventori/{{ $barang->picture }}" alt="" style="max-height:50px;"></td>
+            </tr>
             <tr> <td>Kode</td> <td>{{$barang->code}}</td> </tr>
             <tr> <td>Nama</td> <td>{{$barang->name}}</td> </tr>
             <tr> <td>Kuantitas</td> <td>{{$barang->quantity}}</td> </tr>
@@ -42,9 +43,9 @@
             </tr>
           </thead>
           <tbody>
+            <tr> <td>Nomor PO / Kuitansi</td> <td>{{$barang->number}}</td> </tr>
             <tr> <td>Deskripsi</td> <td>{{$barang->description}}</td> </tr>
-            <tr> <td>Harga</td> <td>{{$barang->price}}</td> </tr>
-            <tr> <td>Nomor</td> <td>{{$barang->number}}</td> </tr>
+            <tr> <td>Harga</td> <td>Rp. {{number_format($barang->price)}}</td> </tr>
             <tr> <td>Sumber</td> <td>{{$barang->source}}</td> </tr>
             <tr> <td>Ukuran</td> <td>{{$barang->size}}</td> </tr>
             <tr> <td>Merek</td> <td>{{$barang->brand}}</td> </tr>

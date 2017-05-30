@@ -28,7 +28,7 @@
                       <td>2</td>
                       <td>ASET AKTIF + ASET DALAM USULAN PENGHAPUSAN</td>
                       <td>
-                        <a href="/laporan/inventaris_aset_usulan/pdf" class="btn btn-xs btn-success"><span class="glyphicon glyphicon-file"></span>PDF</a>
+                        <a href="/laporan/inventaris_aktif_usulan/pdf" class="btn btn-xs btn-success"><span class="glyphicon glyphicon-file"></span>PDF</a>
                         <a href="/laporan/1/excel" class="btn btn-xs btn-success"><span class="glyphicon glyphicon-save-file"></span>EXCEL</a>
                       </td>
                     </tr>
@@ -54,7 +54,7 @@
                       <td>5</td>
                       <td>
                         ASET PER PENGGUNA (TIDAK TERMASUK BARANG HABIS PAKAI)
-                        <select class="" name="id" required>
+                        <select class="" name="pengguna" required>
                           <option value="">Pilih Pengguna</option>
                           @foreach ($pegawais as $pegawai)
                           <option value="{{ $pegawai->id }}">{{ $pegawai->name }}</option>
@@ -68,27 +68,51 @@
                       </form>
                     </tr>
                     <tr>
+                      <form action="laporan/inventaris_perjenis/pdf" method="POST">
+                        {{ csrf_field() }}
                       <td>6</td>
                       <td>
-                        BARANG HABIS PAKAI PERJENIS BARANG PER SATUAN KERJA (OPD)
-                        <select class="" name="">
-                          <optgroup label="Pilih Jenis">
-                            <option value="">okso</option>
-                          </optgroup>
-                        </select>
-                        <select class="" name="">
-                          <optgroup label="Pilih Satuan">
-                            <option value="">okso</option>
-                          </optgroup>
+                        ASET PER JENIS/BIDANG BARANG
+                        <select class="" name="bidang" required>
+                          <option value="">Pilih Per Bidang</option>
+                          @foreach ($bidangs as $bidang)
+                          <option value="{{ $bidang->id }}">{{ $bidang->name }}</option>
+                          @endforeach
                         </select>
                       </td>
                       <td>
-                        <a href="/laporan/1/pdf" class="btn btn-xs btn-success"><span class="glyphicon glyphicon-file"></span>PDF</a>
+                        <button type="submit" class="btn btn-xs btn-success"><span class="glyphicon glyphicon-file"></span>PDF</button>
                         <a href="/laporan/1/excel" class="btn btn-xs btn-success"><span class="glyphicon glyphicon-save-file"></span>EXCEL</a>
                       </td>
+                      </form>
                     </tr>
                     <tr>
+                      <form action="laporan/inventaris_perjenis_persatuan_kerja/pdf" method="POST">
+                      {{ csrf_field() }}
                       <td>7</td>
+                      <td>
+                        BARANG HABIS PAKAI PERJENIS BARANG PER SATUAN KERJA (OPD)
+                        <select class="" name="bidang" required>
+                          <option value="">Pilih Bidang Barang</option>
+                          @foreach ($bidangs_barang_habis_pakai as $bidang_barang_habis_pakai)
+                          <option value="{{ $bidang_barang_habis_pakai->id }}">{{ $bidang_barang_habis_pakai->name }}</option>
+                          @endforeach
+                        </select>
+                        <select class="" name="satuan" required>
+                          <option value="">Pilih Satuan Kerja</option>
+                          @foreach ($satuankerjas as $satuankerja)
+                          <option value="{{ $satuankerja->id }}">{{ $satuankerja->name }}</option>
+                          @endforeach
+                        </select>
+                      </td>
+                      <td>
+                        <button class="btn btn-xs btn-success"><span class="glyphicon glyphicon-file"></span>PDF</button>
+                        <a href="/laporan/1/excel" class="btn btn-xs btn-success"><span class="glyphicon glyphicon-save-file"></span>EXCEL</a>
+                      </td>
+                      </form>
+                    </tr>
+                    <tr>
+                      <td>8</td>
                       <td>
                         BARANG HABIS PAKAI PERJENIS BARANG PER UNIT KERJA (BAGIAN)
                         <select class="" name="">
@@ -109,7 +133,7 @@
                     </tr>
 
                     <tr>
-                      <td>8</td>
+                      <td>9</td>
                       <td>
                         BARANG HABIS PAKAI PER UNIT KERJA (BAGIAN)
                         <select class="" name="">
@@ -124,7 +148,7 @@
                       </td>
                     </tr>
                     <tr>
-                      <td>9</td>
+                      <td>10</td>
                       <td>
                         KARTU INVENTARIS RUANGAN (PERUANGAN)
                         <select class="" name="">

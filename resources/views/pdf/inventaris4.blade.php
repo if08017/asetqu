@@ -84,9 +84,9 @@
           <td>{{ $barang->size }}</td>
           <td>{{ $barang->material }}</td>
           <td class="number">{{ $barang->year_created }}</td>
-          <td>{{ $barang->receipt_code }}</td>
+          <td>{{ $barang->number }}</td>
           <td>{{ $barang->source }}</td>
-          <td class="number">{{ $barang->price }}</td>
+          <td class="number">{{ number_format($barang->price) }}</td>
           <td>{{ $barang->pegawai_name }}</td>
           <td>{{ $barang->status_name }}</td>
           <td>{{ $barang->description }}</td>

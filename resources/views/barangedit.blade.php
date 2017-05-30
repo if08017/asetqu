@@ -2,7 +2,7 @@
 @section('title','Edit barang  - Asetqu')
 @section('content')
     <div class="col-sm-10 content2">
-      <form class="form-horizontal" action="/barang/{{$barang->id}}" method="POST">
+      <form class="form-horizontal" action="/barang/{{$barang->id}}" method="POST" enctype="multipart/form-data">
         <h5>Edit barang</h5>
         {{ csrf_field() }}
         <div class="col-sm-6">
@@ -170,15 +170,17 @@
           <div class="form-group">
             <div class="col-sm-offset-3 col-sm-8">
               <button type="submit" class="btn btn-sm btn-primary">Simpan</button>
-              <a href="/barang" type="submit" class="btn btn-sm btn-primary">Batal</a>
+              <a href="/barang" type="submit" class="btn btn-sm btn-default">Batal</a>
             </div>
           </div>
         </div>
         <div class="col-sm-6">
           <div class="form-group">
-            <label class="control-label col-sm-4" for="name">Gambar</label>
+            <div class="col-sm-4">
+              <img src="/images/inventori/{{ $barang->picture }}" alt="" style="max-height:50px;">
+            </div>
             <div class="col-sm-8">
-              <input type="text" class="form-control" id="text" name="picture" value="{{ $barang->picture }}">
+              <input type="file" name="picture">
             </div>
           </div>
           <div class="form-group">

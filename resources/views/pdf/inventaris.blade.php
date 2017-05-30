@@ -56,7 +56,7 @@
         @foreach ($barangs as $barang)
         @php ($a++)
         <tr>
-          <td><strong>{{$a}}</strong></td>
+          <td class="number"><strong>{{$a}}</strong></td>
           <td class="number">{{ $barang->golongan_barang_code}}</td>
           <td class="number">{{ $barang->bidang_barang_code }}</td>
           <td><strong>{{ $barang->bidang_barang_name }}</strong><br>{{ $barang->kelompok_barang_name }}</td>

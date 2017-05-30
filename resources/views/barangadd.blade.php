@@ -3,11 +3,11 @@
 @section('content')
     <div class="col-sm-10 content2">
       <h5>Tambah Barang</h5>
-      <form class="form-horizontal" action="/barang/insert" method="POST">
+      <form class="form-horizontal" action="/barang/insert" method="POST" enctype="multipart/form-data">
         {{ csrf_field() }}
         <div class="col-sm-6">
           <div class="form-group required">
-            <label class="control-label col-sm-4" for="name">Kode</label>
+            <label class="control-label col-sm-4" for="name">Kode Barang</label>
             <div class="col-sm-8">
               <input type="number" class="form-control" id="text" name="code" placeholder="Ketikkan kode barang" required>
             </div>
@@ -32,32 +32,6 @@
                 <optgroup label="---">
                   @foreach($satuans as $satuan)
                     <option value="{{ $satuan->name }}">{{ $satuan->name }}</option>
-                  @endforeach
-                </optgroup>
-              </select>
-            </div>
-          </div>
-          <div class="form-group required">
-            <label class="control-label col-sm-4" for="name">Kondisi</label>
-            <div class="col-sm-8">
-              <select class="from-control" id="sel1" name="kondisi" required>
-                <option value="">Pilih kondisi barang</option>
-                <optgroup label="---">
-                  @foreach($kondisis as $kondisi)
-                    <option value="{{ $kondisi->name }}">{{ $kondisi->name }}</option>
-                  @endforeach
-                </optgroup>
-              </select>
-            </div>
-          </div>
-          <div class="form-group required">
-            <label class="control-label col-sm-4" for="name">Status</label>
-            <div class="col-sm-8">
-              <select class="from-control" id="sel1" name="status" required>
-                <option value="">Pilih status barang</option>
-                <optgroup label="---">
-                  @foreach($statuss as $status)
-                    <option value="{{ $status->name }}">{{ $status->name }}</option>
                   @endforeach
                 </optgroup>
               </select>
@@ -166,6 +140,13 @@
             </div>
           </div>
           <div class="form-group">
+            <label class="control-label col-sm-4" for="name">&nbsp;</label>
+            <div class="col-sm-8">
+              <label>Upload gambar</label>
+              <input type="file" name="picture">
+            </div>
+          </div>
+          <div class="form-group">
             <div class="col-sm-offset-3 col-sm-8">
               <button type="submit" class="btn btn-sm btn-primary">Simpan</button>
               <a href="/barang" type="submit" class="btn btn-sm btn-default">Batal</a>
@@ -174,9 +155,9 @@
       </div>
       <div class="col-sm-6">
         <div class="form-group">
-          <label class="control-label col-sm-4" for="name">Gambar</label>
+          <label class="control-label col-sm-4" for="name">Nomor PO/Kuitansi</label>
           <div class="col-sm-8">
-            <input type="text" class="form-control" id="text" name="picture" value="{{ old('picture') }}" placeholder="Ketikkan kode barang">
+            <input type="text" class="form-control" id="text" name="number" placeholder="PO-123-1717">
           </div>
         </div>
         <div class="form-group">
@@ -213,12 +194,6 @@
           <label class="control-label col-sm-4" for="name">Bahan</label>
           <div class="col-sm-8">
             <input type="text" class="form-control" id="text" name="material" placeholder="Sumber barang">
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="control-label col-sm-4" for="name">Nomor pemesanan</label>
-          <div class="col-sm-8">
-            <input type="text" class="form-control" id="text" name="number" placeholder="Ketikkan kode pemesanan barang">
           </div>
         </div>
         <div class="form-group">

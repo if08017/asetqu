@@ -64,6 +64,7 @@
           <th>Nomor / Identitas</th>
           <th>Jumlah Unit</th>
           <th>Satuan</th>
+          <th>Golongan</th>
           <th>Kondisi Barang</th>
           <th>Keterangan</th>
         </tr>
@@ -78,8 +79,9 @@
           <td>{{ $barang->name }}</td>
           <td>{{ $barang->brand }}</td>
           <td>{{ $barang->receipt_code }}</td>
-          <td>{{ $barang->quantity }}</td>
+          <td class="number">{{ $barang->quantity }}</td>
           <td>{{ $barang->satuan_name }}</td>
+          <td>{{ $barang->golongan_name }}</td>
           <td>{{ $barang->kondisi_name }}</td>
           <td>{{ $barang->description }}</td>
         </tr>
@@ -88,17 +90,17 @@
       <thead class="signature">
         <tr>
           <td colspan="4">Mengetahui</td>
-          <td colspan="1">&nbsp;</td>
+          <td colspan="2">&nbsp;</td>
           <td colspan="4">PAINAN, {{ date('d M Y') }}</td>
         </tr>
         <tr>
           <td colspan="4">&nbsp;</td>
-          <td colspan="1">&nbsp;</td>
+          <td colspan="2">&nbsp;</td>
           <td colspan="4">&nbsp;</td>
         </tr>
         <tr>
           <td colspan="4">Ir. Erizon, MT <br> NIP. 19630323 199003 1 005	</td>
-          <td colspan="1"></td>
+          <td colspan="2"></td>
           <td colspan="4">WETRI MULYADEVITA, A.Md <br> NIP. 19800708 200902 2 003</td>
         </tr>
       </thead>

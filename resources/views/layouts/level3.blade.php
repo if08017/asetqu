@@ -83,11 +83,12 @@
       <div class="col-sm-2 menu">
         <div class="">
           <a href="/home" class="active">Dashboard</a>
-          <a href="/barang">Barang</a>
+          <a href="/barang/input">Input Inventori</a>
           <a href="/barang/mutation">Mutasi Barang</a>
           <a href="/laporan">Laporan/Report</a>
           <label>Managemen</label>
-          <a href="/pegawai">Pegawai</a>
+          <a href="/barang">Daftar Barang</a>
+          <a href="/pegawai">Daftar Pegawai</a>
           <a href="/bidang">Bidang Kerja</a>
           <a href="/management">Jabatan & Ruangan</a>
           <a href="/barang/golongan">Golongan Barang</a>

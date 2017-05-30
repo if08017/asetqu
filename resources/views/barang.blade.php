@@ -12,8 +12,8 @@
           <thead>
             <tr>
               <th>Gambar</th>
-              <th>Kode</th>
-              <th>Nomor Barang</th>
+              <th>Kode Barang</th>
+              <th>PO/Kuitansi</th>
               <th>Nama</th>
               <th>Deskripsi</th>
               <th>kuantitas</th>
@@ -26,7 +26,7 @@
           <tbody>
             @foreach ($barangs as $barang)
               <tr>
-                <td>{{ $barang->picture }}</td>
+                <td><img src="/images/inventori/{{ $barang->picture }}" alt="" style="max-height:20px;"></td>
                 <td>{{ $barang->code }}</td>
                 <td>{{ $barang->number }}</td>
                 <td>{{ $barang->name }}</td>

@@ -52,7 +52,7 @@
             <td colspan="4">SUMATERA BARAT</td>
           </tr>
           <tr>
-            <td colspan="12" style="text-align:center; padding: 10px;">DAFTAR BARANG INVENTARIS<br>ASET AKTIF dan ASET DALAM USULAN PENGHAPUSAN</td>
+            <td colspan="7" style="text-align:center; padding: 10px;">DAFTAR BARANG INVENTARIS<br>ASET PER JENIS/BIDANG BARANG</td>
           </tr>
         </thead>
       <thead style="text-align:center">
@@ -60,14 +60,9 @@
           <th>No</th>
           <th>Kode Barang</th>
           <th>Nama Barang</th>
-          <th>Merek/Tipe</th>
-          <th>Ukuran</th>
-          <th>Bahan</th>
-          <th>Tahun Pembuatan</th>
-          <th>Nomor/Identitas</th>
-          <th>Asal Usul</th>
-          <th>Harga</th>
-          <th>Pengguna</th>
+          <th>Jumlah Unit</th>
+          <th>Satuan</th>
+          <th>Total Harga</th>
           <th>Keterangan</th>
         </tr>
       </thead>
@@ -79,33 +74,28 @@
           <td class="number"><strong>{{$a}}</strong></td>
           <td class="number">{{ $barang->code }}</td>
           <td>{{ $barang->name }}</td>
-          <td>{{ $barang->brand }}</td>
-          <td class="number">{{ $barang->size }}</td>
-          <td>{{ $barang->material }}</td>
-          <td class="number">{{ $barang->year_created }}</td>
-          <td>{{ $barang->number }}</td>
-          <td>{{ $barang->source }}</td>
-          <td class="number">{{ number_format($barang->price) }}</td>
-          <td>{{ $barang->pegawai_name }}</td>
+          <td>{{ $barang->jumlah_barang }}</td>
+          <td>{{ $barang->satuan_name }}</td>
+          <td class="number">{{ number_format($barang->total_harga) }}</td>
           <td>{{ $barang->description }}</td>
         </tr>
         @endforeach
       </tbody>
       <thead class="signature">
         <tr>
-          <td colspan="4">Mengetahui</td>
-          <td colspan="4">&nbsp;</td>
-          <td colspan="4">PAINAN, 09 Desember 2016</td>
+          <td colspan="3">Mengetahui</td>
+          <td colspan="1">&nbsp;</td>
+          <td colspan="3">PAINAN, {{ date('d M Y') }}</td>
         </tr>
         <tr>
-          <td colspan="4">&nbsp;</td>
-          <td colspan="4">&nbsp;</td>
-          <td colspan="4">&nbsp;</td>
+          <td colspan="3">&nbsp;</td>
+          <td colspan="1">&nbsp;</td>
+          <td colspan="3">&nbsp;</td>
         </tr>
         <tr>
-          <td colspan="4">Ir. Erizon, MT <br> NIP. 19630323 199003 1 005	</td>
-          <td colspan="4"></td>
-          <td colspan="4">WETRI MULYADEVITA, A.Md <br> NIP. 19800708 200902 2 003</td>
+          <td colspan="3">Ir. Erizon, MT <br> NIP. 19630323 199003 1 005	</td>
+          <td colspan="1"></td>
+          <td colspan="3">WETRI MULYADEVITA, A.Md <br> NIP. 19800708 200902 2 003</td>
         </tr>
       </thead>
     </table>

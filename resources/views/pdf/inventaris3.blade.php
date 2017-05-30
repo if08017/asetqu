@@ -75,14 +75,14 @@
         @foreach ($barangs as $barang)
         @php ($a++)
         <tr>
-          <td><strong>{{$a}}</strong></td>
+          <td class="number"><strong>{{$a}}</strong></td>
           <td class="number">{{ $barang->code }}</td>
           <td>{{ $barang->name }}</td>
-          <td>{{ $barang->ruangan_code }}</td>
+          <td class="number">{{ $barang->ruangan_code }}</td>
           <td>{{ $barang->brand }}</td>
-          <td>{{ $barang->receipt_code }}</td>
+          <td>{{ $barang->number }}</td>
           <td class="number">{{ $barang->year_created }}</td>
-          <td class="number">{{ $barang->price }}</td>
+          <td class="number">{{ number_format($barang->price) }}</td>
           <td>{{ $barang->kondisi_name }}</td>
           <td>{{ $barang->status_name }}</td>
           <td>{{ $barang->description }}</td>

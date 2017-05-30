@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
 use App\Http\Requests;
+use Image;
+
 use App\Models\Barang;
 use App\Models\Golongan;
 use App\Models\Bidang;
@@ -82,9 +83,17 @@ class BarangController extends Controller
     return \Response::json($subkelompokbarangs);
   }
   public function update($id, Request $request){
-    //dd($request);
+    // dd($request);
+    if($request->hasFile('picture')){
+      $picture = $request->file('picture');
+      $filename = time() . '.' . $picture->getClientOriginalExtension();
+      Image::make($picture)->resize(300,null, function ($constraint) { $constraint->aspectRatio(); })->save(public_path('images/inventori/' . $filename));
+      $barang = Barang::find($id);
+      $barang->picture = $filename;
+      $barang->save();
+    }
+
     $barang = Barang::find($id);
-    $barang->picture = $request->picture;
     $barang->code = $request->code;
     $barang->number = $request->number;
     $barang->name = $request->name;
@@ -108,7 +117,7 @@ class BarangController extends Controller
     $barang->kelompok_barang_id = $request->kelompok;
     $barang->sub_kelompok_barang_id = $request->subkelompok;
     $barang->save();
-    return redirect('/barang');
+    return redirect('/barang/'.$id.'/view');
   }
   public function add(){
     $satuans = Satuan::orderBy('name', 'asc')->get();
@@ -121,30 +130,34 @@ class BarangController extends Controller
   }
   public function insert(Request $request){
     //dd($request);
+    if($request->hasFile('picture')){
+      $picture = $request->file('picture');
+      $filename = time() . '.' . $picture->getClientOriginalExtension();
+      Image::make($picture)->resize(300,null, function ($constraint) { $constraint->aspectRatio(); })->save(public_path('images/inventori/' . $filename));
+    }
+
     Barang::create([
-      'picture' => $request->picture,
       'code' => $request->code,
       'name' => $request->name,
-      'description' => $request->description,
-      'tujuan' => $request->tujuan,
-      'price' => $request->price,
       'quantity' => $request->quantity,
       'satuan_name' => $request->satuan,
-      'kondisi_name' => $request->kondisi,
-      'brand' => $request->brand,
-      'color' => $request->color,
-      'material' => $request->material,
-      'number' => $request->number,
-      'source' => $request->source,
-      'status_name' => $request->status,
-      'ruangan_id' => $request->ruangan,
-      'year_created' => $request->year_created,
-      'year_buy' => $request->year_buy,
       'pegawai_id' => $request->pegawai,
+      'ruangan_id' => $request->ruangan,
       'golongan_barang_id' => $request->golongan,
       'bidang_barang_id' => $request->bidang,
       'kelompok_barang_id' => $request->kelompok,
       'sub_kelompok_barang_id' => $request->subkelompok,
+      'picture' => $filename,
+      'number' => $request->number,
+      'description' => $request->description,
+      'price' => $request->price,
+      'size' => $request->size,
+      'brand' => $request->brand,
+      'color' => $request->color,
+      'material' => $request->material,
+      'source' => $request->source,
+      'year_created' => $request->year_created,
+      'year_buy' => $request->year_buy,
       'mutation_id' => 1
     ]);
     return redirect('/barang');
@@ -189,5 +202,16 @@ class BarangController extends Controller
       //return \Response::json($results);
       return response()->json($results);
     // }
+  }
+  public function input_inventori(){
+    return view('upload');
+  }
+  public function input_inventori_insert(Request $request){
+    if($request->hasFile('picture')){
+      $picture = $request->file('picture');
+      $filename = time() . '.' . $picture->getClientOriginalExtension();
+      Image::make($picture)->resize(300,null, function ($constraint) { $constraint->aspectRatio(); })->save(public_path('images/inventori/' . $filename));
+    }
+    return view('upload');
   }
 }
