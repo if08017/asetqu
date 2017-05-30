@@ -79,8 +79,12 @@ Route::get('/barang/{id}/delete', 'BarangController@delete');
 Route::get('/barang/ajax-bidang', 'BarangController@bidang_barang');
 Route::get('/barang/ajax-kelompok', 'BarangController@kelompok_barang');
 Route::get('/barang/ajax-sub-kelompok', 'BarangController@sub_kelompok_barang');
+
 Route::get('/barang/mutation', 'BarangController@mutation_view');
-Route::get('/barang/mutation/autocomplete', ['uses' => 'HomeController@autocomplete', 'as' => 'barang.mutation.autocomplete']);
+Route::get('/barang/ajax-mutation', 'BarangController@mutation_barang');
+Route::get('/barang/mutation/autocomplete', ['uses' => 'BarangController@mutation_autocomplete', 'as' => 'barang.mutation.autocomplete']);
+Route::post('/barang/mutation/insert', 'BarangController@mutation_barang_insert');
+
 Route::put('/barang/{id}', 'BarangController@update');
 Route::get('/barang/{id}', 'BarangController@view');
 

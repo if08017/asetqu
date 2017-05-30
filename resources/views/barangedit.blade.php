@@ -234,13 +234,13 @@
           <div class="form-group">
             <label class="control-label col-sm-4" for="name">Tahun Pembuatan</label>
             <div class="col-sm-8">
-              <input type="text" class="form-control" id="text" name="year_created" value="{{ $barang->year_created }}">
+              <input type="text" class="form-control" id="text" name="created_year" value="{{ $barang->created_year }}">
             </div>
           </div>
           <div class="form-group">
             <label class="control-label col-sm-4" for="name">Tahun Pembelian</label>
             <div class="col-sm-8">
-              <input type="text" class="form-control" id="text" name="year_buy" value="{{ $barang->year_buy }}">
+              <input type="text" class="form-control" id="text" name="buy_year" value="{{ $barang->buy_year }}">
             </div>
           </div>
         </div>

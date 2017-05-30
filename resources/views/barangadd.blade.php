@@ -9,7 +9,7 @@
           <div class="form-group required">
             <label class="control-label col-sm-4" for="name">Kode Barang</label>
             <div class="col-sm-8">
-              <input type="number" class="form-control" id="text" name="code" placeholder="Ketikkan kode barang" required>
+              <input type="text" class="form-control" id="text" name="code" placeholder="Ketikkan kode barang" required>
             </div>
           </div>
           <div class="form-group required">

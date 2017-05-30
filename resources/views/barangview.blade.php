@@ -51,8 +51,8 @@
             <tr> <td>Merek</td> <td>{{$barang->brand}}</td> </tr>
             <tr> <td>Warna</td> <td>{{$barang->color}}</td> </tr>
             <tr> <td>Bahan</td> <td>{{$barang->material}}</td> </tr>
-            <tr> <td>Tahun Pembuatan</td> <td>{{$barang->year_created}}</td> </tr>
-            <tr> <td>Tahun Beli</td> <td>{{$barang->year_buy}}</td> </tr>
+            <tr> <td>Tahun Pembuatan</td> <td>{{$barang->created_year}}</td> </tr>
+            <tr> <td>Tahun Beli</td> <td>{{$barang->buy_year}}</td> </tr>
             <tr> <td>Tanggal Input</td> <td>{{$barang->created_at}}</td> </tr>
             <tr> <td>Tanggal Perubahan</td> <td>{{$barang->updated_at}}</td> </tr>
             <tr> <td>Tanggal Serahterima</td> <td>{{$barang->receipt_date}}</td> </tr>

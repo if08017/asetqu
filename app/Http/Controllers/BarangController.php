@@ -72,6 +72,12 @@ class BarangController extends Controller
     $bidangbarangs = Bidang::where('golongan_barang_id', $request->bidang_id)->get();
     return \Response::json($bidangbarangs);
   }
+  public function mutation_barang(Request $request){
+    // dd($request);
+    $barangs = Barang::where('code', $request->barang_code)->get();
+    // dd($barangs);
+    return \Response::json($barangs);
+  }
   public function kelompok_barang(Request $request){
     //dd($request);
     $kelompokbarangs = Kelompok::where('bidang_barang_id', $request->kelompok_id)->get();
@@ -109,8 +115,8 @@ class BarangController extends Controller
     $barang->status_name = $request->status;
     $barang->color = $request->color;
     $barang->material = $request->material;
-    $barang->year_created = $request->year_created;
-    $barang->year_buy = $request->year_buy;
+    $barang->created_year = $request->created_year;
+    $barang->buy_year = $request->buy_year;
     $barang->ruangan_id = $request->ruangan;
     $barang->golongan_barang_id = $request->golongan;
     $barang->bidang_barang_id = $request->bidang;
@@ -156,8 +162,8 @@ class BarangController extends Controller
       'color' => $request->color,
       'material' => $request->material,
       'source' => $request->source,
-      'year_created' => $request->year_created,
-      'year_buy' => $request->year_buy,
+      'created_year' => $request->created_year,
+      'buy_year' => $request->buy_year,
       'mutation_id' => 1
     ]);
     return redirect('/barang');
@@ -176,32 +182,38 @@ class BarangController extends Controller
     $satuans = Satuan::orderBy('name', 'asc')->get();
     $kondisis = Kondisi::orderBy('name', 'asc')->get();
     $statuss = Status::orderBy('name', 'asc')->get();
-    return view('mutationedit',['ruangans' => $ruangans, 'pegawais' => $pegawais]);
+    return view('mutation',['ruangans' => $ruangans, 'pegawais' => $pegawais]);
   }
-  public function autocomplete(Request $request){
+  public function mutation_barang_insert(Request $request){
+    // dd($request);
+    Mutation::create([
+      'barang_id' => $request->id,
+      'pegawai_id' => $request->pegawai,
+      'ruangan_id' => $request->ruangan,
+      'quantity' => $request->quantity,
+    ]);
+    return redirect('/barang/'.$request->id.'/view');
+  }
+  public function mutation_autocomplete(Request $request){
     //call by non ajax autocomplete
-    // if ($request->ajax()) {
+    if ($request->ajax()) {
       //dd($request);
-      $barangs = Barang::join('golongan_barang','golongan_barang_id','=','golongan_barang.id')
-                  ->join('ruangan','ruangan_id','=','ruangan.id')
-                  ->join('pegawai','pegawai_id','=','pegawai.id')
-                  ->select('barang.*','golongan_barang.name as golongan_barang_name','ruangan.name as ruangan_name','pegawai.name as pegawai_name')
-                  ->where(function($query) use ($request){
-                    $query->orWhere('barang.id','like','%'.$request->term.'%');
+      $barangs = Barang::where(function($query) use ($request){
+                    $query->orWhere('barang.code','like','%'.$request->term.'%');
                     $query->orWhere('barang.name','like','%'.$request->term.'%');
                 })
-                ->orderBy('code', 'asc')
+                ->orderBy('name', 'asc')
                 ->take(5)
                 ->get();
       //convert to Json
       $results = [];
       foreach ($barangs as $barang) {
-        $results[] = ['id' => $barang->code, 'value' => $barang->name];
+        $results[] = ['id' => $barang->id, 'value' => $barang->code, 'label' => $barang->code.'-'.$barang->name];
       }
       //dd($results);
-      //return \Response::json($results);
-      return response()->json($results);
-    // }
+      return \Response::json($results);
+      //return response()->json($results);
+    }
   }
   public function input_inventori(){
     return view('upload');

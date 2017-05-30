@@ -124,7 +124,7 @@ class HomeController extends Controller
         //convert to Json
         $results = [];
         foreach ($barangs as $barang) {
-          $results[] = ['id' => $barang->code, 'value' => $barang->name];
+          $results[] = ['id' => $barang->id, 'value' => $barang->name, 'label' => $barang->code.'-'.$barang->name];
         }
         //dd($results);
         return \Response::json($results);
