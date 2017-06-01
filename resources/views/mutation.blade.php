@@ -2,11 +2,11 @@
 @section('title','Mutasi barang - Asetqu')
 @section('content')
     <div class="col-sm-10 content2">
-      <h5>Rincian barang dengan kode</h5>
+      <h5>Proses Mutasi Barang</h5>
       <div class="col-sm-6">
         <div class="form-group">
             <div class="input-group col-sm-8">
-              <input type="text" class="form-control code" id="code" name="code" placeholder="Ketikkan kode/nama barang" required>
+              <input type="text" class="form-control code" id="code" name="code" placeholder="Ketikkan kode/nama barang" required autofocus>
               <span class="input-group-btn">
                 <button type="submit" class="btn btn-sm btn-primary">
                   <i class="glyphicon glyphicon-search"></i>
@@ -35,34 +35,13 @@
                 console.log(data);
                 $('.name').empty();
                 $('.quantity').empty();
-                $('.price').empty();
-                $('.satuan').empty();
-                $('.kondisi').empty();
-                $('.status').empty();
-                $('.golongan').empty();
-                $('.bidang').empty();
-                $('.kelompok').empty();
                 $('.subkelompok').empty();
-                $('.created_year').empty();
-                $('.buy_year').empty();
-                $('.pic').empty();
-                // $('.okezone').append('<p>'+data.id+'</p>');
+                $('.barang_id').empty();
                 $.each(data,function(index, bidangObj){
                   $('.name').append('<p>'+bidangObj.name+'</p>');
                   $('.quantity').append('<p>'+bidangObj.quantity+'</p>');
-                  $('.price').append('<p>'+bidangObj.price+'</p>');
-                  $('.satuan').append('<p>'+bidangObj.satuan_name+'</p>');
-                  $('.kondisi').append('<p>'+bidangObj.kondisi_name+'</p>');
-                  $('.status').append('<p>'+bidangObj.status_name+'</p>');
-                  $('.golongan').append('<p>'+bidangObj.golongan_barang_name+'</p>');
-                  $('.bidang').append('<p>'+bidangObj.bidang_barang_name+'</p>');
-                  $('.kelompok').append('<p>'+bidangObj.kelompok_barang_name+'</p>');
                   $('.subkelompok').append('<p>'+bidangObj.sub_kelompok_barang_name+'</p>');
-                  $('.created_year').append('<p>'+bidangObj.created_year+'</p>');
-                  $('.buy_year').append('<p>'+bidangObj.buy_year+'</p>');
-                  $('.pic').append('<p>'+bidangObj.pegawai_name+'</p>');
                   $('.barang_id').append('<input type="hidden" name="id" value="'+bidangObj.id+'">');
-
                 });
               });
             });
@@ -78,28 +57,22 @@
           <tbody>
             <tr> <td>Nama</td> <td class="name"></td> </tr>
             <tr> <td>Kuantitas</td> <td class="quantity"></td> </tr>
-            <tr> <td>Harga</td> <td class="price"></td> </tr>
-            <tr> <td>Satuan</td> <td class="satuan"></td> </tr>
-            <tr> <td>Kondisi</td> <td class="kondisi"></td> </tr>
-            <tr> <td>Status</td> <td class="status"></td> </tr>
-            <tr> <td>Golongan</td> <td class="golongan"></td> </tr>
-            <tr> <td>Bidang</td> <td class="bidang"></td> </tr>
-            <tr> <td>Kelompok</td> <td class="kelompok"></td> </tr>
-            <tr> <td>Sub Kelompok</td> <td class="subkelompok"></td> </tr>
-            <tr> <td>Tahun Pembuatan</td> <td class="created_year"></td> </tr>
-            <tr> <td>Tahun Beli</td> <td class="buy_year"></td> </tr>
-            <tr> <td>Tanggal Serahterima</td> <td class="receipt_date"></td> </tr>
+            <tr> <td>Total Mutasi</td> <td class="quantity"></td> </tr>
+            <tr> <td>Tolal Dihapus</td> <td class="quantity"></td> </tr>
           </tbody>
         </table>
       </div>
       <div class="col-sm-6">
         <form class="form-horizontal" action="/barang/mutation/insert" method="POST">
-          <h5>Edit barang</h5>
+          <h5>Tujuan Mutasi</h5>
           {{ csrf_field() }}
-
+          <div class="form-group hidden">
+            <label class="control-label col-sm-4" for="name">&nbsp;</label>
+            <div class="col-sm-8 barang_id"></div>
+          </div>
           <div class="form-group required">
             <label class="control-label col-sm-4" for="name">Quantitas</label>
-            <div class="col-sm-8 barang_id">
+            <div class="col-sm-8">
               <input type="number" class="form-control" id="text" name="quantity" value="" required>
             </div>
           </div>

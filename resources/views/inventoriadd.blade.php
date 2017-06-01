@@ -3,20 +3,52 @@
 @section('content')
     <div class="col-sm-10 content2">
       <h5>Tambah Barang</h5>
-      <form class="form-horizontal" action="/barang/insert" method="POST" enctype="multipart/form-data">
+      <form class="form-horizontal" action="/inventori/insert" method="POST" enctype="multipart/form-data">
         {{ csrf_field() }}
         <div class="col-sm-6">
           <div class="form-group required">
             <label class="control-label col-sm-4" for="name">Kode Barang</label>
             <div class="col-sm-8">
-              <input type="text" class="form-control" id="text" name="code" placeholder="Ketikkan kode barang" required>
+              <div class="input-group">
+                <input type="text" class="form-control code" id="code" name="code" placeholder="Ketikkan kode/nama barang" required autofocus>
+                <span class="input-group-btn">
+                  <button type="submit" class="btn btn-sm btn-primary">
+                    <i class="glyphicon glyphicon-search"></i>
+                  </button>
+                </span>
+              </div>
             </div>
+            <script type="text/javascript">
+              $(document).ready(function(){
+                $('#code').on("mouseover", function(event){
+                  //$("div").html("Event: " + event.type);
+                  $("#code").autocomplete({
+                    source: "{{ route('barang.mutation.autocomplete') }}",
+                    minLength: 3,
+                    select: function(event, ui){
+                      console.log(ui);
+                      // $("#code").val(ui.item.id);
+                    }
+                  });
+                });
+              });
+            </script>
+            <script>
+              $( ".code" ).change(function(e) {
+                var barang_code = e.target.value;
+                $.get('/barang/ajax-mutation?barang_code=' + barang_code, function(data){
+                  console.log(data);
+                  $('.name').empty();
+                  $.each(data,function(index, bidangObj){
+                    $('.name').append('<input type="text" class="form-control" id="text" name="name" value="'+bidangObj.name+'" required readonly="readonly"> <input type="hidden" class="form-control" id="text" name="barang_id" value="'+bidangObj.id+'" required readonly="readonly">');
+                  });
+                });
+              });
+            </script>
           </div>
-          <div class="form-group required">
+          <div class="form-group">
             <label class="control-label col-sm-4" for="name">Nama barang</label>
-            <div class="col-sm-8">
-              <input type="text" class="form-control" id="text" name="name" placeholder="Ketikkan nama barang" required>
-            </div>
+            <div class="col-sm-8 name"></div>
           </div>
           <div class="form-group required">
             <label class="control-label col-sm-4" for="name">Quantitas</label>
@@ -139,11 +171,11 @@
               </select>
             </div>
           </div>
-          <div class="form-group">
+          <div class="form-group required">
             <label class="control-label col-sm-4" for="name">&nbsp;</label>
             <div class="col-sm-8">
               <label>Upload gambar</label>
-              <input type="file" name="picture">
+              <input type="file" name="picture" required>
             </div>
           </div>
           <div class="form-group">

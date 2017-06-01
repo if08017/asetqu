@@ -40,8 +40,15 @@ Route::get('//laporan/inventaris/bulanan', 'PDFController@inventaris_bulanan');
 // Route::put('/kategori/{id}', 'KategoriController@kategori_update');
 // Route::get('/kategori/{id}/delete', 'KategoriController@kategori_delete');
 
-Route::get('/barang/inventori', 'InventoriController@index');
-Route::post('/barang/inventori/insert', 'InventoriController@inventori_insert');
+Route::get('/inventori', 'InventoriController@index');
+Route::get('/inventori/{id}/view', 'InventoriController@inventori_view');
+Route::get('/inventori/{id}/edit', 'InventoriController@inventori_edit');
+Route::get('/inventori/{id}/delete', 'InventoriController@inventori_delete');
+Route::get('/inventori/add', 'InventoriController@inventori_add');
+Route::post('/inventori/insert', 'InventoriController@inventori_insert');
+Route::put('/inventori/{id}', 'InventoriController@inventori_update');
+
+Route::post('/inventori/insert', 'InventoriController@inventori_insert');
 
 Route::get('/barang/golongan', 'GolonganController@index');
 // Route::get('/barang/golongan/add', 'GolonganController@add');
@@ -70,12 +77,8 @@ Route::put('/barang/bidang/{id}', 'GolonganController@bidang_update');
 Route::get('/barang/bidang/{id}/edit', 'GolonganController@bidang_edit');
 Route::get('/barang/bidang/{id}/delete', 'GolonganController@bidang_delete');
 
-Route::get('/barang', 'BarangController@index');
-Route::get('/barang/add', 'BarangController@add');
-Route::post('/barang/insert', 'BarangController@insert');
-Route::get('/barang/{id}/view', 'BarangController@view');
-Route::get('/barang/{id}/edit', 'BarangController@edit');
-Route::get('/barang/{id}/delete', 'BarangController@delete');
+
+
 Route::get('/barang/ajax-bidang', 'BarangController@bidang_barang');
 Route::get('/barang/ajax-kelompok', 'BarangController@kelompok_barang');
 Route::get('/barang/ajax-sub-kelompok', 'BarangController@sub_kelompok_barang');
@@ -85,7 +88,13 @@ Route::get('/barang/ajax-mutation', 'BarangController@mutation_barang');
 Route::get('/barang/mutation/autocomplete', ['uses' => 'BarangController@mutation_autocomplete', 'as' => 'barang.mutation.autocomplete']);
 Route::post('/barang/mutation/insert', 'BarangController@mutation_barang_insert');
 
-Route::put('/barang/{id}', 'BarangController@update');
+Route::get('/barang', 'BarangController@index');
+Route::get('/barang/{id}/view', 'BarangController@barang_view');
+Route::get('/barang/{id}/edit', 'BarangController@barang_edit');
+Route::get('/barang/{id}/delete', 'BarangController@barang_delete');
+Route::get('/barang/add', 'BarangController@barang_add');
+Route::post('/barang/insert', 'BarangController@barang_insert');
+Route::put('/barang/{id}', 'BarangController@barang_update');
 Route::get('/barang/{id}', 'BarangController@view');
 
 Route::get('/pegawai', 'PegawaiController@index');

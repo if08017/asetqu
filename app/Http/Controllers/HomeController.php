@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 use App\Http\Requests;
-use App\Models\Barang;
+use App\Models\Inventori;
 
 use Charts;
 
@@ -27,7 +27,7 @@ class HomeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(){
-      $barangs = Barang::count();
+      $barangs = Inventori::count();
       //dd($barangs);
       // $chart = Charts::multi('bar', 'material')
 			// // Setup the chart settings
@@ -44,7 +44,7 @@ class HomeController extends Controller
 			// ->dataset('Element 3', [25,10,40])
 			// // Setup what the values mean
 			// ->labels(['One', 'Two', 'Three']);
-      $charts = Charts::database(Barang::all(),'line', 'highcharts')
+      $charts = Charts::database(Inventori::all(),'line', 'highcharts')
               ->dateFormat('j F y')
               ->title('Aktifitas input barang Harian')
               //->labels(['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'])
@@ -54,15 +54,15 @@ class HomeController extends Controller
               ->responsive(false)
               //->groupByDay();
               ->lastByDay(14, true);
-      $years = Charts::database(Barang::all(),'bar', 'highcharts')
+      $years = Charts::database(Inventori::all(),'bar', 'highcharts')
               ->dateFormat('j F y')
               ->title('Aktifitas Tahunan')
               ->elementLabel('Total')
               ->dimensions(0,200)
               ->responsive(false)
               ->groupByYear();
-      $charts2 = Charts::database(Barang::join('golongan_barang','golongan_barang_id','=','golongan_barang.id')
-              ->select('barang.*','golongan_barang.name as golongan_barang_name')
+      $charts2 = Charts::database(Inventori::join('golongan_barang','golongan_barang_id','=','golongan_barang.id')
+              ->select('inventori_barang.*','golongan_barang.name as golongan_barang_name')
               ->get(),'area', 'highcharts')
               ->title('Line Kategori')
               ->elementLabel('Total')
@@ -74,7 +74,7 @@ class HomeController extends Controller
     public function search(Request $request){
       //$search = \Request::get('search');
       // dd($request);
-      $barangs = Barang::join('golongan_barang','golongan_barang_id','=','golongan_barang.id')
+      $barangs = Inventori::join('golongan_barang','golongan_barang_id','=','golongan_barang.id')
                   ->join('ruangan','ruangan_id','=','ruangan.id')
                   ->join('pegawai','pegawai_id','=','pegawai.id')
                   ->select('barang.*','golongan_barang.name as golongan_barang_name','ruangan.name as ruangan_name','pegawai.name as pegawai_name')
@@ -100,10 +100,10 @@ class HomeController extends Controller
       //call by non ajax autocomplete
       if ($request->ajax()) {
         //dd($request);
-        $barangs = Barang::join('golongan_barang','golongan_barang_id','=','golongan_barang.id')
+        $barangs = Inventori::join('golongan_barang','golongan_barang_id','=','golongan_barang.id')
                     ->join('ruangan','ruangan_id','=','ruangan.id')
                     ->join('pegawai','pegawai_id','=','pegawai.id')
-                    ->select('barang.*','golongan_barang.name as golongan_barang_name','ruangan.name as ruangan_name','pegawai.name as pegawai_name')
+                    ->select('inventori_barang.*','golongan_barang.name as golongan_barang_name','ruangan.name as ruangan_name','pegawai.name as pegawai_name')
                     ->where(function($query) use ($request){
                       $query->orWhere('barang.code','like','%'.$request->term.'%');
                       $query->orWhere('barang.name','like','%'.$request->term.'%');

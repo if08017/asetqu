@@ -26,46 +26,49 @@ class BarangController extends Controller
       $this->middleware('auth');
   }
   public function index(){
-    $barangs = Barang::orderBy('created_at', 'desc')->paginate(13);
+    $barangs = Barang::join('sub_kelompok_barang','sub_kelompok_barang_id','=','sub_kelompok_barang.id')
+            ->select('barang.*','sub_kelompok_barang.name as sub_kelompok_barang_name')
+            ->orderBy('created_at', 'desc')->paginate(13);
     return view('barang', ['barangs' => $barangs]);
   }
-  public function view($id){
-    $barang = Barang::join('ruangan','ruangan_id','=','ruangan.id')
-                ->join('pegawai','pegawai_id','=','pegawai.id')
-                ->join('golongan_barang','golongan_barang_id','=','golongan_barang.id')
-                ->join('bidang_barang','bidang_barang_id','=','bidang_barang.id')
-                ->join('kelompok_barang','kelompok_barang_id','=','kelompok_barang.id')
-                ->join('sub_kelompok_barang','sub_kelompok_barang_id','=','sub_kelompok_barang.id')
-                ->join('mutation','mutation_id','=','mutation.id')
-                ->select('barang.*','sub_kelompok_barang.name as sub_kelompok_barang_name', 'kelompok_barang.name as kelompok_barang_name', 'bidang_barang.name as bidang_barang_name', 'golongan_barang.name as golongan_barang_name', 'ruangan.name as ruangan_name', 'pegawai.name as pegawai_name')
+  public function barang_view($id){
+    $barang = Barang::join('sub_kelompok_barang','sub_kelompok_barang_id','=','sub_kelompok_barang.id')
+                ->select('barang.*','sub_kelompok_barang.name as sub_kelompok_barang_name')
                 ->find($id);
-    //dd($barang);
     return view('barangview', ['barang' => $barang]);
   }
-  public function edit($id){
-    //dd($id);
-    // $kategoris = Kategori::orderBy('name', 'asc')->get();
-    $golongans = Golongan::orderBy('name', 'asc')->get();
-    $bidangs = Bidang::orderBy('name', 'asc')->get();
-    $kelompoks = Kelompok::orderBy('name', 'asc')->get();
+  public function barang_edit($id){
     $subkelompoks = Subkelompok::orderBy('name', 'asc')->get();
-    $ruangans = Ruangan::orderBy('name', 'asc')->get();
-    $pegawais = Pegawai::orderBy('name', 'asc')->get();
-    $satuans = Satuan::orderBy('name', 'asc')->get();
-    $kondisis = Kondisi::orderBy('name', 'asc')->get();
-    $statuss = Status::orderBy('name', 'asc')->get();
-    $barang = Barang::join('ruangan','ruangan_id','=','ruangan.id')
-                ->join('pegawai','pegawai_id','=','pegawai.id')
-                ->join('golongan_barang','golongan_barang_id','=','golongan_barang.id')
-                ->join('bidang_barang','bidang_barang_id','=','bidang_barang.id')
-                ->join('kelompok_barang','kelompok_barang_id','=','kelompok_barang.id')
-                ->join('sub_kelompok_barang','sub_kelompok_barang_id','=','sub_kelompok_barang.id')
-                ->join('mutation','mutation_id','=','mutation.id')
-                ->select('barang.*','sub_kelompok_barang.name as sub_kelompok_barang_name', 'kelompok_barang.name as kelompok_barang_name', 'bidang_barang.name as bidang_barang_name', 'golongan_barang.name as golongan_barang_name', 'ruangan.name as ruangan_name', 'pegawai.name as pegawai_name')
+    $barang = Barang::join('sub_kelompok_barang','sub_kelompok_barang_id','=','sub_kelompok_barang.id')
+                ->select('barang.*','sub_kelompok_barang.name as sub_kelompok_barang_name')
                 ->find($id);
-    //$barang = Barang::find($id);
-    //dd($barang);
-    return view('barangedit', ['barang' => $barang, 'ruangans' => $ruangans, 'pegawais' => $pegawais, 'satuans' => $satuans, 'kondisis' => $kondisis, 'statuss' => $statuss, 'golongans' => $golongans, 'bidangs' => $bidangs, 'kelompoks' => $kelompoks, 'subkelompoks' => $subkelompoks]);
+    return view('barangedit', ['barang' => $barang, 'subkelompoks' => $subkelompoks]);
+  }
+  public function barang_delete($id){
+    Barang::destroy($id);
+    return redirect('/barang');
+  }
+  public function barang_add(){
+    $subkelompoks = Subkelompok::orderBy('name', 'asc')->get();
+    return view('barangadd',['subkelompoks' => $subkelompoks]);
+  }
+  public function barang_insert(Request $request){
+    Barang::create([
+      'code' => $request->code,
+      'name' => $request->name,
+      'description' => $request->description,
+      'sub_kelompok_barang_id' => $request->subkelompok
+    ]);
+    return redirect('/barang');
+  }
+  public function barang_update($id, Request $request){
+    $barang = Barang::find($id);
+    $barang->code = $request->code;
+    $barang->name = $request->name;
+    $barang->description = $request->description;
+    $barang->sub_kelompok_barang_id = $request->subkelompok;
+    $barang->save();
+    return redirect('/barang/'.$id.'/view');
   }
   public function bidang_barang(Request $request){
     //dd($request);
@@ -88,90 +91,9 @@ class BarangController extends Controller
     $subkelompokbarangs = Subkelompok::where('kelompok_barang_id', $request->subkelompok_id)->get();
     return \Response::json($subkelompokbarangs);
   }
-  public function update($id, Request $request){
-    // dd($request);
-    if($request->hasFile('picture')){
-      $picture = $request->file('picture');
-      $filename = time() . '.' . $picture->getClientOriginalExtension();
-      Image::make($picture)->resize(300,null, function ($constraint) { $constraint->aspectRatio(); })->save(public_path('images/inventori/' . $filename));
-      $barang = Barang::find($id);
-      $barang->picture = $filename;
-      $barang->save();
-    }
 
-    $barang = Barang::find($id);
-    $barang->code = $request->code;
-    $barang->number = $request->number;
-    $barang->name = $request->name;
-    $barang->description = $request->description;
-    $barang->price = $request->price;
-    $barang->quantity = $request->quantity;
-    $barang->kondisi_name = $request->kondisi;
-    $barang->tujuan = $request->tujuan;
-    $barang->source = $request->source;
-    $barang->brand = $request->brand;
-    $barang->size = $request->size;
-    $barang->satuan_name = $request->satuan;
-    $barang->status_name = $request->status;
-    $barang->color = $request->color;
-    $barang->material = $request->material;
-    $barang->created_year = $request->created_year;
-    $barang->buy_year = $request->buy_year;
-    $barang->ruangan_id = $request->ruangan;
-    $barang->golongan_barang_id = $request->golongan;
-    $barang->bidang_barang_id = $request->bidang;
-    $barang->kelompok_barang_id = $request->kelompok;
-    $barang->sub_kelompok_barang_id = $request->subkelompok;
-    $barang->save();
-    return redirect('/barang/'.$id.'/view');
-  }
-  public function add(){
-    $satuans = Satuan::orderBy('name', 'asc')->get();
-    $kondisis = Kondisi::orderBy('name', 'asc')->get();
-    $statuss = Status::orderBy('name', 'asc')->get();
-    $pegawais = Pegawai::orderBy('name', 'asc')->get();
-    $ruangans = Ruangan::orderBy('name', 'asc')->get();
-    $golongans = Golongan::orderBy('name', 'asc')->get();
-    return view('barangadd',['satuans' => $satuans, 'kondisis' => $kondisis,  'statuss' => $statuss, 'ruangans' => $ruangans, 'pegawais' => $pegawais, 'golongans' => $golongans]);
-  }
-  public function insert(Request $request){
-    //dd($request);
-    if($request->hasFile('picture')){
-      $picture = $request->file('picture');
-      $filename = time() . '.' . $picture->getClientOriginalExtension();
-      Image::make($picture)->resize(300,null, function ($constraint) { $constraint->aspectRatio(); })->save(public_path('images/inventori/' . $filename));
-    }
 
-    Barang::create([
-      'code' => $request->code,
-      'name' => $request->name,
-      'quantity' => $request->quantity,
-      'satuan_name' => $request->satuan,
-      'pegawai_id' => $request->pegawai,
-      'ruangan_id' => $request->ruangan,
-      'golongan_barang_id' => $request->golongan,
-      'bidang_barang_id' => $request->bidang,
-      'kelompok_barang_id' => $request->kelompok,
-      'sub_kelompok_barang_id' => $request->subkelompok,
-      'picture' => $filename,
-      'number' => $request->number,
-      'description' => $request->description,
-      'price' => $request->price,
-      'size' => $request->size,
-      'brand' => $request->brand,
-      'color' => $request->color,
-      'material' => $request->material,
-      'source' => $request->source,
-      'created_year' => $request->created_year,
-      'buy_year' => $request->buy_year,
-      'mutation_id' => 1
-    ]);
-    return redirect('/barang');
-  }
-  public function delete($id){
-    Barang::destroy($id);
-    return redirect('/barang');
-  }
+
   public function mutation_view(){
     $golongans = Golongan::orderBy('name', 'asc')->get();
     $bidangs = Bidang::orderBy('name', 'asc')->get();

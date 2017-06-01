@@ -11,14 +11,13 @@
         <table class="table table-condensed table-hover">
           <thead>
             <tr>
-              <th>Gambar</th>
               <th>Kode Barang</th>
-              <th>PO/Kuitansi</th>
               <th>Nama</th>
+              <th>Total Barang</th>
+              <th>Total Mutasi</th>
+              <th>Total Dihapus</th>
               <th>Deskripsi</th>
-              <th>kuantitas</th>
-              <th>Kondisi</th>
-              <th>Status</th>
+              <th>Sub Kelompok</th>
               <th>Rincian</th>
               <th>Tindakan</th>
             </tr>
@@ -26,14 +25,13 @@
           <tbody>
             @foreach ($barangs as $barang)
               <tr>
-                <td><img src="/images/inventori/{{ $barang->picture }}" alt="" style="max-height:20px;"></td>
                 <td>{{ $barang->code }}</td>
-                <td>{{ $barang->number }}</td>
                 <td>{{ $barang->name }}</td>
-                <td>{{ $barang->description }}</td>
                 <td>{{ $barang->quantity }}</td>
-                <td>{{ $barang->kondisi_name }}</td>
-                <td>{{ $barang->status_name }}</td>
+                <td>{{ $barang->mutation_quantity }}</td>
+                <td>{{ $barang->destroy_quantity }}</td>
+                <td>{{ $barang->description }}</td>
+                <td>{{ $barang->sub_kelompok_barang_name }}</td>
                 <td>
                   <a class="btn-sm btn-primary" href="/barang/{{$barang->id}}/view"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
                 </td>

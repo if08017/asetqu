@@ -83,7 +83,7 @@
       <div class="col-sm-2 menu">
         <div class="">
           <a href="/home" class="active">Dashboard</a>
-          <a href="/barang/inventori">Input Inventori</a>
+          <a href="/inventori">Inventori Barang</a>
           <a href="/barang/mutation">Mutasi Barang</a>
           <a href="/laporan">Laporan/Report</a>
           <label>Managemen</label>
