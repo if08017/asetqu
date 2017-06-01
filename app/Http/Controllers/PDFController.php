@@ -106,9 +106,9 @@ class PDFController extends Controller
     //5
     $pegawais = Pegawai::where('id', $request->pengguna)->first();
     $barangs = Barang::join('pegawai','pegawai_id','=','pegawai.id')
-    ->join('receipt','receipt_id','=','receipt.id')
+    // ->join('receipt','receipt_id','=','receipt.id')
     ->join('golongan_barang','golongan_barang_id','=','golongan_barang.id')
-    ->select('barang.*','pegawai.name as pegawai_name', 'receipt.code as receipt_code','golongan_barang.name as golongan_name')
+    ->select('barang.*','pegawai.name as pegawai_name','golongan_barang.name as golongan_name')
     ->where('pegawai_id',$request->pengguna)
     ->whereNotIn('golongan_barang_id',[1])
     ->orderBy('code', 'asc')

@@ -40,8 +40,8 @@ Route::get('//laporan/inventaris/bulanan', 'PDFController@inventaris_bulanan');
 // Route::put('/kategori/{id}', 'KategoriController@kategori_update');
 // Route::get('/kategori/{id}/delete', 'KategoriController@kategori_delete');
 
-Route::get('/barang/input', 'BarangController@input_inventori');
-Route::post('/barang/input/insert', 'BarangController@input_inventori_insert');
+Route::get('/barang/inventori', 'InventoriController@index');
+Route::post('/barang/inventori/insert', 'InventoriController@inventori_insert');
 
 Route::get('/barang/golongan', 'GolonganController@index');
 // Route::get('/barang/golongan/add', 'GolonganController@add');

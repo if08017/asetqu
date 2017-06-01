@@ -78,7 +78,7 @@
           <td class="number">{{ $barang->code }}</td>
           <td>{{ $barang->name }}</td>
           <td>{{ $barang->brand }}</td>
-          <td>{{ $barang->receipt_code }}</td>
+          <td>{{ $barang->number }}</td>
           <td class="number">{{ $barang->quantity }}</td>
           <td>{{ $barang->satuan_name }}</td>
           <td>{{ $barang->golongan_name }}</td>

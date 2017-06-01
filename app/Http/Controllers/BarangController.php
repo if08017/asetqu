@@ -215,15 +215,4 @@ class BarangController extends Controller
       //return response()->json($results);
     }
   }
-  public function input_inventori(){
-    return view('upload');
-  }
-  public function input_inventori_insert(Request $request){
-    if($request->hasFile('picture')){
-      $picture = $request->file('picture');
-      $filename = time() . '.' . $picture->getClientOriginalExtension();
-      Image::make($picture)->resize(300,null, function ($constraint) { $constraint->aspectRatio(); })->save(public_path('images/inventori/' . $filename));
-    }
-    return view('upload');
-  }
 }
