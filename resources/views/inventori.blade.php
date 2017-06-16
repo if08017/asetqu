@@ -16,9 +16,11 @@
               <th>PO/Kuitansi</th>
               <th>Nama</th>
               <th>Deskripsi</th>
-              <th>kuantitas</th>
+              <th>Kuantitas</th>
+              <th>Harga</th>
               <th>Kondisi</th>
-              <th>Status</th>
+              <th>Pembuatan</th>
+              <th>Pembelian</th>
               <th>Rincian</th>
               <th>Tindakan</th>
             </tr>
@@ -29,11 +31,13 @@
                 <td><img src="/images/inventori/{{ $inventori->picture }}" alt="" style="max-height:20px;"></td>
                 <td>{{ $inventori->barang_code }}</td>
                 <td>{{ $inventori->number }}</td>
-                <td>{{ $inventori->name }}</td>
+                <td>{{ $inventori->barang_name }}</td>
                 <td>{{ $inventori->description }}</td>
                 <td>{{ $inventori->quantity }}</td>
+                <td>{{ 'Rp.'.number_format($inventori->price) }}</td>
                 <td>{{ $inventori->kondisi_name }}</td>
-                <td>{{ $inventori->status_name }}</td>
+                <td>{{ $inventori->created_year }}</td>
+                <td>{{ $inventori->buy_year }}</td>
                 <td>
                   <a class="btn-sm btn-primary" href="/inventori/{{$inventori->id}}/view"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
                 </td>

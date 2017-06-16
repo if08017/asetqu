@@ -196,11 +196,11 @@
       <div class="col-sm-2 menu">
         <div class="">
           <a href="/home" class="active">Dashboard</a>
-          <a href="/inventori">Inventori Barang</a>
-          <a href="/barang/mutation">Mutasi Barang</a>
+          <a href="/barang">Daftar Barang</a>
+          <a href="/inventori">Daftar Inventori</a>
+          <a href="/barang/mutation">Mutasi Inventori</a>
           <a href="/laporan">Laporan/Report</a>
           <label>Managemen</label>
-          <a href="/barang">Daftar Barang</a>
           <a href="/pegawai">Daftar Pegawai</a>
           <a href="/bidang">Bidang Kerja</a>
           <a href="/management">Jabatan & Ruangan</a>
@@ -219,11 +219,6 @@
                 {!! $charts->render() !!}
             </center>
           </div>
-          <div class="charts">
-            <center>
-                {!! $years->render() !!}
-            </center>
-          </div>
         </div>
         <div class="col-sm-4">
           <div class="barang charts">
@@ -233,6 +228,11 @@
           <div class="charts">
             <center>
                 {!! $charts2->render() !!}
+            </center>
+          </div>
+          <div class="charts">
+            <center>
+                {!! $years->render() !!}
             </center>
           </div>
         </div>

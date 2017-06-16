@@ -46,7 +46,7 @@
               });
             </script>
           </div>
-          <div class="form-group">
+          <div class="form-group required">
             <label class="control-label col-sm-4" for="name">Nama barang</label>
             <div class="col-sm-8 name"></div>
           </div>
@@ -56,7 +56,7 @@
               <input type="number" class="form-control" id="text" name="quantity" placeholder="Jumlah barang" required>
             </div>
           </div>
-          <div class="form-group required">
+          <!-- <div class="form-group required">
             <label class="control-label col-sm-4" for="name">Satuan</label>
             <div class="col-sm-8">
               <select class="from-control" id="sel1" name="satuan" required>
@@ -68,8 +68,8 @@
                 </optgroup>
               </select>
             </div>
-          </div>
-          <div class="form-group required">
+          </div> -->
+          <!-- <div class="form-group required">
             <label class="control-label col-sm-4" for="name">Pegawai / PIC</label>
             <div class="col-sm-8">
               <select class="from-control" id="sel1" name="pegawai" required>
@@ -81,8 +81,8 @@
                 </optgroup>
               </select>
             </div>
-          </div>
-          <div class="form-group required">
+          </div> -->
+          <!-- <div class="form-group required">
             <label class="control-label col-sm-4" for="name">Ruangan</label>
             <div class="col-sm-8">
               <select class="from-control" id="sel1" name="ruangan" required>
@@ -170,50 +170,53 @@
                 <option value="">Pilih Sub Kelompok Barang</option>
               </select>
             </div>
-          </div>
-          <div class="form-group required">
-            <label class="control-label col-sm-4" for="name">&nbsp;</label>
+          </div> -->
+          <div class="form-group">
+            <label class="control-label col-sm-4" for="name">Nomor PO/Kuitansi</label>
             <div class="col-sm-8">
-              <label>Upload gambar</label>
-              <input type="file" name="picture" required>
+              <input type="text" class="form-control" id="text" name="number" placeholder="PO-123-1717">
             </div>
           </div>
           <div class="form-group">
+            <label class="control-label col-sm-4" for="name">Deskripsi</label>
+            <div class="col-sm-8">
+              <input type="text" class="form-control" id="text" name="description" placeholder="Deskripsi barang">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-4" for="name">Merek</label>
+            <div class="col-sm-8">
+              <input type="text" class="form-control" id="text" name="brand" placeholder="Sumber barang">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-4" for="name">Harga</label>
+            <div class="col-sm-8">
+              <input type="text" class="form-control" id="text" name="price" placeholder="Jumlah dalam rupiah">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-4" for="name">Ukuran</label>
+            <div class="col-sm-8">
+              <input type="text" class="form-control" id="text" name="size" placeholder="Kondisi barang">
+            </div>
+          </div>
+
+
+
+          <div class="form-group">
             <div class="col-sm-offset-3 col-sm-8">
               <button type="submit" class="btn btn-sm btn-primary">Simpan</button>
-              <a href="/barang" type="submit" class="btn btn-sm btn-default">Batal</a>
+              <a href="/inventori" type="submit" class="btn btn-sm btn-default">Batal</a>
             </div>
           </div>
       </div>
       <div class="col-sm-6">
-        <div class="form-group">
-          <label class="control-label col-sm-4" for="name">Nomor PO/Kuitansi</label>
+        <div class="form-group required">
+          <label class="control-label col-sm-4" for="name">Foto</label>
           <div class="col-sm-8">
-            <input type="text" class="form-control" id="text" name="number" placeholder="PO-123-1717">
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="control-label col-sm-4" for="name">Deskripsi</label>
-          <div class="col-sm-8">
-            <input type="text" class="form-control" id="text" name="description" placeholder="Deskripsi barang">
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="control-label col-sm-4" for="name">Harga</label>
-          <div class="col-sm-8">
-            <input type="text" class="form-control" id="text" name="price" placeholder="Jumlah dalam rupiah">
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="control-label col-sm-4" for="name">Ukuran</label>
-          <div class="col-sm-8">
-            <input type="text" class="form-control" id="text" name="size" placeholder="Kondisi barang">
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="control-label col-sm-4" for="name">Merek</label>
-          <div class="col-sm-8">
-            <input type="text" class="form-control" id="text" name="brand" placeholder="Sumber barang">
+            <label>Upload gambar</label>
+            <input type="file" name="picture" required>
           </div>
         </div>
         <div class="form-group">
@@ -237,13 +240,13 @@
         <div class="form-group">
           <label class="control-label col-sm-4" for="name">Tahun Pembuatan</label>
           <div class="col-sm-8">
-            <input type="text" class="form-control" id="text" name="year_created" placeholder="Tahun pembuatan">
+            <input type="text" class="form-control" id="text" name="created_year" placeholder="Tahun pembuatan">
           </div>
         </div>
         <div class="form-group">
           <label class="control-label col-sm-4" for="name">Tahun Pembelian</label>
           <div class="col-sm-8">
-            <input type="text" class="form-control" id="text" name="year_buy" placeholder="Tahun pembelian">
+            <input type="text" class="form-control" id="text" name="buy_year" placeholder="Tahun pembelian">
           </div>
         </div>
       </div>

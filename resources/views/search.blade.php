@@ -29,7 +29,7 @@
     // });
     $(document).ready(function(){
       $('#term').on("mouseover", function(event){
-        //$("div").html("Event: " + event.type);
+        // $("div").html("Event: " + event.type);
         $("#term").autocomplete({
           source: "{{ route('search.autocomplete') }}",
           minLength: 3,
@@ -127,14 +127,11 @@
                 <strong>{{$barang->quantity}} <br> unit</strong>
               </div>
               <div class="col-sm-9">
-                <strong>{{$barang->name}}</strong>
+                <strong>{{$barang->barang_name}}</strong>
                 <p>
                   {{$barang->description}}&#124;
-                  {{$barang->price}}&#124;
-                  {{$barang->kondisi}}&#124;
-                  {{$barang->Tujuan}}&#124;
-                  {{$barang->source}}&#124;
-                  {{$barang->kategori_name}}&#124;
+                  {{$barang->kondisi_name}}&#124;
+                  {{$barang->status_name}}&#124;
                   {{$barang->ruangan_name}}&#124;
                   <span class="glyphicon glyphicon-user"></span>
                   {{$barang->pegawai_name}}

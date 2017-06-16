@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 use App\Http\Requests;
+use App\Models\Barang;
 use App\Models\Inventori;
+use App\Models\Mutation;
 
 use Charts;
 
@@ -27,7 +29,7 @@ class HomeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(){
-      $barangs = Inventori::count();
+      $barangs = Barang::sum('quantity');
       //dd($barangs);
       // $chart = Charts::multi('bar', 'material')
 			// // Setup the chart settings
@@ -44,19 +46,31 @@ class HomeController extends Controller
 			// ->dataset('Element 3', [25,10,40])
 			// // Setup what the values mean
 			// ->labels(['One', 'Two', 'Three']);
-      $charts = Charts::database(Inventori::all(),'line', 'highcharts')
+      // $inputs = Charts::database(Inventori::all(),'line', 'highcharts')
+      //         ->dateFormat('j F y')
+      //         ->title('Aktifitas input inventori harian')
+      //         ->elementLabel('Total')
+      //         ->dimensions(0,300)
+      //         ->responsive(false)
+      //         // ->groupByDay()
+      //         ->lastByDay(14, true);
+      $charts = Charts::multiDatabase('areaspline','highcharts')
+              ->dataset('Input',Inventori::all())
+              ->dataset('Dihapus',Mutation::where('status_name','Dihapuskan')->get())
+              ->dataset('Mutasi',Mutation::where('status_name','Mutasi Pindah')->get())
+              ->dataset('Usulan penghapusan',Mutation::where('status_name','Dalam usulan penghapusan')->get())
               ->dateFormat('j F y')
-              ->title('Aktifitas input barang Harian')
+              ->title('Aktifitas inventori harian')
               //->labels(['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'])
               //->values([100,50,25])
-              ->elementLabel('Total')
+              ->elementLabel('Jumlah')
               ->dimensions(0,300)
               ->responsive(false)
               //->groupByDay();
               ->lastByDay(14, true);
       $years = Charts::database(Inventori::all(),'bar', 'highcharts')
               ->dateFormat('j F y')
-              ->title('Aktifitas Tahunan')
+              ->title('Grafik Tahunan')
               ->elementLabel('Total')
               ->dimensions(0,200)
               ->responsive(false)
@@ -69,62 +83,57 @@ class HomeController extends Controller
               ->dimensions(0,200)
               ->responsive(false)
               ->groupBy('golongan_barang_name');
-      return view('home', ['barangs' => $barangs, 'charts' => $charts, 'charts2' => $charts2, 'years' => $years]);
+      return view('home', ['barangs' => $barangs,'charts'=>$charts, 'charts2'=>$charts2, 'years'=>$years]);
     }
     public function search(Request $request){
       //$search = \Request::get('search');
       // dd($request);
-      $barangs = Inventori::join('golongan_barang','golongan_barang_id','=','golongan_barang.id')
-                  ->join('ruangan','ruangan_id','=','ruangan.id')
-                  ->join('pegawai','pegawai_id','=','pegawai.id')
-                  ->select('barang.*','golongan_barang.name as golongan_barang_name','ruangan.name as ruangan_name','pegawai.name as pegawai_name')
-                  ->where(function($query) use ($request){
-                  $query->orWhere('barang.code','like','%'.$request->term.'%');
-                  $query->orWhere('barang.name','like','%'.$request->term.'%');
-                  $query->orWhere('barang.number','like','%'.$request->term.'%');
-                  $query->orWhere('barang.description','like','%'.$request->term.'%');
-                  $query->orWhere('barang.quantity','like','%'.$request->term.'%');
-                  $query->orWhere('pegawai.nip','like','%'.$request->term.'%');
+      $barangs = Mutation::join('barang','barang_id','=','barang.id')
+                ->join('pegawai','mutation.pegawai_id','=','pegawai.id')
+                ->join('ruangan','mutation.ruangan_id','=','ruangan.id')
+                ->select('mutation.*', 'pegawai.name as pegawai_name', 'ruangan.name as ruangan_name')
+                ->where(function($query) use ($request){
+                  $query->orWhere('mutation.barang_code','like','%'.$request->term.'%');
+                  $query->orWhere('mutation.barang_name','like','%'.$request->term.'%');
+                  $query->orWhere('mutation.description','like','%'.$request->term.'%');
+                  $query->orWhere('mutation.quantity','like','%'.$request->term.'%');
+                  $query->orWhere('mutation.kondisi_name','like','%'.$request->term.'%');
+                  $query->orWhere('mutation.status_name','like','%'.$request->term.'%');
                   $query->orWhere('pegawai.name','like','%'.$request->term.'%');
-                  $query->orWhere('pegawai.contact','like','%'.$request->term.'%');
-                  $query->orWhere('barang.kondisi_name','like','%'.$request->term.'%');
-                  $query->orWhere('barang.status_name','like','%'.$request->term.'%');
                   $query->orWhere('ruangan.name','like','%'.$request->term.'%');
-                  $query->orWhere('golongan_barang.name','like','%'.$request->term.'%');
                 })
                 ->orderBy('id', 'asc')->paginate(5);
-      // dd($request);
+      // dd($barangs);
       return view('search',['barangs'=>$barangs, 'request'=>$request]);
     }
     public function autocomplete(Request $request){
       //call by non ajax autocomplete
+      // dd($request);
       if ($request->ajax()) {
-        //dd($request);
-        $barangs = Inventori::join('golongan_barang','golongan_barang_id','=','golongan_barang.id')
-                    ->join('ruangan','ruangan_id','=','ruangan.id')
-                    ->join('pegawai','pegawai_id','=','pegawai.id')
-                    ->select('inventori_barang.*','golongan_barang.name as golongan_barang_name','ruangan.name as ruangan_name','pegawai.name as pegawai_name')
-                    ->where(function($query) use ($request){
-                      $query->orWhere('barang.code','like','%'.$request->term.'%');
-                      $query->orWhere('barang.name','like','%'.$request->term.'%');
-                      $query->orWhere('barang.number','like','%'.$request->term.'%');
-                      $query->orWhere('barang.description','like','%'.$request->term.'%');
-                      $query->orWhere('barang.quantity','like','%'.$request->term.'%');
-                      $query->orWhere('pegawai.nip','like','%'.$request->term.'%');
-                      $query->orWhere('pegawai.name','like','%'.$request->term.'%');
-                      $query->orWhere('pegawai.contact','like','%'.$request->term.'%');
-                      $query->orWhere('barang.kondisi_name','like','%'.$request->term.'%');
-                      $query->orWhere('barang.status_name','like','%'.$request->term.'%');
-                      $query->orWhere('ruangan.name','like','%'.$request->term.'%');
-                      $query->orWhere('golongan_barang.name','like','%'.$request->term.'%');
+        // dd($request);
+        $barangs = Mutation::join('barang','barang_id','=','barang.id')
+                  ->join('pegawai','mutation.pegawai_id','=','pegawai.id')
+                  ->join('ruangan','mutation.ruangan_id','=','ruangan.id')
+                  ->select('mutation.*')
+                  ->select('mutation.*', 'pegawai.name as pegawai_name', 'ruangan.name as ruangan_name')
+                  ->where(function($query) use ($request){
+                    $query->orWhere('mutation.barang_code','like','%'.$request->term.'%');
+                    $query->orWhere('mutation.barang_name','like','%'.$request->term.'%');
+                    $query->orWhere('mutation.description','like','%'.$request->term.'%');
+                    $query->orWhere('mutation.quantity','like','%'.$request->term.'%');
+                    $query->orWhere('mutation.kondisi_name','like','%'.$request->term.'%');
+                    $query->orWhere('mutation.status_name','like','%'.$request->term.'%');
+                    $query->orWhere('ruangan.name','like','%'.$request->term.'%');
+                    $query->orWhere('pegawai.name','like','%'.$request->term.'%');
                   })
-                  ->orderBy('name', 'asc')
-                  ->take(5)
-                  ->get();
+                ->orderBy('id', 'asc')
+                ->take(5)
+                ->get();
         //convert to Json
+        // dd($barangs);
         $results = [];
         foreach ($barangs as $barang) {
-          $results[] = ['id' => $barang->id, 'value' => $barang->name, 'label' => $barang->code.'-'.$barang->name];
+          $results[] = ['id' => $barang->barang_id, 'value' => $barang->barang_name, 'label' => $barang->barang_code.'-'.$barang->barang_name];
         }
         //dd($results);
         return \Response::json($results);

@@ -90,7 +90,7 @@ Route::post('/barang/mutation/insert', 'BarangController@mutation_barang_insert'
 
 Route::get('/barang', 'BarangController@index');
 Route::get('/barang/{id}/view', 'BarangController@barang_view');
-Route::get('/barang/{id}/edit', 'BarangController@barang_edit');
+Route::get('/barang/{id}/{golongan_barang_id}/{bidang_barang_id}/{kelompok_barang_id}/edit', 'BarangController@barang_edit');
 Route::get('/barang/{id}/delete', 'BarangController@barang_delete');
 Route::get('/barang/add', 'BarangController@barang_add');
 Route::post('/barang/insert', 'BarangController@barang_insert');

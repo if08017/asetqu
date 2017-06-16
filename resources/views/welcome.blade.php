@@ -1,12 +1,12 @@
 @extends('layouts.level1')
 
-@section('title','Asetqu - Sistem Informasi Pengelolaan Aset')
+@section('title','Asetqu - Inventory Management System')
 
 @section('content')
 <h1>Asetqu</h1>
-<h3>Sistem Informasi Pengelolaan Aset</h3>
+<h3>Inventory Management System</h3>
 <p>
-  Sekretariat bagian Keuangan Setda Kab. Pesisir Selatan<br>
-  Jl. H. Agus Salim No. 1 Painan, Padang
+  Kelola aset anda dengan baik dan benar<br>
+  Open source project
 </p>
 @endsection

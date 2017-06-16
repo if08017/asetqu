@@ -29,39 +29,16 @@ class InventoriController extends Controller
     return view('inventori', ['inventoris' => $inventoris]);
   }
   public function inventori_view($id){
-    $inventori = Inventori::join('ruangan','ruangan_id','=','ruangan.id')
-                ->join('pegawai','pegawai_id','=','pegawai.id')
-                ->join('golongan_barang','golongan_barang_id','=','golongan_barang.id')
-                ->join('bidang_barang','bidang_barang_id','=','bidang_barang.id')
-                ->join('kelompok_barang','kelompok_barang_id','=','kelompok_barang.id')
-                ->join('sub_kelompok_barang','sub_kelompok_barang_id','=','sub_kelompok_barang.id')
-                ->join('mutation','mutation_id','=','mutation.id')
-                ->select('inventori_barang.*','sub_kelompok_barang.name as sub_kelompok_barang_name', 'kelompok_barang.name as kelompok_barang_name', 'bidang_barang.name as bidang_barang_name', 'golongan_barang.name as golongan_barang_name', 'ruangan.name as ruangan_name', 'pegawai.name as pegawai_name')
-                ->find($id);
+    $inventori = Inventori::find($id);
     return view('inventoriview', ['inventori' => $inventori]);
   }
   public function inventori_edit($id){
-    $golongans = Golongan::orderBy('name', 'asc')->get();
-    $bidangs = Bidang::orderBy('name', 'asc')->get();
-    $kelompoks = Kelompok::orderBy('name', 'asc')->get();
-    $subkelompoks = Subkelompok::orderBy('name', 'asc')->get();
-    $ruangans = Ruangan::orderBy('name', 'asc')->get();
-    $pegawais = Pegawai::orderBy('name', 'asc')->get();
-    $satuans = Satuan::orderBy('name', 'asc')->get();
     $kondisis = Kondisi::orderBy('name', 'asc')->get();
     $statuss = Status::orderBy('name', 'asc')->get();
-    $inventori = Inventori::join('ruangan','ruangan_id','=','ruangan.id')
-                ->join('pegawai','pegawai_id','=','pegawai.id')
-                ->join('golongan_barang','golongan_barang_id','=','golongan_barang.id')
-                ->join('bidang_barang','bidang_barang_id','=','bidang_barang.id')
-                ->join('kelompok_barang','kelompok_barang_id','=','kelompok_barang.id')
-                ->join('sub_kelompok_barang','sub_kelompok_barang_id','=','sub_kelompok_barang.id')
-                ->join('mutation','mutation_id','=','mutation.id')
-                ->select('inventori_barang.*','sub_kelompok_barang.name as sub_kelompok_barang_name', 'kelompok_barang.name as kelompok_barang_name', 'bidang_barang.name as bidang_barang_name', 'golongan_barang.name as golongan_barang_name', 'ruangan.name as ruangan_name', 'pegawai.name as pegawai_name')
-                ->find($id);
+    $inventori = Inventori::find($id);
     //$barang = Barang::find($id);
     //dd($barang);
-    return view('inventoriedit', ['inventori' => $inventori, 'ruangans' => $ruangans, 'pegawais' => $pegawais, 'satuans' => $satuans, 'kondisis' => $kondisis, 'statuss' => $statuss, 'golongans' => $golongans, 'bidangs' => $bidangs, 'kelompoks' => $kelompoks, 'subkelompoks' => $subkelompoks]);
+    return view('inventoriedit', ['inventori' => $inventori, 'kondisis' => $kondisis, 'statuss' => $statuss]);
   }
   public function inventori_update($id, Request $request){
     // dd($request);
@@ -85,7 +62,7 @@ class InventoriController extends Controller
     $inventori = Inventori::find($id);
     $inventori->barang_code = $request->code;
     $inventori->number = $request->number;
-    $inventori->name = $request->name;
+    $inventori->barang_name = $request->name;
     $inventori->description = $request->description;
     $inventori->price = $request->price;
     $inventori->quantity = $request->quantity;
@@ -95,16 +72,11 @@ class InventoriController extends Controller
     $inventori->brand = $request->brand;
     $inventori->size = $request->size;
     $inventori->satuan_name = $request->satuan;
-    $inventori->status_name = $request->status;
+    $inventori->status_name = 'Aktif';
     $inventori->color = $request->color;
     $inventori->material = $request->material;
     $inventori->created_year = $request->created_year;
     $inventori->buy_year = $request->buy_year;
-    $inventori->ruangan_id = $request->ruangan;
-    $inventori->golongan_barang_id = $request->golongan;
-    $inventori->bidang_barang_id = $request->bidang;
-    $inventori->kelompok_barang_id = $request->kelompok;
-    $inventori->sub_kelompok_barang_id = $request->subkelompok;
     $inventori->save();
     return redirect('/inventori/'.$id.'/view');
   }
@@ -117,7 +89,7 @@ class InventoriController extends Controller
       // dd($pathToImage);
       File::delete($pathToImage);
     }
-    // Inventori::destroy($id);
+    Inventori::destroy($id);
     return redirect('/inventori');
   }
   public function inventori_add(){
@@ -138,10 +110,10 @@ class InventoriController extends Controller
     }
 
     Inventori::create([
-      'barang_code' => $request->code,
-      'name' => $request->name,
-      'quantity' => $request->quantity,
       'barang_id' => $request->barang_id,
+      'barang_code' => $request->code,
+      'barang_name' => $request->name,
+      'quantity' => $request->quantity,
       'satuan_name' => $request->satuan,
       'pegawai_id' => $request->pegawai,
       'ruangan_id' => $request->ruangan,

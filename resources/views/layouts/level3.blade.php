@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="/css/datepicker.css">
   <link rel="stylesheet" href="/js/jqueryui/jquery-ui.min.css">
   <link rel="stylesheet" href="/js/jqueryui/jquery-ui.theme.css">
+  <link rel="stylesheet" href="/css/font-awesome.min.css">
   <link rel="stylesheet" href="/css/master.css">
   <script type="text/javascript" src="/js/jquery-3.2.1.min.js"></script>
   <script type="text/javascript" src="/js/bootstrap.min.js"></script>
@@ -83,11 +84,11 @@
       <div class="col-sm-2 menu">
         <div class="">
           <a href="/home" class="active">Dashboard</a>
-          <a href="/inventori">Inventori Barang</a>
-          <a href="/barang/mutation">Mutasi Barang</a>
+          <a href="/barang">Daftar Barang</a>
+          <a href="/inventori">Daftar Inventori</a>
+          <a href="/barang/mutation">Mutasi Inventori</a>
           <a href="/laporan">Laporan/Report</a>
           <label>Managemen</label>
-          <a href="/barang">Daftar Barang</a>
           <a href="/pegawai">Daftar Pegawai</a>
           <a href="/bidang">Bidang Kerja</a>
           <a href="/management">Jabatan & Ruangan</a>

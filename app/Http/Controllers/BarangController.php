@@ -26,37 +26,59 @@ class BarangController extends Controller
       $this->middleware('auth');
   }
   public function index(){
-    $barangs = Barang::join('sub_kelompok_barang','sub_kelompok_barang_id','=','sub_kelompok_barang.id')
-            ->select('barang.*','sub_kelompok_barang.name as sub_kelompok_barang_name')
-            ->orderBy('created_at', 'desc')->paginate(13);
+    $barangs = Barang::join('golongan_barang','golongan_barang_id','=','golongan_barang.id')
+              ->join('bidang_barang','bidang_barang_id','=','bidang_barang.id')
+              ->join('kelompok_barang','kelompok_barang_id','=','kelompok_barang.id')
+              ->join('sub_kelompok_barang','sub_kelompok_barang_id','=','sub_kelompok_barang.id')
+              ->select('barang.*','golongan_barang.name as golongan_barang_name','bidang_barang.name as bidang_barang_name','kelompok_barang.name as kelompok_barang_name','sub_kelompok_barang.name as sub_kelompok_barang_name')
+              ->orderBy('created_at', 'desc')->paginate(13);
     return view('barang', ['barangs' => $barangs]);
   }
   public function barang_view($id){
-    $barang = Barang::join('sub_kelompok_barang','sub_kelompok_barang_id','=','sub_kelompok_barang.id')
-                ->select('barang.*','sub_kelompok_barang.name as sub_kelompok_barang_name')
-                ->find($id);
+    $barang = Barang::join('golongan_barang','golongan_barang_id','=','golongan_barang.id')
+              ->join('bidang_barang','bidang_barang_id','=','bidang_barang.id')
+              ->join('kelompok_barang','kelompok_barang_id','=','kelompok_barang.id')
+              ->join('sub_kelompok_barang','sub_kelompok_barang_id','=','sub_kelompok_barang.id')
+              ->select('barang.*','golongan_barang.name as golongan_barang_name','bidang_barang.name as bidang_barang_name','kelompok_barang.name as kelompok_barang_name','sub_kelompok_barang.name as sub_kelompok_barang_name')
+              ->find($id);
     return view('barangview', ['barang' => $barang]);
   }
-  public function barang_edit($id){
-    $subkelompoks = Subkelompok::orderBy('name', 'asc')->get();
-    $barang = Barang::join('sub_kelompok_barang','sub_kelompok_barang_id','=','sub_kelompok_barang.id')
-                ->select('barang.*','sub_kelompok_barang.name as sub_kelompok_barang_name')
-                ->find($id);
-    return view('barangedit', ['barang' => $barang, 'subkelompoks' => $subkelompoks]);
+  public function barang_edit($id,$golongan_barang_id,$bidang_barang_id,$kelompok_barang_id){
+    $golongans = Golongan::orderBy('name', 'asc')->get();
+    $bidangs = Bidang::where('golongan_barang_id',$golongan_barang_id)->orderBy('name', 'asc')->get();
+    $kelompoks = Kelompok::where('bidang_barang_id',$bidang_barang_id)->orderBy('name', 'asc')->get();
+    $subkelompoks = Subkelompok::where('kelompok_barang_id',$kelompok_barang_id)->orderBy('name', 'asc')->get();
+    $satuans = Satuan::orderBy('name', 'asc')->get();
+    $barang = Barang::join('golongan_barang','golongan_barang_id','=','golongan_barang.id')
+              ->join('bidang_barang','bidang_barang_id','=','bidang_barang.id')
+              ->join('kelompok_barang','kelompok_barang_id','=','kelompok_barang.id')
+              ->join('sub_kelompok_barang','sub_kelompok_barang_id','=','sub_kelompok_barang.id')
+              ->select('barang.*','golongan_barang.name as golongan_barang_name','bidang_barang.name as bidang_barang_name','kelompok_barang.name as kelompok_barang_name','sub_kelompok_barang.name as sub_kelompok_barang_name')
+              ->find($id);
+    return view('barangedit', ['barang' => $barang, 'satuans' => $satuans, 'golongans' => $golongans, 'bidangs' => $bidangs, 'kelompoks' => $kelompoks, 'subkelompoks' => $subkelompoks]);
   }
   public function barang_delete($id){
     Barang::destroy($id);
     return redirect('/barang');
   }
   public function barang_add(){
+    $satuans = Satuan::orderBy('name', 'asc')->get();
+    $golongans = Golongan::orderBy('name', 'asc')->get();
+    $bidangs = Bidang::orderBy('name', 'asc')->get();
+    $kelompoks = Kelompok::orderBy('name', 'asc')->get();
     $subkelompoks = Subkelompok::orderBy('name', 'asc')->get();
-    return view('barangadd',['subkelompoks' => $subkelompoks]);
+    return view('barangadd',['satuans' => $satuans, 'golongans' => $golongans, 'bidangs' => $bidangs, 'kelompoks' => $kelompoks, 'subkelompoks' => $subkelompoks]);
   }
   public function barang_insert(Request $request){
     Barang::create([
       'code' => $request->code,
       'name' => $request->name,
       'description' => $request->description,
+      'satuan_name' => $request->satuan,
+      'status_name' => 'Aktif',
+      'golongan_barang_id' => $request->golongan,
+      'bidang_barang_id' => $request->bidang,
+      'kelompok_barang_id' => $request->kelompok,
       'sub_kelompok_barang_id' => $request->subkelompok
     ]);
     return redirect('/barang');
@@ -66,6 +88,9 @@ class BarangController extends Controller
     $barang->code = $request->code;
     $barang->name = $request->name;
     $barang->description = $request->description;
+    $barang->golongan_barang_id = $request->golongan;
+    $barang->bidang_barang_id = $request->bidang;
+    $barang->kelompok_barang_id = $request->kelompok;
     $barang->sub_kelompok_barang_id = $request->subkelompok;
     $barang->save();
     return redirect('/barang/'.$id.'/view');
@@ -95,24 +120,29 @@ class BarangController extends Controller
 
 
   public function mutation_view(){
-    $golongans = Golongan::orderBy('name', 'asc')->get();
-    $bidangs = Bidang::orderBy('name', 'asc')->get();
-    $kelompoks = Kelompok::orderBy('name', 'asc')->get();
-    $subkelompoks = Subkelompok::orderBy('name', 'asc')->get();
     $ruangans = Ruangan::orderBy('name', 'asc')->get();
     $pegawais = Pegawai::orderBy('name', 'asc')->get();
-    $satuans = Satuan::orderBy('name', 'asc')->get();
     $kondisis = Kondisi::orderBy('name', 'asc')->get();
     $statuss = Status::orderBy('name', 'asc')->get();
-    return view('mutation',['ruangans' => $ruangans, 'pegawais' => $pegawais]);
+    $mutations = Mutation::join('pegawai','mutation.pegawai_id','=','pegawai.id')
+                ->join('ruangan','mutation.ruangan_id','=','ruangan.id')
+                ->orderBy('created_at', 'desc')
+                ->select('mutation.*', 'pegawai.name as pegawai_name', 'ruangan.name as ruangan_name')
+                ->paginate(5);
+    return view('mutation',['mutations'=>$mutations,'ruangans' => $ruangans, 'pegawais' => $pegawais, 'kondisis'=>$kondisis, 'statuss'=>$statuss]);
   }
   public function mutation_barang_insert(Request $request){
     // dd($request);
     Mutation::create([
       'barang_id' => $request->id,
+      'barang_code'=>$request->code,
+      'barang_name'=>$request->name,
       'pegawai_id' => $request->pegawai,
       'ruangan_id' => $request->ruangan,
       'quantity' => $request->quantity,
+      'kondisi_name' => $request->kondisi,
+      'status_name' => $request->status,
+      '_token' => $request->_token,
     ]);
     return redirect('/barang/'.$request->id.'/view');
   }

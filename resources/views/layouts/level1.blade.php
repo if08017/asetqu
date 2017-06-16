@@ -23,7 +23,9 @@
         <div class="collapse navbar-collapse" id="myNavbar">
           <ul class="nav navbar-nav navbar-left">
             <li><a href="/home">Asetqu</a></li>
-            <li><a href="http://padang.go.id/" target="_blank">Padang.go.id</a></li>
+            <li><a href="http://www.kawanlabs.com/" target="_blank">#Kawanlabs</a></li>
+            <li><a href="http://www.megaark.com/" target="_blank">#MegaArk</a></li>
+            <li><a href="http://blog.kawanlabs.com/" target="_blank">#Blog</a></li>
           </ul>
         </div>
       </div>
