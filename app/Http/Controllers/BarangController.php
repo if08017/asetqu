@@ -116,6 +116,11 @@ class BarangController extends Controller
     $subkelompokbarangs = Subkelompok::where('kelompok_barang_id', $request->subkelompok_id)->get();
     return \Response::json($subkelompokbarangs);
   }
+  public function nama_barang(Request $request){
+    // dd($request);
+    $barangs = Barang::where('sub_kelompok_barang_id', $request->barang_id)->get();
+    return \Response::json($barangs);
+  }
 
 
 

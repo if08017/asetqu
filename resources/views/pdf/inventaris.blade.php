@@ -37,6 +37,21 @@
       <table class="table table-striped table-bordered">
         <thead class="atas">
           <tr>
+            <td>&nbsp;</td>
+            <td colspan="2">OPD</td>
+            <td colspan="4">03.06.01. SEKRETARIAT DAERAH</td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td colspan="2">KABUPATEN/KOTA</td>
+            <td colspan="4">PEMERINTAH KABUPATEN PESISIR SELATAN</td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td colspan="2">PROVINSI</td>
+            <td colspan="4">SUMATERA BARAT</td>
+          </tr>
+          <tr>
             <td colspan="7" style="text-align:center; padding: 10px;">DAFTAR BARANG INVENTARIS<br>{{ date('Y')}}</td>
           </tr>
         </thead>
@@ -76,6 +91,23 @@
           <th class="number">{{ $barangs->sum('total_barang')}}</th>
           <th class="number">{{ number_format($barangs->sum('total_price'))}}</th>
           <th>&nbsp;</th>
+        </tr>
+      </thead>
+      <thead class="signature">
+        <tr>
+          <td colspan="3">Mengetahui</td>
+          <td colspan="1">&nbsp;</td>
+          <td colspan="3">PAINAN, 09 Desember 2016</td>
+        </tr>
+        <tr>
+          <td colspan="3">&nbsp;</td>
+          <td colspan="1">&nbsp;</td>
+          <td colspan="3">&nbsp;</td>
+        </tr>
+        <tr>
+          <td colspan="3">Ir. Erizon, MT <br> NIP. 19630323 199003 1 005	</td>
+          <td colspan="1"></td>
+          <td colspan="3">WETRI MULYADEVITA, A.Md <br> NIP. 19800708 200902 2 003</td>
         </tr>
       </thead>
     </table>

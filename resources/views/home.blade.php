@@ -196,11 +196,12 @@
       <div class="col-sm-2 menu">
         <div class="">
           <a href="/home" class="active">Dashboard</a>
-          <a href="/barang">Daftar Barang</a>
-          <a href="/inventori">Daftar Inventori</a>
-          <a href="/barang/mutation">Mutasi Inventori</a>
+          <a href="/inventori">Input Inventori</a>
+          <a href="/bhp">Barang Habis Pakai</a>
+          <!-- <a href="/barang/mutation">Mutasi Inventori</a> -->
           <a href="/laporan">Laporan/Report</a>
           <label>Managemen</label>
+          <a href="/barang">Daftar Barang</a>
           <a href="/pegawai">Daftar Pegawai</a>
           <a href="/bidang">Bidang Kerja</a>
           <a href="/management">Jabatan & Ruangan</a>

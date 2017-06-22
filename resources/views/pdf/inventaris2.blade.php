@@ -52,7 +52,7 @@
             <td colspan="4">SUMATERA BARAT</td>
           </tr>
           <tr>
-            <td colspan="12" style="text-align:center; padding: 10px;">DAFTAR BARANG INVENTARIS<br>ASET AKTIF dan ASET DALAM USULAN PENGHAPUSAN</td>
+            <td colspan="12" style="text-align:center; padding: 10px;">DAFTAR BARANG INVENTARIS<br>ASET AKTIF dan ASET DALAM USULAN PENGHAPUSAN<br>{{ date('Y')}}</td>
           </tr>
         </thead>
       <thead style="text-align:center">
@@ -67,6 +67,7 @@
           <th>Nomor/Identitas</th>
           <th>Asal Usul</th>
           <th>Harga</th>
+          <th>Status</th>
           <th>Pengguna</th>
           <th>Keterangan</th>
         </tr>
@@ -77,17 +78,38 @@
         @php ($a++)
         <tr>
           <td class="number"><strong>{{$a}}</strong></td>
-          <td class="number">{{ $barang->code }}</td>
-          <td>{{ $barang->name }}</td>
-          <td>{{ $barang->brand }}</td>
+          <td class="number">{{ $barang->barang_code }}</td>
+          <td>{{ $barang->barang_name }}</td>
+          <td>{{ $barang->inventori_barang_brand }}</td>
           <td class="number">{{ $barang->size }}</td>
           <td>{{ $barang->material }}</td>
           <td class="number">{{ $barang->year_created }}</td>
           <td>{{ $barang->number }}</td>
           <td>{{ $barang->source }}</td>
           <td class="number">{{ number_format($barang->price) }}</td>
+          <td>{{ $barang->status_name }}</td>
           <td>{{ $barang->pegawai_name }}</td>
           <td>{{ $barang->description }}</td>
+        </tr>
+        @endforeach
+
+        @php ($b=$a)
+        @foreach ($barangs2 as $barang2)
+        @php ($b++)
+        <tr>
+          <td class="number"><strong>{{$b}}</strong></td>
+          <td class="number">{{ $barang2->code }}</td>
+          <td>{{ $barang2->name }}</td>
+          <td>{{ $barang2->brand }}</td>
+          <td class="number">{{ $barang2->size }}</td>
+          <td>{{ $barang2->material }}</td>
+          <td class="number">{{ $barang2->year_created }}</td>
+          <td>{{ $barang2->number }}</td>
+          <td>{{ $barang2->source }}</td>
+          <td class="number">{{ number_format($barang2->price) }}</td>
+          <td>{{ $barang2->status_name }}</td>
+          <td>{{ $barang2->pegawai_name }}</td>
+          <td>{{ $barang2->description }}</td>
         </tr>
         @endforeach
       </tbody>

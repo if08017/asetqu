@@ -42,6 +42,7 @@
                 $('.barang_id').empty();
                 $('.barang_code').empty();
                 $('.barang_name').empty();
+                $('.brand').empty();
                 $.each(data,function(index, bidangObj){
                   $('.name').append('<p>'+bidangObj.name+'</p>');
                   $('.description').append('<p>'+bidangObj.description+'</p>');
@@ -52,6 +53,7 @@
                   $('.barang_id').append('<input type="hidden" name="id" value="'+bidangObj.id+'">');
                   $('.barang_code').append('<input type="hidden" name="code" value="'+bidangObj.code+'">');
                   $('.barang_name').append('<input type="hidden" name="name" value="'+bidangObj.name+'">');
+                  $('.brand').append('<input type="hidden" name="brand" value="'+bidangObj.brand+'">');
                 });
               });
             });
@@ -89,6 +91,10 @@
           <div class="form-group hidden">
             <label class="control-label col-sm-4" for="name">&nbsp;</label>
             <div class="col-sm-8 barang_name"></div>
+          </div>
+          <div class="form-group hidden">
+            <label class="control-label col-sm-4" for="name">&nbsp;</label>
+            <div class="col-sm-8 brand"></div>
           </div>
           <div class="form-group required">
             <label class="control-label col-sm-4" for="name">Quantitas</label>

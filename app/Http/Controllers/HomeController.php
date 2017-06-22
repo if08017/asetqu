@@ -9,6 +9,7 @@ use App\Http\Requests;
 use App\Models\Barang;
 use App\Models\Inventori;
 use App\Models\Mutation;
+use App\Models\Baranghabispakai;
 
 use Charts;
 
@@ -55,10 +56,11 @@ class HomeController extends Controller
       //         // ->groupByDay()
       //         ->lastByDay(14, true);
       $charts = Charts::multiDatabase('areaspline','highcharts')
-              ->dataset('Input',Inventori::all())
-              ->dataset('Dihapus',Mutation::where('status_name','Dihapuskan')->get())
-              ->dataset('Mutasi',Mutation::where('status_name','Mutasi Pindah')->get())
-              ->dataset('Usulan penghapusan',Mutation::where('status_name','Dalam usulan penghapusan')->get())
+              ->dataset('Input Inventori',Inventori::all())
+              ->dataset('BHP Masuk',Baranghabispakai::where('mutation_id','1')->get())
+              ->dataset('BHP Keluar',Baranghabispakai::where('mutation_id','2')->get())
+              // ->dataset('Mutasi',Mutation::where('status_name','Mutasi Pindah')->get())
+              // ->dataset('Usulan penghapusan',Mutation::where('status_name','Dalam usulan penghapusan')->get())
               ->dateFormat('j F y')
               ->title('Aktifitas inventori harian')
               //->labels(['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'])

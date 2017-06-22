@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Requests;
 use PDF;
 use App\Models\Barang;
+use App\Models\Inventori;
+use App\Models\Mutation;
 use App\Models\Report;
 use App\Models\Pegawai;
 use App\Models\Ruangan;
@@ -46,19 +48,27 @@ class PDFController extends Controller
   }
   public function inventaris_pertahun(){
     // 1
-    $barangs = Barang::join('golongan_barang','golongan_barang_id','=','golongan_barang.id')
+    $barangs = Inventori::join('golongan_barang','golongan_barang_id','=','golongan_barang.id')
     ->join('bidang_barang','bidang_barang_id','=','bidang_barang.id')
     ->join('kelompok_barang','kelompok_barang_id','=','kelompok_barang.id')
-    ->select('barang.*', DB::raw('COUNT(barang.id) as total_barang'), DB::raw('SUM(barang.price) as total_price'),'golongan_barang.code as golongan_barang_code', 'bidang_barang.code as bidang_barang_code', 'bidang_barang.name as bidang_barang_name','kelompok_barang.code as kelompok_barang_code', DB::raw('GROUP_CONCAT(DISTINCT(kelompok_barang.name)) as kelompok_barang_name'))
-    ->whereYear('barang.created_at','=',date('Y'))
+    ->select(
+      'inventori_barang.*',
+      DB::raw('COUNT(inventori_barang.id) as total_barang'),
+      DB::raw('SUM(inventori_barang.price) as total_price'),
+      'golongan_barang.code as golongan_barang_code',
+      'bidang_barang.code as bidang_barang_code',
+      'bidang_barang.name as bidang_barang_name',
+      'kelompok_barang.code as kelompok_barang_code',
+      DB::raw('GROUP_CONCAT(DISTINCT(kelompok_barang.name)) as kelompok_barang_name'))
+    ->whereYear('inventori_barang.created_at','=',date('Y'))
     ->groupBy('bidang_barang_code')
     // , 'bidang_barang_id', 'kelompok_barang_id','bidang_barang_name', 'kelompok_barang_name', 'golongan_barang_code', 'bidang_barang_code')
     ->orderBy('golongan_barang_code', 'asc')
     // ->havingRaw('COUNT(barang.id) > 0')
     ->get();
 
-    $golongans = Barang::join('golongan_barang','golongan_barang_id','=','golongan_barang.id')
-    ->select(DB::raw('SUM(barang.price) as total_price'), 'golongan_barang.code as golongan_barang_code')
+    $golongans = Inventori::join('golongan_barang','golongan_barang_id','=','golongan_barang.id')
+    ->select(DB::raw('SUM(inventori_barang.price) as total_price'), 'golongan_barang.code as golongan_barang_code')
     ->groupBy('golongan_barang_code')
     ->orderBy('golongan_barang_code', 'asc')
     ->get();
@@ -68,14 +78,22 @@ class PDFController extends Controller
   }
   public function inventaris_aktif_usulan(){
     // 2
-    $barangs = Barang::join('pegawai','pegawai_id','=','pegawai.id')
-    ->select('barang.*','pegawai.name as pegawai_name')
-    ->where('status_name','aktif')
-    ->orWhere('status_name','Dalam usulan penghapusan')
-    ->orderBy('code', 'asc')
-    ->get();
+    // $barangs = Barang::where('bidang_barang_id',$request->bidang)
+    // ->select('barang.*', DB::raw('SUM(barang.quantity) as jumlah_barang'), DB::raw('SUM(barang.price) as total_harga'))
+    // ->groupBy('barang.code')
+    // ->orderBy('code', 'asc')
+    // ->get();
+    $barangs2 = Barang::where('barang.status_name','Aktif')->get();
 
-    $pdf=PDF::loadView('pdf.inventaris2', ['barangs' => $barangs])->setPaper('a4', 'landscape');
+    $barangs = Mutation::join('pegawai','pegawai_id','=','pegawai.id')
+    ->select('mutation.*','pegawai.name as pegawai_name')
+    ->where('mutation.status_name','Dalam usulan penghapusan')
+    // ->orWhere('mutation.status_name','')
+    ->orderBy('mutation.barang_code', 'asc')
+    ->get();
+    // dd($barangs);
+
+    $pdf=PDF::loadView('pdf.inventaris2', ['barangs' => $barangs, 'barangs2' => $barangs2])->setPaper('a4', 'landscape');
     return $pdf->stream('Inventaris Aset Aktif dan usulan penghapusan.pdf');
   }
   public function inventaris_usulan(){

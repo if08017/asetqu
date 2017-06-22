@@ -42,13 +42,17 @@ Route::get('//laporan/inventaris/bulanan', 'PDFController@inventaris_bulanan');
 
 Route::get('/inventori', 'InventoriController@index');
 Route::get('/inventori/{id}/view', 'InventoriController@inventori_view');
-Route::get('/inventori/{id}/edit', 'InventoriController@inventori_edit');
+Route::get('/inventori/{id}/{golongan_barang_id}/{bidang_barang_id}/{kelompok_barang_id}/edit', 'InventoriController@inventori_edit');
 Route::get('/inventori/{id}/delete', 'InventoriController@inventori_delete');
 Route::get('/inventori/add', 'InventoriController@inventori_add');
 Route::post('/inventori/insert', 'InventoriController@inventori_insert');
 Route::put('/inventori/{id}', 'InventoriController@inventori_update');
+// Route::post('/inventori/insert', 'InventoriController@inventori_insert');
 
-Route::post('/inventori/insert', 'InventoriController@inventori_insert');
+Route::get('/bhp', 'BarangHabisPakaiController@index');
+Route::get('/bhp/add', 'BarangHabisPakaiController@bhp_add');
+Route::post('/bhp/insert', 'BarangHabisPakaiController@bhp_insert');
+
 
 Route::get('/barang/golongan', 'GolonganController@index');
 // Route::get('/barang/golongan/add', 'GolonganController@add');
@@ -82,6 +86,7 @@ Route::get('/barang/bidang/{id}/delete', 'GolonganController@bidang_delete');
 Route::get('/barang/ajax-bidang', 'BarangController@bidang_barang');
 Route::get('/barang/ajax-kelompok', 'BarangController@kelompok_barang');
 Route::get('/barang/ajax-sub-kelompok', 'BarangController@sub_kelompok_barang');
+Route::get('/barang/ajax-nama-barang', 'BarangController@nama_barang');
 
 Route::get('/barang/mutation', 'BarangController@mutation_view');
 Route::get('/barang/ajax-mutation', 'BarangController@mutation_barang');

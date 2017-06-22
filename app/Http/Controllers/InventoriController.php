@@ -25,20 +25,57 @@ class InventoriController extends Controller
       $this->middleware('auth');
   }
   public function index(){
-    $inventoris = Inventori::orderBy('created_at', 'desc')->paginate(13);
+    $inventoris = Inventori::join('barang','inventori_barang.barang_id','=','barang.id')
+      ->join('pegawai','inventori_barang.pegawai_id','=','pegawai.id')
+      ->select('inventori_barang.*', 'barang.name as barang_name', 'pegawai.name as pegawai_name')
+      ->orderBy('created_at', 'desc')
+      ->paginate(13);
     return view('inventori', ['inventoris' => $inventoris]);
   }
   public function inventori_view($id){
-    $inventori = Inventori::find($id);
+    $inventori = Inventori::join('barang','inventori_barang.barang_id','=','barang.id')
+      ->join('pegawai','inventori_barang.pegawai_id','=','pegawai.id')
+      ->join('ruangan','inventori_barang.ruangan_id','=','ruangan.id')
+      ->join('golongan_barang','inventori_barang.golongan_barang_id','=','golongan_barang.id')
+      ->join('bidang_barang','inventori_barang.bidang_barang_id','=','bidang_barang.id')
+      ->join('kelompok_barang','inventori_barang.kelompok_barang_id','=','kelompok_barang.id')
+      ->join('sub_kelompok_barang','inventori_barang.sub_kelompok_barang_id','=','sub_kelompok_barang.id')
+      ->select('inventori_barang.*','barang.name as barang_name','pegawai.name as pegawai_name','ruangan.name as ruangan_name','golongan_barang.name as golongan_barang_name','bidang_barang.name as bidang_barang_name','kelompok_barang.name as kelompok_barang_name','sub_kelompok_barang.name as sub_kelompok_barang_name')
+      ->find($id);
     return view('inventoriview', ['inventori' => $inventori]);
   }
-  public function inventori_edit($id){
+  public function inventori_edit($id,$golongan_barang_id,$bidang_barang_id,$kelompok_barang_id){
     $kondisis = Kondisi::orderBy('name', 'asc')->get();
     $statuss = Status::orderBy('name', 'asc')->get();
-    $inventori = Inventori::find($id);
+    $pegawais = Pegawai::orderBy('name', 'asc')->get();
+    $ruangans = Ruangan::orderBy('name', 'asc')->get();
+    $golongans = Golongan::orderBy('name', 'asc')->get();
+    $bidangs = Bidang::where('golongan_barang_id',$golongan_barang_id)->orderBy('name', 'asc')->get();
+    $kelompoks = Kelompok::where('bidang_barang_id',$bidang_barang_id)->orderBy('name', 'asc')->get();
+    $subkelompoks = Subkelompok::where('kelompok_barang_id',$kelompok_barang_id)->orderBy('name', 'asc')->get();
+    $satuans = Satuan::orderBy('name', 'asc')->get();
+    $inventori = Inventori::join('barang','inventori_barang.barang_id','=','barang.id')
+      ->join('pegawai','inventori_barang.pegawai_id','=','pegawai.id')
+      ->join('ruangan','inventori_barang.ruangan_id','=','ruangan.id')
+      ->join('golongan_barang','inventori_barang.golongan_barang_id','=','golongan_barang.id')
+      ->join('bidang_barang','inventori_barang.bidang_barang_id','=','bidang_barang.id')
+      ->join('kelompok_barang','inventori_barang.kelompok_barang_id','=','kelompok_barang.id')
+      ->join('sub_kelompok_barang','inventori_barang.sub_kelompok_barang_id','=','sub_kelompok_barang.id')
+      ->select('inventori_barang.*','barang.name as barang_name','pegawai.name as pegawai_name','ruangan.name as ruangan_name','golongan_barang.name as golongan_barang_name','bidang_barang.name as bidang_barang_name','kelompok_barang.name as kelompok_barang_name','sub_kelompok_barang.name as sub_kelompok_barang_name')
+      ->find($id);
     //$barang = Barang::find($id);
     //dd($barang);
-    return view('inventoriedit', ['inventori' => $inventori, 'kondisis' => $kondisis, 'statuss' => $statuss]);
+    return view('inventoriedit', [
+      'inventori' => $inventori,
+      'golongans'=>$golongans,
+      'bidangs'=>$bidangs,
+      'kelompoks'=>$kelompoks,
+      'subkelompoks'=>$subkelompoks,
+      'kondisis' => $kondisis,
+      'statuss' => $statuss,
+      'pegawais' => $pegawais,
+      'ruangans' => $ruangans
+    ]);
   }
   public function inventori_update($id, Request $request){
     // dd($request);
@@ -60,19 +97,22 @@ class InventoriController extends Controller
     }
 
     $inventori = Inventori::find($id);
-    $inventori->barang_code = $request->code;
+    $inventori->golongan_barang_id = $request->golongan;
+    $inventori->bidang_barang_id = $request->bidang;
+    $inventori->kelompok_barang_id = $request->kelompok;
+    $inventori->sub_kelompok_barang_id = $request->subkelompok;
+    $inventori->barang_id = $request->id;
+    $inventori->ruangan_id = $request->ruangan;
+    $inventori->pegawai_id = $request->pegawai;
     $inventori->number = $request->number;
-    $inventori->barang_name = $request->name;
     $inventori->description = $request->description;
     $inventori->price = $request->price;
-    $inventori->quantity = $request->quantity;
     $inventori->kondisi_name = $request->kondisi;
-    $inventori->tujuan = $request->tujuan;
+    $inventori->status_name = $request->status;
     $inventori->source = $request->source;
     $inventori->brand = $request->brand;
     $inventori->size = $request->size;
     $inventori->satuan_name = $request->satuan;
-    $inventori->status_name = 'Aktif';
     $inventori->color = $request->color;
     $inventori->material = $request->material;
     $inventori->created_year = $request->created_year;
