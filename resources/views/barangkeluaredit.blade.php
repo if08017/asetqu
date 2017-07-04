@@ -59,6 +59,19 @@
               </select>
             </div>
           </div>
+          <div class="form-group required">
+            <label class="control-label col-sm-4" for="name">Status</label>
+            <div class="col-sm-8">
+              <select class="from-control" id="sel1" name="status" required>
+                <option value="{{ $barang->status_mutasi_id }}">{{ $barang->status_mutasi_name }}</option>
+                <optgroup label="---">
+                  @foreach($statuss as $status)
+                    <option value="{{ $status->id }}">{{ $status->name }}</option>
+                  @endforeach
+                </optgroup>
+              </select>
+            </div>
+          </div>
           <div class="form-group">
             <label class="control-label col-sm-4" for="name">Deskripsi</label>
             <div class="col-sm-8">

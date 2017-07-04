@@ -80,14 +80,14 @@
           <td class="number"><strong>{{$a}}</strong></td>
           <td class="number">{{ $barang->barang_code }}</td>
           <td>{{ $barang->barang_name }}</td>
-          <td>{{ $barang->brand }}</td>
+          <td>{{ $barang->barang_brand }}</td>
           <td class="number">{{ $barang->size }}</td>
           <td>{{ $barang->material }}</td>
           <td class="number">{{ $barang->created_year }}</td>
           <td>{{ $barang->number }}</td>
           <td>{{ $barang->source }}</td>
           <td class="number">{{ number_format($barang->price) }}</td>
-          <td>{{ $barang->status_name }}</td>
+          <td>{{ $barang->status_barang_name }}</td>
           <td>{{ $barang->pegawai_name }}</td>
           <td>{{ $barang->description }}</td>
         </tr>

@@ -328,15 +328,16 @@ class BarangController extends Controller
   }
   public function barang_keluar_edit($id){
     $satuans = Satuan::orderBy('name', 'asc')->get();
-    $statuss = Status::orderBy('name', 'asc')->get();
+    $statuss = Statusmutasi::orderBy('name', 'asc')->get();
     $kondisis = Kondisi::orderBy('name', 'asc')->get();
     $ruangans = Ruangan::orderBy('name', 'asc')->get();
     $pegawais = Pegawai::orderBy('name', 'asc')->get();
-    $barang = Barangmasuk::join('barang','barang_id','=','barang.id')
-      ->join('pegawai','barang_masuk.pegawai_id','=','pegawai.id')
-      ->join('ruangan','barang_masuk.ruangan_id','=','ruangan.id')
-      ->join('kondisi_barang','barang_masuk.kondisi_barang_id','=','kondisi_barang.id')
-      ->select('barang_masuk.*','barang.name as barang_name','ruangan.name as ruangan_name','pegawai.name as pegawai_name','kondisi_barang.name as kondisi_barang_name')
+    $barang = Barangkeluar::join('barang','barang_id','=','barang.id')
+      ->join('pegawai','barang_keluar.pegawai_id','=','pegawai.id')
+      ->join('ruangan','barang_keluar.ruangan_id','=','ruangan.id')
+      ->join('kondisi_barang','barang_keluar.kondisi_barang_id','=','kondisi_barang.id')
+      ->join('status_mutasi','barang_keluar.status_mutasi_id','=','status_mutasi.id')
+      ->select('barang_keluar.*','barang.name as barang_name','ruangan.name as ruangan_name','pegawai.name as pegawai_name','kondisi_barang.name as kondisi_barang_name','status_mutasi.name as status_mutasi_name')
       ->find($id);
     return view('barangkeluaredit', ['barang' => $barang,'ruangans' => $ruangans, 'pegawais' => $pegawais,'satuans' => $satuans,'statuss'=>$statuss,'kondisis'=>$kondisis]);
   }
@@ -347,6 +348,7 @@ class BarangController extends Controller
     $barangkeluar->ruangan_id = $request->ruangan;
     $barangkeluar->pegawai_id = $request->pegawai;
     $barangkeluar->kondisi_barang_id = $request->kondisi;
+    $barangkeluar->status_mutasi_id = $request->status;
     $barangkeluar->description = $request->description;
     $barangkeluar->quantity = $request->quantity;
     $barangkeluar->save();

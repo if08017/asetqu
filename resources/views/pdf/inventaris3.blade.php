@@ -52,7 +52,7 @@
             <td colspan="4">SUMATERA BARAT</td>
           </tr>
           <tr>
-            <td colspan="11" style="text-align:center; padding: 10px;">DAFTAR BARANG INVENTARIS<br>ASET DALAM USULAN PENGHAPUSAN</td>
+            <td colspan="8" style="text-align:center; padding: 10px;">DAFTAR BARANG INVENTARIS<br>ASET DALAM USULAN PENGHAPUSAN</td>
           </tr>
         </thead>
       <thead style="text-align:center">
@@ -62,9 +62,6 @@
           <th>Nama Barang</th>
           <th>Kode Lokasi</th>
           <th>Merek / Tipe</th>
-          <th>Dokumen Kepemilikan</th>
-          <th>Tahun Pembelian</th>
-          <th>Harga Perolehan</th>
           <th>Keadaan Barang</th>
           <th>Status</th>
           <th>Keterangan</th>
@@ -79,30 +76,27 @@
           <td class="number">{{ $barang->barang_code }}</td>
           <td>{{ $barang->barang_name }}</td>
           <td class="number">{{ $barang->ruangan_code }}</td>
-          <td>{{ $barang->brand }}</td>
-          <td>{{ $barang->number }}</td>
-          <td class="number">{{ $barang->created_year }}</td>
-          <td class="number">{{ number_format($barang->price) }}</td>
-          <td>{{ $barang->kondisi_name }}</td>
-          <td>{{ $barang->status_name }}</td>
+          <td>{{ $barang->barang_brand }}</td>
+          <td>{{ $barang->kondisi_barang_name }}</td>
+          <td>{{ $barang->status_mutasi_name }}</td>
           <td>{{ $barang->description }}</td>
         </tr>
         @endforeach
       </tbody>
       <thead class="signature">
         <tr>
-          <td colspan="4">Mengetahui</td>
-          <td colspan="3">&nbsp;</td>
+          <td colspan="3">Mengetahui</td>
+          <td colspan="1">&nbsp;</td>
           <td colspan="4">PAINAN, {{ date('d M Y') }}</td>
         </tr>
         <tr>
-          <td colspan="4">&nbsp;</td>
           <td colspan="3">&nbsp;</td>
+          <td colspan="1">&nbsp;</td>
           <td colspan="4">&nbsp;</td>
         </tr>
         <tr>
-          <td colspan="4">Ir. Erizon, MT <br> NIP. 19630323 199003 1 005	</td>
-          <td colspan="3"></td>
+          <td colspan="3">Ir. Erizon, MT <br> NIP. 19630323 199003 1 005	</td>
+          <td colspan="1"></td>
           <td colspan="4">WETRI MULYADEVITA, A.Md <br> NIP. 19800708 200902 2 003</td>
         </tr>
       </thead>
