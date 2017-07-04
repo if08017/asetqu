@@ -13,15 +13,11 @@
             <tr>
               <th>Kode Barang</th>
               <th>Nama</th>
-              <th>Quantitas</th>
-              <th>Mutasi</th>
-              <th>Usulan</th>
-              <th>Dihapus</th>
+              <th>Stok</th>
+              <th>Keluar</th>
+              <th>Sisa</th>
               <th>Golongan</th>
-              <th>Bidang</th>
-              <th>Kelompok</th>
-              <th>Sub Kelompok</th>
-              <th>Rincian</th>
+              <th>Status</th>
               <th>Tindakan</th>
             </tr>
           </thead>
@@ -30,18 +26,13 @@
               <tr>
                 <td>{{ $barang->code }}</td>
                 <td>{{ $barang->name }}</td>
-                <td>{{ $barang->quantity.' '.$barang->satuan_name }}</td>
-                <td>{{ $barang->mutation_quantity }}</td>
-                <td>{{ $barang->request_destroy_quantity }}</td>
-                <td>{{ $barang->destroy_quantity }}</td>
+                <td>{{ $barang->in_stock}}</td>
+                <td>{{ $barang->out_stock }}</td>
+                <td>{{ $barang->in_stock - $barang->out_stock }}</td>
                 <td>{{ $barang->golongan_barang_name }}</td>
-                <td>{{ $barang->bidang_barang_name }}</td>
-                <td>{{ $barang->kelompok_barang_name }}</td>
-                <td>{{ $barang->sub_kelompok_barang_name }}</td>
+                <td>{{ $barang->status_name }}</td>
                 <td>
                   <a class="btn-sm btn-primary" href="/barang/{{$barang->id}}/view"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
-                </td>
-                <td>
                   <a class="btn-sm btn-warning" href="/barang/{{$barang->id}}/{{$barang->golongan_barang_id}}/{{$barang->bidang_barang_id}}/{{$barang->kelompok_barang_id}}/edit"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
                   <a class="btn-sm btn-danger" href="/barang/{{$barang->id}}/delete"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
                 </td>

@@ -53,7 +53,7 @@ class PDFController extends Controller
     ->join('kelompok_barang','kelompok_barang_id','=','kelompok_barang.id')
     ->select(
       'inventori_barang.*',
-      DB::raw('COUNT(inventori_barang.id) as total_barang'),
+      DB::raw('SUM(inventori_barang.quantity) as total_barang'),
       DB::raw('SUM(inventori_barang.price) as total_price'),
       'golongan_barang.code as golongan_barang_code',
       'bidang_barang.code as bidang_barang_code',
@@ -77,71 +77,67 @@ class PDFController extends Controller
     return $pdf->stream('Inventaris Tahun '.date('Y').'.pdf');
   }
   public function inventaris_aktif_usulan(){
-    // 2
-    // $barangs = Barang::where('bidang_barang_id',$request->bidang)
-    // ->select('barang.*', DB::raw('SUM(barang.quantity) as jumlah_barang'), DB::raw('SUM(barang.price) as total_harga'))
-    // ->groupBy('barang.code')
-    // ->orderBy('code', 'asc')
-    // ->get();
-    $barangs2 = Barang::where('barang.status_name','Aktif')->get();
-
-    $barangs = Mutation::join('pegawai','pegawai_id','=','pegawai.id')
-    ->select('mutation.*','pegawai.name as pegawai_name')
-    ->where('mutation.status_name','Dalam usulan penghapusan')
-    // ->orWhere('mutation.status_name','')
-    ->orderBy('mutation.barang_code', 'asc')
-    ->get();
-    // dd($barangs);
-
-    $pdf=PDF::loadView('pdf.inventaris2', ['barangs' => $barangs, 'barangs2' => $barangs2])->setPaper('a4', 'landscape');
+    //2
+    $barangs = Inventori::join('barang','barang_id','=','barang.id')
+      ->join('pegawai','inventori_barang.pegawai_id','=','pegawai.id')
+      ->select('inventori_barang.*','pegawai.name as pegawai_name','barang.code as barang_code','barang.name as barang_name')
+      ->where('inventori_barang.status_name','Aktif')
+      ->orWhere('inventori_barang.status_name','Dalam usulan penghapusan')
+      ->orderBy('barang_code', 'asc')
+      ->get();
+    $pdf=PDF::loadView('pdf.inventaris2', ['barangs' => $barangs])->setPaper('a4', 'landscape');
     return $pdf->stream('Inventaris Aset Aktif dan usulan penghapusan.pdf');
   }
   public function inventaris_usulan(){
     //3
-    $barangs = Barang::join('pegawai','pegawai_id','=','pegawai.id')
-    ->join('ruangan','ruangan_id','=','ruangan.id')
-    ->select('barang.*','pegawai.name as pegawai_name','ruangan.code as ruangan_code')
-    ->where('status_name','Dalam usulan penghapusan')
-    ->orderBy('code', 'asc')
-    ->get();
+    $barangs = Inventori::join('barang','barang_id','=','barang.id')
+      ->join('ruangan','inventori_barang.ruangan_id','=','ruangan.id')
+      ->select('inventori_barang.*','ruangan.code as ruangan_code','barang.code as barang_code','barang.name as barang_name')
+      ->where('inventori_barang.status_name','Dalam usulan penghapusan')
+      ->orderBy('barang_code', 'asc')
+      ->get();
 
     $pdf=PDF::loadView('pdf.inventaris3', ['barangs' => $barangs])->setPaper('a4', 'landscape');
     return $pdf->stream('Inventaris Aset Dalam Usulan Penghapusan.pdf');
   }
   public function inventaris_mutasi_hapus(){
     //4
-    $barangs = Barang::join('pegawai','pegawai_id','=','pegawai.id')
-    ->join('ruangan','ruangan_id','=','ruangan.id')
-    ->select('barang.*','pegawai.name as pegawai_name','ruangan.code as ruangan_code')
-    ->where('status_name','Mutasi Pindah')
-    ->orWhere('status_name','Dihapuskan')
-    ->orderBy('code', 'asc')
-    ->get();
+    $barangs = Inventori::join('barang','barang_id','=','barang.id')
+      ->join('pegawai','inventori_barang.pegawai_id','=','pegawai.id')
+      ->select('inventori_barang.*','pegawai.name as pegawai_name','barang.code as barang_code','barang.name as barang_name')
+      ->where('inventori_barang.status_name','Mutasi Pindah')
+      ->orWhere('inventori_barang.status_name','Dihapuskan')
+      ->orderBy('barang_code', 'asc')
+      ->get();
+
     $pdf=PDF::loadView('pdf.inventaris4', ['barangs' => $barangs])->setPaper('a4', 'landscape');
     return $pdf->stream('Inventaris Aset Dalam Usulan Penghapusan.pdf');
   }
   public function inventaris_perpengguna(Request $request){
     //5
     $pegawais = Pegawai::where('id', $request->pengguna)->first();
-    $barangs = Barang::join('pegawai','pegawai_id','=','pegawai.id')
-    // ->join('receipt','receipt_id','=','receipt.id')
-    ->join('golongan_barang','golongan_barang_id','=','golongan_barang.id')
-    ->select('barang.*','pegawai.name as pegawai_name','golongan_barang.name as golongan_name')
-    ->where('pegawai_id',$request->pengguna)
-    ->whereNotIn('golongan_barang_id',[1])
-    ->orderBy('code', 'asc')
-    ->get();
+    $barangs = Inventori::join('barang','barang_id','=','barang.id')
+      ->join('pegawai','inventori_barang.pegawai_id','=','pegawai.id')
+      ->join('golongan_barang','inventori_barang.golongan_barang_id','=','golongan_barang.id')
+      ->select('inventori_barang.*','pegawai.name as pegawai_name','barang.code as barang_code','barang.name as barang_name','golongan_barang.name as golongan_name')
+      ->where('inventori_barang.pegawai_id',$request->pengguna)
+      ->whereNotIn('inventori_barang.golongan_barang_id',[1])
+      ->orderBy('barang_code', 'asc')
+      ->get();
 
     $pdf=PDF::loadView('pdf.inventaris5', ['barangs' => $barangs, 'pegawai' => $pegawais])->setPaper('a4', 'landscape');
     return $pdf->stream('Inventaris_Bulanan.pdf');
   }
   public function inventaris_perjenis(Request $request){
     //6
-    $barangs = Barang::where('bidang_barang_id',$request->bidang)
-    ->select('barang.*', DB::raw('SUM(barang.quantity) as jumlah_barang'), DB::raw('SUM(barang.price) as total_harga'))
-    ->groupBy('barang.code')
-    ->orderBy('code', 'asc')
-    ->get();
+    $barangs = Inventori::join('barang','barang_id','=','barang.id')
+      ->join('golongan_barang','inventori_barang.golongan_barang_id','=','golongan_barang.id')
+      ->select('inventori_barang.*',DB::raw('SUM(inventori_barang.quantity) as jumlah_barang'),DB::raw('SUM(inventori_barang.price) as total_harga'),'barang.code as barang_code','barang.name as barang_name','golongan_barang.name as golongan_name')
+      ->where('inventori_barang.bidang_barang_id',$request->bidang)
+      ->groupBy('barang_code')
+      ->orderBy('barang_code', 'asc')
+      ->get();
+
     $pdf=PDF::loadView('pdf.inventaris6', ['barangs' => $barangs])->setPaper('a4', 'landscape');
     return $pdf->stream('Inventaris_Bulanan.pdf');
   }
@@ -157,23 +153,29 @@ class PDFController extends Controller
     // // $total_masuk = $grouped->count();
     // dd($grouped);
 
-    $barangs_meta = Barang::join('bidang_barang','barang.bidang_barang_id','=','bidang_barang.id')
-    ->join('pegawai','pegawai_id','=','pegawai.id')
-    ->select('barang.*')
-    ->where([
-      ['barang.golongan_barang_id',1],
-      ['barang.bidang_barang_id',$request->bidang],
-      ['pegawai.satuan_kerja_id',$request->satuan]
-    ])
-    // ->groupBy('barang.code')
-    ->orderBy('barang.code', 'asc')
-    ->get();
-    $barangs = $barangs_meta->groupBy('code');
-    $masuk = $barangs->sum('quantity');
-    $barangs2 = $barangs_meta->unique('code');
-    dd($masuk);
+    $barangs = Inventori::join('barang','barang_id','=','barang.id')
+      ->join('pegawai','inventori_barang.pegawai_id','=','pegawai.id')
+      ->join('satuan_kerja','pegawai.satuan_kerja_id','=','satuan_kerja.id')
+      ->join('golongan_barang','inventori_barang.golongan_barang_id','=','golongan_barang.id')
+      ->join('bidang_barang','inventori_barang.bidang_barang_id','=','bidang_barang.id')
+      ->select(
+        'inventori_barang.*',
+        DB::raw('SUM(inventori_barang.quantity) as jumlah_barang'),
+        DB::raw('SUM(inventori_barang.price) as total_harga'),
+        'barang.code as barang_code',
+        'barang.name as barang_name',
+        'golongan_barang.name as golongan_barang_name',
+        'bidang_barang.name as bidang_barang_name',
+        'satuan_kerja.name as satuan_kerja_name')
+      ->where('inventori_barang.golongan_barang_id',[1])
+      ->where('inventori_barang.bidang_barang_id',$request->bidang)
+      ->where('satuan_kerja_id',$request->satuan)
+      ->groupBy('barang_code')
+      ->orderBy('barang_code', 'asc')
+      ->get();
+      // dd($barangs);
 
-    $pdf=PDF::loadView('pdf.inventaris7', ['barangs_meta'=>$barangs_meta, 'barangs' => $barangs])->setPaper('a4', 'landscape');
+    $pdf=PDF::loadView('pdf.inventaris7', ['barangs'=>$barangs])->setPaper('a4', 'landscape');
     return $pdf->stream('Inventaris_Bulanan.pdf');
   }
   public function getPDF(){

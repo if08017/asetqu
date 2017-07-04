@@ -52,7 +52,7 @@
             <td colspan="4">SUMATERA BARAT</td>
           </tr>
           <tr>
-            <td colspan="9" style="text-align:center; padding: 10px; text-transform: uppercase;">DAFTAR BARANG INVENTARIS<br>ASET DIMILIKI OLEH {{ $pegawai->name }}</td>
+            <td colspan="9" style="text-align:center; padding: 10px; text-transform: uppercase;">DAFTAR BARANG INVENTARIS<br>ASET DIMILIKI OLEH {{ $pegawai->name }}<br>{{ date('Y') }}</td>
           </tr>
         </thead>
       <thead style="text-align:center">
@@ -75,8 +75,8 @@
         @php ($a++)
         <tr>
           <td class="number"><strong>{{$a}}</strong></td>
-          <td class="number">{{ $barang->code }}</td>
-          <td>{{ $barang->name }}</td>
+          <td class="number">{{ $barang->barang_code }}</td>
+          <td>{{ $barang->barang_name }}</td>
           <td>{{ $barang->brand }}</td>
           <td>{{ $barang->number }}</td>
           <td class="number">{{ $barang->quantity }}</td>

@@ -18,6 +18,7 @@ use App\Models\Pegawai;
 use App\Models\Satuan;
 use App\Models\Kondisi;
 use App\Models\Status;
+use App\Models\Barang;
 
 class InventoriController extends Controller
 {
@@ -26,8 +27,9 @@ class InventoriController extends Controller
   }
   public function index(){
     $inventoris = Inventori::join('barang','inventori_barang.barang_id','=','barang.id')
+      ->join('golongan_barang','inventori_barang.golongan_barang_id','=','golongan_barang.id')
       ->join('pegawai','inventori_barang.pegawai_id','=','pegawai.id')
-      ->select('inventori_barang.*', 'barang.name as barang_name', 'pegawai.name as pegawai_name')
+      ->select('inventori_barang.*','barang.name as barang_name','golongan_barang.name as golongan_barang_name','pegawai.name as pegawai_name')
       ->orderBy('created_at', 'desc')
       ->paginate(13);
     return view('inventori', ['inventoris' => $inventoris]);
@@ -40,7 +42,7 @@ class InventoriController extends Controller
       ->join('bidang_barang','inventori_barang.bidang_barang_id','=','bidang_barang.id')
       ->join('kelompok_barang','inventori_barang.kelompok_barang_id','=','kelompok_barang.id')
       ->join('sub_kelompok_barang','inventori_barang.sub_kelompok_barang_id','=','sub_kelompok_barang.id')
-      ->select('inventori_barang.*','barang.name as barang_name','pegawai.name as pegawai_name','ruangan.name as ruangan_name','golongan_barang.name as golongan_barang_name','bidang_barang.name as bidang_barang_name','kelompok_barang.name as kelompok_barang_name','sub_kelompok_barang.name as sub_kelompok_barang_name')
+      ->select('inventori_barang.*','barang.code as barang_code','barang.name as barang_name','pegawai.name as pegawai_name','ruangan.name as ruangan_name','golongan_barang.name as golongan_barang_name','bidang_barang.name as bidang_barang_name','kelompok_barang.name as kelompok_barang_name','sub_kelompok_barang.name as sub_kelompok_barang_name')
       ->find($id);
     return view('inventoriview', ['inventori' => $inventori]);
   }
@@ -143,6 +145,17 @@ class InventoriController extends Controller
   }
   public function inventori_insert(Request $request){
     // dd($request);
+
+    if ($request->mutasi == 'masuk') {
+      if(Inventori::where('barang_id','=',$request->barang_id)->exists()){
+        $id=$request->barang_id;
+        // return $id;
+        $inventori = Inventori::where('barang_id',$id)->first();
+        $inventori->quantity = $inventori->quantity+$request->quantity;
+        $inventori->save();
+      }
+      return redirect('/inventori');
+    }
     if($request->hasFile('picture')){
       $picture = $request->file('picture');
       $filename = time() . '.' . $picture->getClientOriginalExtension();
@@ -151,16 +164,16 @@ class InventoriController extends Controller
 
     Inventori::create([
       'barang_id' => $request->barang_id,
-      'barang_code' => $request->code,
-      'barang_name' => $request->name,
       'quantity' => $request->quantity,
       'satuan_name' => $request->satuan,
+      'kodisi_name' => $request->kondisi,
+      'status_name' => $request->status,
       'pegawai_id' => $request->pegawai,
       'ruangan_id' => $request->ruangan,
-      'golongan_barang_id' => $request->golongan,
-      'bidang_barang_id' => $request->bidang,
-      'kelompok_barang_id' => $request->kelompok,
-      'sub_kelompok_barang_id' => $request->subkelompok,
+      'golongan_barang_id' => $request->golongan_barang_id,
+      'bidang_barang_id' => $request->bidang_barang_id,
+      'kelompok_barang_id' => $request->kelompok_barang_id,
+      'sub_kelompok_barang_id' => $request->sub_kelompok_barang_id,
       'picture' => $filename,
       'number' => $request->number,
       'description' => $request->description,

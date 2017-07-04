@@ -80,10 +80,10 @@
           <td class="number"><strong>{{$a}}</strong></td>
           <td class="number">{{ $barang->barang_code }}</td>
           <td>{{ $barang->barang_name }}</td>
-          <td>{{ $barang->inventori_barang_brand }}</td>
+          <td>{{ $barang->brand }}</td>
           <td class="number">{{ $barang->size }}</td>
           <td>{{ $barang->material }}</td>
-          <td class="number">{{ $barang->year_created }}</td>
+          <td class="number">{{ $barang->created_year }}</td>
           <td>{{ $barang->number }}</td>
           <td>{{ $barang->source }}</td>
           <td class="number">{{ number_format($barang->price) }}</td>
@@ -92,42 +92,22 @@
           <td>{{ $barang->description }}</td>
         </tr>
         @endforeach
-
-        @php ($b=$a)
-        @foreach ($barangs2 as $barang2)
-        @php ($b++)
-        <tr>
-          <td class="number"><strong>{{$b}}</strong></td>
-          <td class="number">{{ $barang2->code }}</td>
-          <td>{{ $barang2->name }}</td>
-          <td>{{ $barang2->brand }}</td>
-          <td class="number">{{ $barang2->size }}</td>
-          <td>{{ $barang2->material }}</td>
-          <td class="number">{{ $barang2->year_created }}</td>
-          <td>{{ $barang2->number }}</td>
-          <td>{{ $barang2->source }}</td>
-          <td class="number">{{ number_format($barang2->price) }}</td>
-          <td>{{ $barang2->status_name }}</td>
-          <td>{{ $barang2->pegawai_name }}</td>
-          <td>{{ $barang2->description }}</td>
-        </tr>
-        @endforeach
       </tbody>
       <thead class="signature">
         <tr>
-          <td colspan="4">Mengetahui</td>
-          <td colspan="4">&nbsp;</td>
-          <td colspan="4">PAINAN, 09 Desember 2016</td>
+          <td colspan="5">Mengetahui</td>
+          <td colspan="3">&nbsp;</td>
+          <td colspan="5">PAINAN, {{ date(' d M Y')}}</td>
         </tr>
         <tr>
-          <td colspan="4">&nbsp;</td>
-          <td colspan="4">&nbsp;</td>
-          <td colspan="4">&nbsp;</td>
+          <td colspan="5">&nbsp;</td>
+          <td colspan="3">&nbsp;</td>
+          <td colspan="5">&nbsp;</td>
         </tr>
         <tr>
-          <td colspan="4">Ir. Erizon, MT <br> NIP. 19630323 199003 1 005	</td>
-          <td colspan="4"></td>
-          <td colspan="4">WETRI MULYADEVITA, A.Md <br> NIP. 19800708 200902 2 003</td>
+          <td colspan="5">Ir. Erizon, MT <br> NIP. 19630323 199003 1 005	</td>
+          <td colspan="3"></td>
+          <td colspan="5">WETRI MULYADEVITA, A.Md <br> NIP. 19800708 200902 2 003</td>
         </tr>
       </thead>
     </table>

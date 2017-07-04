@@ -13,9 +13,8 @@
             <tr>
               <th>Gambar</th>
               <th>Nama</th>
-              <th>Harga</th>
-              <th>Merek</th>
-              <th>Pembelian</th>
+              <th>Gologan</th>
+              <th>Kuantitas</th>
               <th>Pengguna</th>
               <th>Sumber</th>
               <th>Kondisi</th>
@@ -29,9 +28,8 @@
               <tr>
                 <td><img src="/images/inventori/{{ $inventori->picture }}" alt="" style="max-height:20px;"></td>
                 <td>{{ $inventori->barang_name }}</td>
-                <td>{{ number_format($inventori->price) }}</td>
-                <td>{{ $inventori->brand }}</td>
-                <td>{{ $inventori->buy_year }}</td>
+                <td>{{ $inventori->golongan_barang_name }}</td>
+                <td>{{ $inventori->quantity }}</td>
                 <td>{{ $inventori->pegawai_name }}</td>
                 <td>{{ $inventori->source }}</td>
                 <td>{{ $inventori->kondisi_name }}</td>

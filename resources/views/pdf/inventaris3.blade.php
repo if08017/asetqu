@@ -76,12 +76,12 @@
         @php ($a++)
         <tr>
           <td class="number"><strong>{{$a}}</strong></td>
-          <td class="number">{{ $barang->code }}</td>
-          <td>{{ $barang->name }}</td>
+          <td class="number">{{ $barang->barang_code }}</td>
+          <td>{{ $barang->barang_name }}</td>
           <td class="number">{{ $barang->ruangan_code }}</td>
           <td>{{ $barang->brand }}</td>
           <td>{{ $barang->number }}</td>
-          <td class="number">{{ $barang->year_created }}</td>
+          <td class="number">{{ $barang->created_year }}</td>
           <td class="number">{{ number_format($barang->price) }}</td>
           <td>{{ $barang->kondisi_name }}</td>
           <td>{{ $barang->status_name }}</td>

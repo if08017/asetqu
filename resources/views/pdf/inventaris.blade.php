@@ -97,7 +97,7 @@
         <tr>
           <td colspan="3">Mengetahui</td>
           <td colspan="1">&nbsp;</td>
-          <td colspan="3">PAINAN, 09 Desember 2016</td>
+          <td colspan="3">PAINAN, {{ date('d M Y')}}</td>
         </tr>
         <tr>
           <td colspan="3">&nbsp;</td>

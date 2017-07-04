@@ -19,6 +19,7 @@
           <tbody>
             <tr><td>Gambar</td><td><img src="/images/inventori/{{ $inventori->picture }}" alt="" style="max-height:50px;"></td>
             </tr>
+            <tr> <td>Kode Barang</td> <td>{{$inventori->barang_code}}</td> </tr>
             <tr> <td>Nama</td> <td>{{$inventori->barang_name}}</td> </tr>
             <tr> <td>Nomor PO / Kuitansi</td> <td>{{$inventori->number}}</td> </tr>
             <tr> <td>Deskripsi</td> <td>{{$inventori->description}}</td> </tr>

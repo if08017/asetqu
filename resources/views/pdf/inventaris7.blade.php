@@ -52,12 +52,13 @@
             <td colspan="4">SUMATERA BARAT</td>
           </tr>
           <tr>
-            <td colspan="9" style="text-align:center; padding: 10px; text-transform: uppercase;">DAFTAR BARANG INVENTARIS<br>BARANG HABIS PAKAI PERJENIS BARANG PER SATUAN KERJA</td>
+            <td colspan="9" style="text-align:center; padding: 10px; text-transform: uppercase;">DAFTAR BARANG INVENTARIS<br>BARANG HABIS PAKAI PERJENIS BARANG PER SATUAN KERJA<br>{{ date('Y') }}</td>
           </tr>
         </thead>
       <thead style="text-align:center">
         <tr>
           <th rowspan="2">No</th>
+          <th rowspan="2">Kode Barang</th>
           <th rowspan="2">Nama Barang Habis Pakai</th>
           <th colspan="3">Total Barang</th>
           <th colspan="3">Jumlah Harga Barang</th>
@@ -78,13 +79,15 @@
         @php ($a++)
         <tr>
           <td class="number"><strong>{{$a}}</strong></td>
-          <td>{{ $barang->name }}</td>
-          <td>{{ $barangs_meta->sum('quantity') }}</td>
-          <td>{{ $barangs_meta->whereIn('status_name',['Dihapuskan','Mutasi Pindah'])->sum('quantity') }}</td>
+          <td>{{ $barang->barang_code }}</td>
+          <td>{{ $barang->barang_name }}</td>
+          <td>{{ $barang->jumlah_barang }}</td>
+          <td></td>
+          <!-- <td>{{ $barang->whereIn('mutation_name',['Keluar'])->sum('inventori_barang.quantity') }}</td> -->
           <td class="number">{{ $barang->quantity }}</td>
-          <td>{{ $barang->satuan_name }}</td>
-          <td>{{ $barang->golongan_name }}</td>
-          <td>{{ $barang->kondisi_name }}</td>
+          <td>{{ $barang->total_harga }}</td>
+          <td>{{ $barang->total_harga }}</td>
+          <td>{{ $barang->total_harga }}</td>
           <td>{{ $barang->description }}</td>
         </tr>
         @endforeach
@@ -92,17 +95,17 @@
       <thead class="signature">
         <tr>
           <td colspan="4">Mengetahui</td>
-          <td colspan="1">&nbsp;</td>
+          <td colspan="2">&nbsp;</td>
           <td colspan="4">PAINAN, {{ date('d M Y') }}</td>
         </tr>
         <tr>
           <td colspan="4">&nbsp;</td>
-          <td colspan="1">&nbsp;</td>
+          <td colspan="2">&nbsp;</td>
           <td colspan="4">&nbsp;</td>
         </tr>
         <tr>
           <td colspan="4">Ir. Erizon, MT <br> NIP. 19630323 199003 1 005	</td>
-          <td colspan="1"></td>
+          <td colspan="2"></td>
           <td colspan="4">WETRI MULYADEVITA, A.Md <br> NIP. 19800708 200902 2 003</td>
         </tr>
       </thead>

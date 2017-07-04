@@ -3,7 +3,7 @@
 @section('content')
     <div class="col-sm-10 content2">
       <h5>Tambah Inventoris Barang</h5>
-      <form class="form-horizontal" action="/inventori/insert" method="POST" enctype="multipart/form-data">
+      <form class="form-horizontal" action="/barang/masuk/insert" method="POST" enctype="multipart/form-data">
         {{ csrf_field() }}
         <div class="col-sm-6">
           <div class="form-group required">
@@ -56,15 +56,7 @@
               });
             </script>
           </div>
-          <div class="form-group required">
-            <label class="control-label col-sm-4" for="name">Mutasi</label>
-            <div class="col-sm-8">
-              <select class="from-control" id="sel1" name="mutasi" required>
-                <option value="masuk">Masuk</option>
-                <option value="keluar">Keluar</option>
-              </select>
-            </div>
-          </div>
+
           <div class="form-group required">
             <label class="control-label col-sm-4" for="name">Foto</label>
             <div class="col-sm-8">
@@ -78,19 +70,7 @@
               <input type="number" class="form-control" id="text" name="quantity" placeholder="Jumlah barang" required>
             </div>
           </div>
-          <div class="form-group required">
-            <label class="control-label col-sm-4" for="name">Satuan</label>
-            <div class="col-sm-8">
-              <select class="from-control" id="sel1" name="satuan" required>
-                <option value="">Pilih jenis satuan</option>
-                <optgroup label="---">
-                  @foreach($satuans as $satuan)
-                    <option value="{{ $satuan->name }}">{{ $satuan->name }}</option>
-                  @endforeach
-                </optgroup>
-              </select>
-            </div>
-          </div>
+
           <div class="form-group required">
             <label class="control-label col-sm-4" for="name">Pegawai / PIC</label>
             <div class="col-sm-8">
@@ -124,102 +104,12 @@
                 <option value="">Pilih Kondisi</option>
                 <optgroup label="---">
                   @foreach($kondisis as $kondisi)
-                    <option value="{{ $kondisi->name }}">{{ $kondisi->name }}</option>
+                    <option value="{{ $kondisi->id }}">{{ $kondisi->name }}</option>
                   @endforeach
                 </optgroup>
               </select>
             </div>
           </div>
-          <div class="form-group required">
-            <label class="control-label col-sm-4" for="name">Status</label>
-            <div class="col-sm-8">
-              <select class="from-control" id="sel1" name="status" required>
-                <option value="">Pilih Status</option>
-                <optgroup label="---">
-                  @foreach($statuss as $status)
-                    <option value="{{ $status->name }}">{{ $status->name }}</option>
-                  @endforeach
-                </optgroup>
-              </select>
-            </div>
-          </div>
-          <!--
-          <div class="form-group required">
-            <label class="control-label col-sm-4" for="name">Golongan</label>
-            <div class="col-sm-8">
-              <select class="from-control golongan" id="sel1" name="golongan" required>
-                <option value="">Pilih Golongan Barang</option>
-                <optgroup label="---">
-                  @foreach($golongans as $golongan)
-                    <option value="{{ $golongan->id }}">{{ $golongan->name }}</option>
-                  @endforeach
-                </optgroup>
-              </select>
-            </div>
-          </div>
-          <script>
-            $( ".golongan" ).change(function(e) {
-              var bidang_id = e.target.value;
-              $.get('/barang/ajax-bidang?bidang_id=' + bidang_id, function(data){
-                console.log(data);
-                $('.bidang').empty();
-                $('.kelompok').empty();
-                $('.subkelompok').empty();
-                $.each(data,function(index, bidangObj){
-                  $('.bidang').append('<option value="'+bidangObj.id+'">'+bidangObj.name+'</option>');
-                });
-              });
-            });
-          </script>
-          <div class="form-group required">
-            <label class="control-label col-sm-4" for="name">Bidang</label>
-            <div class="col-sm-8">
-              <select class="from-control bidang" id="sel1" name="bidang" required>
-                <option value="">Pilih Bidang Barang</option>
-              </select>
-            </div>
-          </div>
-          <script>
-            $( ".bidang" ).change(function(e) {
-              var kelompok_id = e.target.value;
-              $.get('/barang/ajax-kelompok?kelompok_id=' + kelompok_id, function(data){
-                console.log(data);
-                $('.kelompok').empty();
-                $('.subkelompok').empty();
-                $.each(data,function(index, kelompokObj){
-                  $('.kelompok').append('<option value="'+kelompokObj.id+'">'+kelompokObj.name+'</option>');
-                });
-              });
-            });
-          </script>
-          <div class="form-group required">
-            <label class="control-label col-sm-4" for="name">Kelompok</label>
-            <div class="col-sm-8">
-              <select class="from-control kelompok" id="sel1" name="kelompok" required>
-                <option value="">Pilih Kelompok Barang</option>
-              </select>
-            </div>
-          </div>
-          <script>
-            $( ".kelompok" ).change(function(e) {
-              var subkelompok_id = e.target.value;
-              $.get('/barang/ajax-sub-kelompok?subkelompok_id=' + subkelompok_id, function(data){
-                console.log(data);
-                $('.subkelompok').empty();
-                $.each(data,function(index, subkelompokObj){
-                  $('.subkelompok').append('<option value="'+subkelompokObj.id+'">'+subkelompokObj.name+'</option>');
-                });
-              });
-            });
-          </script>
-          <div class="form-group required">
-            <label class="control-label col-sm-4" for="name">Sub-kelompok</label>
-            <div class="col-sm-8">
-              <select class="from-control subkelompok" id="sel1" name="subkelompok" required>
-                <option value="">Pilih Sub Kelompok Barang</option>
-              </select>
-            </div>
-          </div> -->
           <div class="form-group">
             <label class="control-label col-sm-4" for="name">Nomor PO/Kuitansi</label>
             <div class="col-sm-8">
@@ -242,7 +132,7 @@
           <div class="form-group">
             <label class="control-label col-sm-4" for="name">Ukuran</label>
             <div class="col-sm-8">
-              <input type="text" class="form-control" id="text" name="size" placeholder="Kondisi barang">
+              <input type="text" class="form-control" id="text" name="size" placeholder="Ukuran barang">
             </div>
           </div>
           <div class="form-group">
