@@ -48,19 +48,19 @@ class PDFController extends Controller
   }
   public function inventaris_pertahun(){
     // 1
-    $barangs = Inventori::join('golongan_barang','golongan_barang_id','=','golongan_barang.id')
+    $barangs = Barang::join('golongan_barang','golongan_barang_id','=','golongan_barang.id')
     ->join('bidang_barang','bidang_barang_id','=','bidang_barang.id')
     ->join('kelompok_barang','kelompok_barang_id','=','kelompok_barang.id')
     ->select(
-      'inventori_barang.*',
-      DB::raw('SUM(inventori_barang.quantity) as total_barang'),
-      DB::raw('SUM(inventori_barang.price) as total_price'),
+      'barang.*',
+      DB::raw('SUM(barang.in_stock) as total_barang'),
+      DB::raw('SUM(barang.price) as total_price'),
       'golongan_barang.code as golongan_barang_code',
       'bidang_barang.code as bidang_barang_code',
       'bidang_barang.name as bidang_barang_name',
       'kelompok_barang.code as kelompok_barang_code',
       DB::raw('GROUP_CONCAT(DISTINCT(kelompok_barang.name)) as kelompok_barang_name'))
-    ->whereYear('inventori_barang.created_at','=',date('Y'))
+    ->whereYear('barang.created_at','=',date('Y'))
     ->groupBy('bidang_barang_code')
     // , 'bidang_barang_id', 'kelompok_barang_id','bidang_barang_name', 'kelompok_barang_name', 'golongan_barang_code', 'bidang_barang_code')
     ->orderBy('golongan_barang_code', 'asc')
@@ -73,7 +73,7 @@ class PDFController extends Controller
     ->orderBy('golongan_barang_code', 'asc')
     ->get();
 
-    $pdf=PDF::loadView('pdf.inventaris', ['barangs' => $barangs, 'golongans' => $golongans])->setPaper('a4', 'landscape');
+    $pdf=PDF::loadView('pdf.inventaris', ['barangs' => $barangs])->setPaper('a4', 'landscape');
     return $pdf->stream('Inventaris Tahun '.date('Y').'.pdf');
   }
   public function inventaris_aktif_usulan(){

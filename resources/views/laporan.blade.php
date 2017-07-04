@@ -21,7 +21,7 @@
                       <td>REKAPITULASI BARANG INVENTARIS</td>
                       <td>
                         <a href="/laporan/inventaris/pdf" class="btn btn-xs btn-danger"><span class="fa fa-file-pdf-o fa-lg"></span></a>
-                        <a href="/laporan/1/excel" class="btn btn-xs btn-success"><span class="fa fa-file-excel-o fa-lg"></span></a>
+                        <!-- <a href="/laporan/1/excel" class="btn btn-xs btn-success"><span class="fa fa-file-excel-o fa-lg"></span></a> -->
                       </td>
                     </tr>
                     <tr>
@@ -29,7 +29,7 @@
                       <td>ASET AKTIF + ASET DALAM USULAN PENGHAPUSAN</td>
                       <td>
                         <a href="/laporan/inventaris_aktif_usulan/pdf" class="btn btn-xs btn-danger"><span class="fa fa-file-pdf-o fa-lg"></span></a>
-                        <a href="/laporan/1/excel" class="btn btn-xs btn-success"><span class="fa fa-file-excel-o fa-lg"></span></a>
+                        <!-- <a href="/laporan/1/excel" class="btn btn-xs btn-success"><span class="fa fa-file-excel-o fa-lg"></span></a> -->
                       </td>
                     </tr>
                     <tr>
@@ -37,7 +37,7 @@
                       <td>ASET DALAM USULAN PENGHAPUSAN</td>
                       <td>
                         <a href="/laporan/inventaris_usulan/pdf" class="btn btn-xs btn-danger"><span class="fa fa-file-pdf-o fa-lg"></span></a>
-                        <a href="/laporan/1/excel" class="btn btn-xs btn-success"><span class="fa fa-file-excel-o fa-lg"></span></a>
+                        <!-- <a href="/laporan/1/excel" class="btn btn-xs btn-success"><span class="fa fa-file-excel-o fa-lg"></span></a> -->
                       </td>
                     </tr>
                     <tr>
@@ -45,7 +45,7 @@
                       <td>ASET YANG DIMUTASIKAN PINDAH DAN ASET YANG TELAH DIHAPUS</td>
                       <td>
                         <a href="/laporan/inventaris_mutasi_hapus/pdf" class="btn btn-xs btn-danger"><span class="fa fa-file-pdf-o fa-lg"></span></a>
-                        <a href="/laporan/1/excel" class="btn btn-xs btn-success"><span class="fa fa-file-excel-o fa-lg"></span></a>
+                        <!-- <a href="/laporan/1/excel" class="btn btn-xs btn-success"><span class="fa fa-file-excel-o fa-lg"></span></a> -->
                       </td>
                     </tr>
                     <tr>
@@ -63,7 +63,7 @@
                       </td>
                       <td>
                         <button type="submit" class="btn btn-xs btn-danger"><span class="fa fa-file-pdf-o fa-lg"></span></button>
-                        <a href="/laporan/1/excel" class="btn btn-xs btn-success"><span class="fa fa-file-excel-o fa-lg"></span></a>
+                        <!-- <a href="/laporan/1/excel" class="btn btn-xs btn-success"><span class="fa fa-file-excel-o fa-lg"></span></a> -->
                       </td>
                       </form>
                     </tr>
@@ -82,11 +82,11 @@
                       </td>
                       <td>
                         <button type="submit" class="btn btn-xs btn-danger"><span class="fa fa-file-pdf-o fa-lg"></span></button>
-                        <a href="/laporan/1/excel" class="btn btn-xs btn-success"><span class="fa fa-file-excel-o fa-lg"></span></a>
+                        <!-- <a href="/laporan/1/excel" class="btn btn-xs btn-success"><span class="fa fa-file-excel-o fa-lg"></span></a> -->
                       </td>
                       </form>
                     </tr>
-                    <tr>
+                    <!-- <tr>
                       <form action="laporan/inventaris_perjenis_persatuan_kerja/pdf" method="POST">
                       {{ csrf_field() }}
                       <td>7</td>
@@ -161,7 +161,7 @@
                         <a href="/laporan/1/pdf" class="btn btn-xs btn-danger"><span class="fa fa-file-pdf-o fa-lg"></span></a>
                         <a href="/laporan/1/excel" class="btn btn-xs btn-success"><span class="fa fa-file-excel-o fa-lg"></span></a>
                       </td>
-                    </tr>
+                    </tr> -->
                   </tbody>
                 </table>
               </div>

@@ -77,9 +77,6 @@
           <td><strong>{{ $barang->bidang_barang_name }}</strong><br>{{ $barang->kelompok_barang_name }}</td>
           <td class="number">{{ $barang->total_barang }}</td>
           <td class="number">{{ number_format($barang->total_price) }}</td>
-            <!-- @foreach ($golongans as $golongan)
-              <td class="number">{{ number_format($barangs->where('golongan_barang_code',$golongan->golongan_barang_code)->sum('total_price')) }}</td>
-            @endforeach -->
           <td>{{ $barang->status_name}},{{$barang->kondisi_name  }}</td>
         </tr>
         @endforeach
