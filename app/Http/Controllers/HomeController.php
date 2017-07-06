@@ -77,17 +77,18 @@ class HomeController extends Controller
     public function search(Request $request){
       //$search = \Request::get('search');
       // dd($request);
-      $barangs = Mutation::join('barang','barang_id','=','barang.id')
-        ->join('pegawai','mutation.pegawai_id','=','pegawai.id')
-        ->join('ruangan','mutation.ruangan_id','=','ruangan.id')
-        ->select('mutation.*', 'pegawai.name as pegawai_name', 'ruangan.name as ruangan_name')
+      $barangs = Barangmasuk::join('barang','barang_id','=','barang.id')
+        ->join('pegawai','barang_masuk.pegawai_id','=','pegawai.id')
+        ->join('kondisi_barang','barang_masuk.kondisi_barang_id','=','kondisi_barang.id')
+        ->join('ruangan','barang_masuk.ruangan_id','=','ruangan.id')
+        ->select('barang_masuk.*', 'pegawai.name as pegawai_name', 'ruangan.name as ruangan_name')
         ->where(function($query) use ($request){
-          $query->orWhere('mutation.barang_code','like','%'.$request->term.'%');
-          $query->orWhere('mutation.barang_name','like','%'.$request->term.'%');
-          $query->orWhere('mutation.description','like','%'.$request->term.'%');
-          $query->orWhere('mutation.quantity','like','%'.$request->term.'%');
-          $query->orWhere('mutation.kondisi_name','like','%'.$request->term.'%');
-          $query->orWhere('mutation.status_name','like','%'.$request->term.'%');
+          $query->orWhere('barang.code','like','%'.$request->term.'%');
+          $query->orWhere('barang.name','like','%'.$request->term.'%');
+          $query->orWhere('barang_masuk.description','like','%'.$request->term.'%');
+          $query->orWhere('barang_masuk.quantity','like','%'.$request->term.'%');
+          $query->orWhere('kondisi_barang.name','like','%'.$request->term.'%');
+          // $query->orWhere('status_mutasi.name','like','%'.$request->term.'%');
           $query->orWhere('pegawai.name','like','%'.$request->term.'%');
           $query->orWhere('ruangan.name','like','%'.$request->term.'%');
         })
@@ -100,20 +101,20 @@ class HomeController extends Controller
       // dd($request);
       if ($request->ajax()) {
         // dd($request);
-        $barangs = Mutation::join('barang','barang_id','=','barang.id')
-          ->join('pegawai','mutation.pegawai_id','=','pegawai.id')
-          ->join('ruangan','mutation.ruangan_id','=','ruangan.id')
-          ->select('mutation.*')
-          ->select('mutation.*', 'pegawai.name as pegawai_name', 'ruangan.name as ruangan_name')
+        $barangs = Barangmasuk::join('barang','barang_id','=','barang.id')
+          ->join('pegawai','barang_masuk.pegawai_id','=','pegawai.id')
+          ->join('kondisi_barang','barang_masuk.kondisi_barang_id','=','kondisi_barang.id')
+          ->join('ruangan','barang_masuk.ruangan_id','=','ruangan.id')
+          ->select('barang_masuk.*','barang.code as barang_code','barang.name as barang_name','pegawai.name as pegawai_name', 'ruangan.name as ruangan_name')
           ->where(function($query) use ($request){
-            $query->orWhere('mutation.barang_code','like','%'.$request->term.'%');
-            $query->orWhere('mutation.barang_name','like','%'.$request->term.'%');
-            $query->orWhere('mutation.description','like','%'.$request->term.'%');
-            $query->orWhere('mutation.quantity','like','%'.$request->term.'%');
-            $query->orWhere('mutation.kondisi_name','like','%'.$request->term.'%');
-            $query->orWhere('mutation.status_name','like','%'.$request->term.'%');
-            $query->orWhere('ruangan.name','like','%'.$request->term.'%');
+            $query->orWhere('barang.code','like','%'.$request->term.'%');
+            $query->orWhere('barang.name','like','%'.$request->term.'%');
+            $query->orWhere('barang_masuk.description','like','%'.$request->term.'%');
+            $query->orWhere('barang_masuk.quantity','like','%'.$request->term.'%');
+            $query->orWhere('kondisi_barang.name','like','%'.$request->term.'%');
+            // $query->orWhere('status_mutasi.name','like','%'.$request->term.'%');
             $query->orWhere('pegawai.name','like','%'.$request->term.'%');
+            $query->orWhere('ruangan.name','like','%'.$request->term.'%');
           })
         ->orderBy('id', 'asc')
         ->take(5)

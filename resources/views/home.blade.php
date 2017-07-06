@@ -20,15 +20,7 @@
           'csrfToken' => csrf_token(),
       ]) !!};
   </script>
-  <script type="text/javascript">
-    $(function(){
-      $('.datepicker').datepicker({
-        format: 'yyyy-mm-dd',
-        startDate: '-3d'
-      });
-    });
-  </script>
-  <link rel="stylesheet" href="/js/chart/chartist.min.css">
+<link rel="stylesheet" href="/js/chart/chartist.min.css">
 <link rel="stylesheet" href="/js/chart/morris.css">
 <link rel="stylesheet" href="/js/chart/plottable.css">
 <link rel="stylesheet" href="/js/chart/c3.min.css"><style>
