@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 06, 2017 at 09:35 PM
+-- Generation Time: Jul 06, 2017 at 11:14 PM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 7.1.1
 
@@ -33,19 +33,15 @@ CREATE TABLE `barang` (
   `bidang_barang_id` int(11) NOT NULL,
   `kelompok_barang_id` int(11) NOT NULL,
   `sub_kelompok_barang_id` int(11) NOT NULL,
+  `pegawai_id` int(11) DEFAULT NULL,
   `name` varchar(100) DEFAULT NULL,
   `description` varchar(200) DEFAULT NULL,
   `in_stock` int(11) DEFAULT NULL,
   `out_stock` int(11) DEFAULT NULL,
-  `price` int(11) DEFAULT NULL,
-  `size` varchar(100) NOT NULL,
   `brand` varchar(100) DEFAULT NULL,
-  `mutation_quantity` int(11) DEFAULT NULL,
-  `request_destroy_quantity` int(11) DEFAULT NULL,
   `satuan_name` varchar(100) NOT NULL,
   `kondisi_name` varchar(100) DEFAULT NULL,
   `status_name` varchar(100) NOT NULL,
-  `pegawai_id` int(11) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `_token` varchar(100) DEFAULT NULL
@@ -55,22 +51,22 @@ CREATE TABLE `barang` (
 -- Dumping data for table `barang`
 --
 
-INSERT INTO `barang` (`id`, `code`, `golongan_barang_id`, `bidang_barang_id`, `kelompok_barang_id`, `sub_kelompok_barang_id`, `name`, `description`, `in_stock`, `out_stock`, `price`, `size`, `brand`, `mutation_quantity`, `request_destroy_quantity`, `satuan_name`, `kondisi_name`, `status_name`, `pegawai_id`, `created_at`, `updated_at`, `_token`) VALUES
-(1, '111.11.101', 2, 2, 4, 16, 'Iphone 7s 64GB', 'Ini hp bagus 2017', 32, 2, 10, '10', 'Iphone', NULL, NULL, 'Unit', 'Baik', 'Aktif', 6, '2017-06-01 05:05:25', '2017-07-04 16:50:54', NULL),
-(2, '111.22.11', 2, 2, 4, 17, 'iPhone 6 128 GB', 'Memori 128 GB', NULL, NULL, NULL, '', 'Iphone', NULL, NULL, 'Unit', 'Baik', 'Aktif', 6, '2017-06-05 23:13:25', '2017-07-04 13:32:16', NULL),
-(3, '222.22.123', 1, 4, 19, 32, 'Kertas A4', 'Barang Habis Pakai', 13, 3, 200, '', 'Sinar', NULL, NULL, 'Unit', 'Baik', 'Aktif', 6, '2017-06-10 08:20:03', '2017-07-06 13:54:19', NULL),
-(4, '192.99.88', 1, 3, 16, 57, 'Air Galon', 'Aqua Besar', NULL, NULL, NULL, '', 'Aqua', NULL, NULL, 'Unit', 'Baik', 'Aktif', 6, '2017-06-14 09:07:33', '2017-07-03 19:46:01', NULL),
-(11, '444.123.12', 2, 5, 10, 51, 'Lampu 24 warna', 'Lampu jalan', 23, 2, 300, '', 'Philips', NULL, NULL, 'Unit', NULL, 'Aktif', NULL, '2017-06-15 06:18:05', '2017-07-04 16:37:44', NULL),
-(12, '123.123.1', 2, 1, 1, 5, 'Lenovo B640i', '14 inc', 34, 18, 12, '', 'Lenovo', NULL, NULL, 'PCS', NULL, 'Aktif', NULL, '2017-06-16 06:45:25', '2017-07-04 16:37:44', NULL),
-(13, '222.222.1', 1, 4, 5, 35, 'Marker Hitam', '1mm', 20, NULL, 10, '', 'Sinar Dunia', NULL, NULL, 'PCS', NULL, 'Aktif', NULL, '2017-06-16 06:46:58', '2017-07-04 16:37:44', NULL),
-(14, '222.222.2', 1, 4, 5, 36, 'Marker Merah', '1mm', NULL, NULL, NULL, '', 'Sinar', NULL, NULL, 'PCS', NULL, 'Aktif', NULL, '2017-06-16 06:47:30', '2017-07-02 07:59:34', NULL),
-(15, '333.333.1', 1, 3, 15, 52, 'TimTam', 'Cokelat', 13, NULL, 100, '', 'Timtam', NULL, NULL, 'PCS', NULL, 'Aktif', NULL, '2017-06-16 06:48:43', '2017-07-04 16:37:44', NULL),
-(16, '111.111.1', 2, 2, 3, 12, 'Samsung S7', 'Samsung baru', 20, 13, 200, '', 'Samsung', NULL, NULL, 'PCS', NULL, 'Aktif', NULL, '2017-06-16 06:56:30', '2017-07-06 10:19:32', NULL),
-(17, '333.333.2', 2, 1, 1, 10, 'Dell Inpiro 424', 'Jadul laptop', 30, NULL, 200, '', 'Dell', NULL, NULL, 'Paket', NULL, 'Aktif', NULL, '2017-06-16 06:58:22', '2017-07-06 10:19:32', NULL),
-(18, '123.123.900', 1, 3, 16, 45, 'Gelas Plastik', 'Untuk operational', 30, 23, 90, '', 'Sinar', NULL, NULL, 'Unit', NULL, 'Aktif', NULL, '2017-06-20 09:13:46', '2017-07-04 16:37:44', NULL),
-(19, '999.00', 1, 4, 5, 36, 'Melai', 'Untuk operational', NULL, NULL, NULL, '', 'Yosinoya', NULL, NULL, 'Unit', NULL, 'Aktif', NULL, '2017-06-20 09:14:17', '2017-06-30 07:55:33', NULL),
-(20, '123.123.5', 2, 1, 1, 1, 'iMac pro', 'iMac', NULL, NULL, NULL, '', NULL, NULL, NULL, 'PCS', NULL, 'Aktif', NULL, '2017-07-06 13:41:43', '2017-07-06 13:41:43', NULL),
-(21, '123.4.123', 2, 1, 1, 10, 'iMac pro2', 'iMac', 12, NULL, NULL, '', NULL, NULL, NULL, 'Unit', NULL, 'Aktif', NULL, '2017-07-06 13:43:42', '2017-07-06 13:44:28', NULL);
+INSERT INTO `barang` (`id`, `code`, `golongan_barang_id`, `bidang_barang_id`, `kelompok_barang_id`, `sub_kelompok_barang_id`, `pegawai_id`, `name`, `description`, `in_stock`, `out_stock`, `brand`, `satuan_name`, `kondisi_name`, `status_name`, `created_at`, `updated_at`, `_token`) VALUES
+(1, '111.11.101', 2, 2, 4, 16, 6, 'Iphone 7s 64GB', 'Ini hp bagus 2017', 32, 2, 'Iphone', 'Unit', 'Baik', 'Aktif', '2017-06-01 05:05:25', '2017-07-04 16:50:54', NULL),
+(2, '111.22.11', 2, 2, 4, 17, 6, 'iPhone 6 128 GB', 'Memori 128 GB', NULL, NULL, 'Iphone', 'Unit', 'Baik', 'Aktif', '2017-06-05 23:13:25', '2017-07-04 13:32:16', NULL),
+(3, '222.22.123', 1, 4, 19, 32, 6, 'Kertas A4', 'Barang Habis Pakai', 13, 3, 'Sinar', 'Unit', 'Baik', 'Aktif', '2017-06-10 08:20:03', '2017-07-06 13:54:19', NULL),
+(4, '192.99.88', 1, 3, 16, 57, 6, 'Air Galon', 'Aqua Besar', 18, NULL, 'Aqua', 'Unit', 'Baik', 'Aktif', '2017-06-14 09:07:33', '2017-07-06 16:13:00', NULL),
+(11, '444.123.12', 2, 5, 10, 51, 4, 'Lampu 24 warna', 'Lampu jalan', 23, 2, 'Philips', 'Unit', NULL, 'Aktif', '2017-06-15 06:18:05', '2017-07-06 16:07:10', NULL),
+(12, '123.123.1', 2, 1, 1, 5, 2, 'Lenovo B640i', '14 inc', 34, 18, 'Lenovo', 'PCS', NULL, 'Aktif', '2017-06-16 06:45:25', '2017-07-06 16:06:40', NULL),
+(13, '222.222.1', 1, 4, 5, 35, 2, 'Marker Hitam', '1mm', 20, NULL, 'Sinar Dunia', 'PCS', NULL, 'Aktif', '2017-06-16 06:46:58', '2017-07-06 16:07:20', NULL),
+(14, '222.222.2', 1, 4, 5, 36, 2, 'Marker Merah', '1mm', NULL, NULL, 'Sinar', 'PCS', NULL, 'Aktif', '2017-06-16 06:47:30', '2017-07-06 16:07:17', NULL),
+(15, '333.333.1', 1, 3, 15, 52, 2, 'TimTam', 'Cokelat', 13, NULL, 'Timtam', 'PCS', NULL, 'Aktif', '2017-06-16 06:48:43', '2017-07-06 16:07:23', NULL),
+(16, '111.111.1', 2, 2, 3, 12, 4, 'Samsung S7', 'Samsung baru', 20, 13, 'Samsung', 'PCS', NULL, 'Aktif', '2017-06-16 06:56:30', '2017-07-06 16:06:54', NULL),
+(17, '333.333.2', 2, 1, 1, 10, 3, 'Dell Inpiro 424', 'Jadul laptop', 30, NULL, 'Dell', 'Paket', NULL, 'Aktif', '2017-06-16 06:58:22', '2017-07-06 16:06:45', NULL),
+(18, '123.123.900', 1, 3, 16, 45, 3, 'Gelas Plastik', 'Untuk operational', 30, 23, 'Sinar', 'Unit', NULL, 'Aktif', '2017-06-20 09:13:46', '2017-07-06 16:07:06', NULL),
+(19, '999.00', 1, 4, 5, 36, 6, 'Melai', 'Untuk operational', NULL, NULL, 'Yosinoya', 'Unit', NULL, 'Aktif', '2017-06-20 09:14:17', '2017-07-06 16:07:13', NULL),
+(20, '123.123.5', 2, 1, 1, 1, 5, 'iMac pro', 'iMac', NULL, NULL, NULL, 'PCS', NULL, 'Aktif', '2017-07-06 13:41:43', '2017-07-06 16:07:00', NULL),
+(21, '123.4.123', 2, 1, 1, 10, 4, 'iMac pro2', 'iMac', 12, NULL, NULL, 'Unit', NULL, 'Aktif', '2017-07-06 13:43:42', '2017-07-06 16:06:57', NULL);
 
 -- --------------------------------------------------------
 
@@ -170,7 +166,8 @@ INSERT INTO `barang_masuk` (`id`, `number`, `barang_id`, `ruangan_id`, `pegawai_
 (83, NULL, 3, 6, 3, 3, 1, NULL, 13, NULL, NULL, NULL, NULL, 200, '1499184394.png', NULL, NULL, '2017-07-04 16:06:34', '2017-07-04 16:06:34'),
 (84, NULL, 16, 5, 6, 3, 1, NULL, 20, 'Merah', NULL, NULL, NULL, 200, '1499260254.jpg', NULL, NULL, '2017-07-05 13:10:54', '2017-07-05 13:10:54'),
 (85, NULL, 17, 6, 1, 3, 1, NULL, 30, NULL, NULL, NULL, NULL, 200, '1499307366.JPG', NULL, NULL, '2017-07-06 02:16:06', '2017-07-06 02:16:06'),
-(86, NULL, 21, 3, 4, 1, 1, NULL, 12, NULL, NULL, NULL, NULL, 3000, '1499348668.png', NULL, NULL, '2017-07-06 13:44:28', '2017-07-06 13:44:28');
+(86, NULL, 21, 3, 4, 1, 1, NULL, 12, NULL, NULL, NULL, NULL, 3000, '1499348668.png', NULL, NULL, '2017-07-06 13:44:28', '2017-07-06 13:44:28'),
+(87, NULL, 4, 7, 3, 3, 1, NULL, 18, NULL, NULL, NULL, NULL, 2000, '1499357580.JPG', NULL, NULL, '2017-07-06 16:13:00', '2017-07-06 16:13:00');
 
 --
 -- Triggers `barang_masuk`
@@ -218,12 +215,14 @@ CREATE TABLE `bidang_barang` (
 INSERT INTO `bidang_barang` (`id`, `code`, `name`, `status`, `created_at`, `updated_at`, `golongan_barang_id`) VALUES
 (1, 201, 'Komputer', NULL, '2017-05-14 14:35:34', '2017-05-18 19:03:19', 2),
 (2, 203, 'Handphone', NULL, '2017-05-14 23:22:18', '2017-05-18 19:03:21', 2),
-(3, 2, 'Sumbako', NULL, '2017-05-17 11:41:07', '2017-05-18 19:03:24', 1),
+(3, 22, 'Sumbako', NULL, '2017-05-17 11:41:07', '2017-07-06 15:40:43', 1),
 (4, 3, 'ATK', NULL, '2017-05-17 11:41:26', '2017-05-18 19:03:26', 1),
 (5, 4, 'Lampu', NULL, '2017-05-17 11:43:07', '2017-06-16 08:29:37', 2),
 (6, 223, 'Bahan Bakar', NULL, '2017-05-17 11:43:24', '2017-05-18 19:03:31', 1),
 (7, 12, 'TV', NULL, '2017-05-18 08:24:34', '2017-05-18 19:03:33', 2),
-(8, 323, 'Alat-alat Besar', NULL, '2017-07-06 08:54:55', '2017-07-06 08:54:55', 5);
+(8, 323, 'Alat-alat Besar', NULL, '2017-07-06 08:54:55', '2017-07-06 08:54:55', 5),
+(9, 1, 'Perkampungan', NULL, '2017-07-06 15:31:21', '2017-07-06 15:38:39', 3),
+(11, 2, 'Tanah Pertanian', NULL, '2017-07-06 15:40:51', '2017-07-06 15:40:51', 3);
 
 -- --------------------------------------------------------
 
@@ -245,14 +244,14 @@ CREATE TABLE `golongan_barang` (
 --
 
 INSERT INTO `golongan_barang` (`id`, `code`, `name`, `status`, `created_at`, `updated_at`) VALUES
-(1, '3', 'BARANG HABIS PAKAI', NULL, '2017-05-14 09:42:59', '2017-07-06 08:45:38'),
-(2, '2', 'ELEKTRONIK', NULL, '2017-05-14 14:35:18', '2017-07-06 08:45:47'),
-(3, '1', 'TANAH', NULL, '2017-07-06 08:37:50', '2017-07-06 08:45:56'),
-(5, '4', 'PERALATAN DAN MESIN', NULL, '2017-07-06 08:45:21', '2017-07-06 08:45:21'),
-(6, '5', 'GEDUNG DAN BANGUNAN', NULL, '2017-07-06 08:46:07', '2017-07-06 08:46:07'),
-(7, '6', 'JALAN, IRIGASI DAN JARINGAN', NULL, '2017-07-06 08:46:18', '2017-07-06 08:46:18'),
-(8, '10', 'ASET TETAP LAINNYA', NULL, '2017-07-06 08:46:35', '2017-07-06 08:46:35'),
-(9, '9', 'KONSTRUKSI DALAM PENGERJAAN', NULL, '2017-07-06 08:46:44', '2017-07-06 08:46:44');
+(1, '7', 'Barang habis pakai', NULL, '2017-05-14 09:42:59', '2017-07-06 15:46:29'),
+(2, '8', 'Elektronik', NULL, '2017-05-14 14:35:18', '2017-07-06 15:47:08'),
+(3, '1', 'Tanah', NULL, '2017-07-06 08:37:50', '2017-07-06 15:38:21'),
+(5, '2', 'Peralatan dan Mesin', NULL, '2017-07-06 08:45:21', '2017-07-06 15:42:01'),
+(6, '3', 'Gedung dan Bangunan', NULL, '2017-07-06 08:46:07', '2017-07-06 15:48:30'),
+(7, '4', 'Jalan, Irigasi dan Jaringan', NULL, '2017-07-06 08:46:18', '2017-07-06 15:44:08'),
+(8, '5', 'Aset tetap lainnya', NULL, '2017-07-06 08:46:35', '2017-07-06 15:45:59'),
+(9, '6', 'Konstruksi dalam pengerjaan', NULL, '2017-07-06 08:46:44', '2017-07-06 15:45:25');
 
 -- --------------------------------------------------------
 
@@ -7941,7 +7940,7 @@ INSERT INTO `kecamatan` (`id`, `name`, `kabupaten_id`, `created_at`, `updated_at
 
 CREATE TABLE `kelompok_barang` (
   `id` int(11) NOT NULL,
-  `code` int(11) NOT NULL,
+  `code` varchar(45) DEFAULT NULL,
   `name` varchar(200) NOT NULL,
   `status` varchar(100) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
@@ -7954,27 +7953,37 @@ CREATE TABLE `kelompok_barang` (
 --
 
 INSERT INTO `kelompok_barang` (`id`, `code`, `name`, `status`, `created_at`, `updated_at`, `bidang_barang_id`) VALUES
-(1, 901, 'Laptop', NULL, '2017-05-14 14:59:43', '2017-05-18 19:04:57', 1),
-(2, 902, 'PC', NULL, '2017-05-14 15:00:19', '2017-05-18 19:05:00', 1),
-(3, 903, 'Android Phone', NULL, '2017-05-14 23:22:35', '2017-05-18 13:16:04', 2),
-(4, 904, 'Apple Phone', NULL, '2017-05-14 23:22:49', '2017-05-18 13:15:52', 2),
-(5, 1, 'Spidol', NULL, '2017-05-17 11:44:36', '2017-05-18 19:05:09', 4),
-(6, 3, 'Pensil', NULL, '2017-05-17 11:44:49', '2017-05-18 19:05:12', 4),
-(7, 2, 'Minyak', NULL, '2017-05-17 11:45:18', '2017-05-18 19:05:15', 6),
-(8, 2, 'Gas', NULL, '2017-05-17 11:45:31', '2017-05-18 19:05:18', 6),
-(9, 2, 'Tablet', NULL, '2017-05-17 11:45:48', '2017-05-18 19:05:20', 2),
-(10, 22, 'Led', NULL, '2017-05-17 11:45:55', '2017-05-18 19:05:22', 5),
-(11, 3, 'Pijar', NULL, '2017-05-17 11:46:11', '2017-05-18 19:05:25', 5),
-(12, 2, 'Neon', NULL, '2017-05-17 11:46:25', '2017-05-18 19:05:29', 5),
-(13, 12, 'Flashma', NULL, '2017-05-18 08:24:54', '2017-05-18 19:05:31', 7),
-(14, 122, 'TV LCD', NULL, '2017-05-18 08:26:40', '2017-05-18 19:05:34', 7),
-(15, 12, 'Makanan Ringan', NULL, '2017-05-18 11:07:59', '2017-05-18 19:05:38', 3),
-(16, 323, 'Air Minum', NULL, '2017-05-18 11:07:45', '2017-05-18 19:05:41', 3),
-(17, 123, 'Beras', NULL, '2017-05-18 11:07:37', '2017-05-18 19:05:43', 3),
-(18, 123, 'Gula', NULL, '2017-05-18 11:07:30', '2017-05-18 19:05:47', 3),
-(19, 123, 'Kertas', NULL, '2017-05-18 11:07:13', '2017-05-18 19:05:50', 4),
-(20, 12, 'TV Monitor', NULL, '2017-05-18 11:05:30', '2017-05-18 19:05:53', 7),
-(21, 12, 'TV LED', NULL, '2017-05-18 11:05:15', '2017-05-18 19:06:03', 7);
+(1, '901', 'Laptop', NULL, '2017-05-14 14:59:43', '2017-05-18 19:04:57', 1),
+(2, '902', 'PC', NULL, '2017-05-14 15:00:19', '2017-05-18 19:05:00', 1),
+(3, '903', 'Android Phone', NULL, '2017-05-14 23:22:35', '2017-05-18 13:16:04', 2),
+(4, '904', 'Apple Phone', NULL, '2017-05-14 23:22:49', '2017-05-18 13:15:52', 2),
+(5, '1', 'Spidol', NULL, '2017-05-17 11:44:36', '2017-05-18 19:05:09', 4),
+(6, '3', 'Pensil', NULL, '2017-05-17 11:44:49', '2017-05-18 19:05:12', 4),
+(7, '2', 'Minyak', NULL, '2017-05-17 11:45:18', '2017-05-18 19:05:15', 6),
+(8, '2', 'Gas', NULL, '2017-05-17 11:45:31', '2017-05-18 19:05:18', 6),
+(9, '2', 'Tablet', NULL, '2017-05-17 11:45:48', '2017-05-18 19:05:20', 2),
+(10, '22', 'Led', NULL, '2017-05-17 11:45:55', '2017-05-18 19:05:22', 5),
+(11, '3', 'Pijar', NULL, '2017-05-17 11:46:11', '2017-05-18 19:05:25', 5),
+(12, '2', 'Neon', NULL, '2017-05-17 11:46:25', '2017-05-18 19:05:29', 5),
+(13, '12', 'Flashma', NULL, '2017-05-18 08:24:54', '2017-05-18 19:05:31', 7),
+(14, '122', 'TV LCD', NULL, '2017-05-18 08:26:40', '2017-05-18 19:05:34', 7),
+(15, '12', 'Makanan Ringan', NULL, '2017-05-18 11:07:59', '2017-05-18 19:05:38', 3),
+(16, '323', 'Air Minum', NULL, '2017-05-18 11:07:45', '2017-05-18 19:05:41', 3),
+(17, '123', 'Beras', NULL, '2017-05-18 11:07:37', '2017-05-18 19:05:43', 3),
+(18, '123', 'Gula', NULL, '2017-05-18 11:07:30', '2017-05-18 19:05:47', 3),
+(19, '123', 'Kertas', NULL, '2017-05-18 11:07:13', '2017-05-18 19:05:50', 4),
+(20, '12', 'TV Monitor', NULL, '2017-05-18 11:05:30', '2017-05-18 19:05:53', 7),
+(21, '12', 'TV LED', NULL, '2017-05-18 11:05:15', '2017-05-18 19:06:03', 7),
+(22, '1', 'Kampung', NULL, '2017-07-06 15:32:12', '2017-07-06 15:38:59', 9),
+(23, '2', 'Tanah Pertanian', NULL, '2017-07-06 15:36:05', '2017-07-06 15:36:21', 9),
+(24, '2', 'Emplasmen', NULL, '2017-07-06 15:39:51', '2017-07-06 15:39:51', 9),
+(25, '3', 'Kuburan', NULL, '2017-07-06 15:40:00', '2017-07-06 15:40:00', 9),
+(26, '1', 'Pagi', NULL, '2017-07-06 15:50:21', '2017-07-06 15:50:21', 11),
+(27, '2', 'Palawija', NULL, '2017-07-06 15:50:41', '2017-07-06 15:50:41', 11),
+(28, '3', 'Sawah Ditanami Tebu', NULL, '2017-07-06 15:50:51', '2017-07-06 15:50:51', 11),
+(29, '4', 'Sawah Ditanami Sayuran', NULL, '2017-07-06 15:51:01', '2017-07-06 15:51:01', 11),
+(30, '5', 'Sawah Ditanami Tembakau', NULL, '2017-07-06 15:51:17', '2017-07-06 15:51:17', 11),
+(31, '6', 'Sawah Ditanami Rosella', NULL, '2017-07-06 15:51:27', '2017-07-06 15:51:27', 11);
 
 -- --------------------------------------------------------
 
@@ -8159,8 +8168,8 @@ INSERT INTO `satuan` (`name`) VALUES
 
 CREATE TABLE `satuan_kerja` (
   `id` int(11) NOT NULL,
-  `name` varchar(200) NOT NULL,
   `code` int(11) NOT NULL,
+  `name` varchar(200) NOT NULL,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `unit_kerja_id` int(11) NOT NULL
@@ -8170,25 +8179,25 @@ CREATE TABLE `satuan_kerja` (
 -- Dumping data for table `satuan_kerja`
 --
 
-INSERT INTO `satuan_kerja` (`id`, `name`, `code`, `created_at`, `updated_at`, `unit_kerja_id`) VALUES
-(1, 'Penggajian', 121, '2017-05-18 11:38:48', '2017-05-18 19:06:49', 1),
-(2, 'Pembiayaan Proyek', 121, '2017-05-18 11:38:37', '2017-05-18 19:06:51', 1),
-(3, 'Pembayaran Tagihan', 12, '2017-05-18 11:38:23', '2017-05-18 19:06:54', 1),
-(4, 'Pembayaran Pajak', 12, '2017-05-18 11:38:14', '2017-05-18 19:07:04', 1),
-(5, 'Programmer', 11, '2017-05-14 09:25:25', '2017-05-18 19:07:15', 2),
-(6, 'DBA', 2, '2017-05-14 09:25:34', '2017-05-18 19:07:19', 2),
-(7, 'Admin Khusus', 14, '2017-05-17 11:24:38', '2017-05-18 19:07:26', 4),
-(8, 'Admin Online', 13, '2017-05-17 11:24:08', '2017-05-18 19:07:28', 4),
-(9, 'Bisnis Analis', 12, '2017-05-17 11:22:40', '2017-05-18 19:07:30', 2),
-(10, 'Admin Pajak', 10, '2017-05-17 11:22:01', '2017-05-18 19:07:34', 4),
-(11, 'Hacker', 9, '2017-05-17 11:21:45', '2017-05-18 19:07:37', 2),
-(12, 'Sys Admin IT', 5, '2017-05-17 11:02:41', '2017-05-18 19:07:39', 2),
-(13, 'Admin Pengurus Harian', 1, '2017-05-15 18:56:08', '2017-05-18 19:07:43', 4),
-(14, 'Programmer', 4, '2017-05-14 09:52:42', '2017-05-18 19:07:47', 2),
-(15, 'OB', 8, '2017-05-14 09:28:46', '2017-05-18 19:07:50', 3),
-(16, 'Koordinator Lapangan', 7, '2017-05-14 09:28:24', '2017-05-28 14:37:13', 3),
-(17, 'Kerja Taman', 6, '2017-05-14 09:28:13', '2017-05-18 19:07:55', 3),
-(18, 'Designer', 3, '2017-05-14 09:26:00', '2017-05-18 19:07:59', 2);
+INSERT INTO `satuan_kerja` (`id`, `code`, `name`, `created_at`, `updated_at`, `unit_kerja_id`) VALUES
+(1, 121, 'Penggajian', '2017-05-18 11:38:48', '2017-05-18 19:06:49', 1),
+(2, 121, 'Pembiayaan Proyek', '2017-05-18 11:38:37', '2017-05-18 19:06:51', 1),
+(3, 12, 'Pembayaran Tagihan', '2017-05-18 11:38:23', '2017-05-18 19:06:54', 1),
+(4, 12, 'Pembayaran Pajak', '2017-05-18 11:38:14', '2017-05-18 19:07:04', 1),
+(5, 11, 'Programmer', '2017-05-14 09:25:25', '2017-05-18 19:07:15', 2),
+(6, 2, 'DBA', '2017-05-14 09:25:34', '2017-05-18 19:07:19', 2),
+(7, 14, 'Admin Khusus', '2017-05-17 11:24:38', '2017-05-18 19:07:26', 4),
+(8, 13, 'Admin Online', '2017-05-17 11:24:08', '2017-05-18 19:07:28', 4),
+(9, 12, 'Bisnis Analis', '2017-05-17 11:22:40', '2017-05-18 19:07:30', 2),
+(10, 10, 'Admin Pajak', '2017-05-17 11:22:01', '2017-05-18 19:07:34', 4),
+(11, 9, 'Hacker', '2017-05-17 11:21:45', '2017-05-18 19:07:37', 2),
+(12, 5, 'Sys Admin IT', '2017-05-17 11:02:41', '2017-05-18 19:07:39', 2),
+(13, 1, 'Admin Pengurus Harian', '2017-05-15 18:56:08', '2017-05-18 19:07:43', 4),
+(14, 4, 'Programmer', '2017-05-14 09:52:42', '2017-05-18 19:07:47', 2),
+(15, 8, 'OB', '2017-05-14 09:28:46', '2017-05-18 19:07:50', 3),
+(16, 7, 'Koordinator Lapangan', '2017-05-14 09:28:24', '2017-05-28 14:37:13', 3),
+(17, 6, 'Kerja Taman', '2017-05-14 09:28:13', '2017-05-18 19:07:55', 3),
+(18, 3, 'Designer', '2017-05-14 09:26:00', '2017-05-18 19:07:59', 2);
 
 -- --------------------------------------------------------
 
@@ -8303,7 +8312,9 @@ INSERT INTO `sub_kelompok_barang` (`id`, `code`, `name`, `status`, `created_at`,
 (56, 12312, 'Pertamax', NULL, '2017-05-18 11:23:57', '2017-05-18 11:23:57', 7),
 (57, 32, 'Botol Besar', NULL, '2017-05-18 11:24:10', '2017-06-14 09:08:22', 16),
 (58, 231223, 'Panjang', NULL, '2017-05-18 11:24:16', '2017-05-18 11:24:16', 12),
-(59, 12312, 'Pendek', NULL, '2017-05-18 11:24:27', '2017-05-18 11:24:27', 12);
+(59, 12312, 'Pendek', NULL, '2017-05-18 11:24:27', '2017-05-18 11:24:27', 12),
+(60, 1, 'Kampung', NULL, '2017-07-06 15:33:37', '2017-07-06 15:33:37', 22),
+(61, 2, 'Emplasmen', NULL, '2017-07-06 15:34:13', '2017-07-06 15:34:13', 22);
 
 -- --------------------------------------------------------
 
@@ -8350,7 +8361,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `username`, `email`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Admin Asetqu', 'admin', 'admin@kawanlabs.com', '$2y$10$aLnqv8eynQlbhWOSTiXj4.03NIGQrvcGjKpbtoQPXB6XAVTW5RbBq', 'RI7pDLaclTeJfT2OyBtKBbWHpU5iMrM82QklmPU4Mct5xKMKE5KzE4OSRv94', '2017-05-11 21:47:57', '2017-05-11 21:47:57'),
+(1, 'Admin Asetqu', 'admin', 'admin@kawanlabs.com', '$2y$10$aLnqv8eynQlbhWOSTiXj4.03NIGQrvcGjKpbtoQPXB6XAVTW5RbBq', 'soff23RThns8XLv3HWOf1yovAhunCtwt8aQ0QCrMiAltImltbKhsJe2sZb2i', '2017-05-11 21:47:57', '2017-05-11 21:47:57'),
 (4, 'masto', 'masto', 'masto@kawanlabs.com', '$2y$10$iJpwZDp2JRe71ajc5oy36ejnC3pnHUiybIECWNPobUkw4DttNpGBO', '9gtRFMRXfFCIBf6238eA9uD6Q2UzQpQkKhOfXcWTxpwSoUqdjb9UBaAsEBZg', '2017-05-20 11:04:58', '2017-05-20 11:04:58'),
 (9, 'zorro', 'zorro', 'zorro@gmail.com', '$2y$10$LxzZhGJJy1DMvsQSKCkEpec8Kc8OJxTMxS189qMTAcJQBwZZZanC.', 'k56OuEwtrvMZeuRBYENqOqEjkFPNbeBnInACc4YsRGdGP7t17ESb4jEOHnNq', '2017-06-04 16:58:19', '2017-06-04 16:58:19');
 
@@ -8362,7 +8373,13 @@ INSERT INTO `users` (`id`, `name`, `username`, `email`, `password`, `remember_to
 -- Indexes for table `barang`
 --
 ALTER TABLE `barang`
-  ADD PRIMARY KEY (`id`) USING BTREE;
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD UNIQUE KEY `code` (`code`),
+  ADD KEY `fk_barang_golongan_barang1_idx` (`golongan_barang_id`),
+  ADD KEY `fk_barang_bidang_barang1_idx` (`bidang_barang_id`),
+  ADD KEY `fk_barang_kelompok_barang1_idx` (`kelompok_barang_id`),
+  ADD KEY `fk_barang_sub_kelompok_barang1_idx` (`sub_kelompok_barang_id`),
+  ADD KEY `fk_barang_pegawai1_idx` (`pegawai_id`);
 
 --
 -- Indexes for table `barang_keluar`
@@ -8444,6 +8461,7 @@ ALTER TABLE `migrations`
 --
 ALTER TABLE `pegawai`
   ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `nip` (`nip`),
   ADD KEY `fk_pegawai_jabatan1_idx` (`jabatan_id`),
   ADD KEY `fk_pegawai_unit_kerja1_idx` (`unit_kerja_id`),
   ADD KEY `fk_pegawai_provinsi1_idx` (`provinsi_id`),
@@ -8460,7 +8478,8 @@ ALTER TABLE `provinsi`
 -- Indexes for table `ruangan`
 --
 ALTER TABLE `ruangan`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `code` (`code`);
 
 --
 -- Indexes for table `satuan`
@@ -8524,12 +8543,12 @@ ALTER TABLE `barang_keluar`
 -- AUTO_INCREMENT for table `barang_masuk`
 --
 ALTER TABLE `barang_masuk`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
 --
 -- AUTO_INCREMENT for table `bidang_barang`
 --
 ALTER TABLE `bidang_barang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT for table `golongan_barang`
 --
@@ -8554,7 +8573,7 @@ ALTER TABLE `kecamatan`
 -- AUTO_INCREMENT for table `kelompok_barang`
 --
 ALTER TABLE `kelompok_barang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 --
 -- AUTO_INCREMENT for table `kondisi_barang`
 --
@@ -8599,7 +8618,7 @@ ALTER TABLE `status_mutasi`
 -- AUTO_INCREMENT for table `sub_kelompok_barang`
 --
 ALTER TABLE `sub_kelompok_barang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 --
 -- AUTO_INCREMENT for table `unit_kerja`
 --
@@ -8613,6 +8632,16 @@ ALTER TABLE `users`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `barang`
+--
+ALTER TABLE `barang`
+  ADD CONSTRAINT `fk_barang_bidang_barang1` FOREIGN KEY (`bidang_barang_id`) REFERENCES `bidang_barang` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_barang_golongan_barang1` FOREIGN KEY (`golongan_barang_id`) REFERENCES `golongan_barang` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_barang_kelompok_barang1` FOREIGN KEY (`kelompok_barang_id`) REFERENCES `kelompok_barang` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_barang_pegawai1` FOREIGN KEY (`pegawai_id`) REFERENCES `pegawai` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_barang_sub_kelompok_barang1` FOREIGN KEY (`sub_kelompok_barang_id`) REFERENCES `sub_kelompok_barang` (`id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `barang_keluar`

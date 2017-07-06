@@ -192,8 +192,8 @@ class BarangController extends Controller
     $ruangans = Ruangan::orderBy('name', 'asc')->get();
     $pegawais = Pegawai::orderBy('name', 'asc')->get();
     $kondisis = Kondisi::orderBy('name', 'asc')->get();
-    $statuss = Status::orderBy('name', 'asc')->get();
-    return view('barangmasukadd',['ruangans' => $ruangans, 'pegawais' => $pegawais,'kondisis' => $kondisis, 'statuss' => $statuss]);
+    // $statuss = Status::orderBy('name', 'asc')->get();
+    return view('barangmasukadd',['ruangans' => $ruangans, 'pegawais' => $pegawais,'kondisis' => $kondisis]);
   }
   public function barang_masuk_insert(Request $request){
     // dd($request);
