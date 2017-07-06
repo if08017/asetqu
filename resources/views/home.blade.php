@@ -211,12 +211,12 @@
         <div class="col-sm-8">
           <div class="charts">
             <center>
-                {!! $inventory->render() !!}
+                {!! $in->render() !!}
             </center>
           </div>
           <div class="charts">
             <center>
-                {!! $bhp->render() !!}
+                {!! $out->render() !!}
             </center>
           </div>
         </div>
@@ -227,12 +227,7 @@
           </div>
           <div class="charts">
             <center>
-                {!! $charts2->render() !!}
-            </center>
-          </div>
-          <div class="charts">
-            <center>
-                {!! $years->render() !!}
+                {!! $year->render() !!}
             </center>
           </div>
         </div>

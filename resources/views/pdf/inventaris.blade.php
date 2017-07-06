@@ -37,48 +37,82 @@
       <table class="table table-striped table-bordered">
         <thead class="atas">
           <tr>
-            <td>&nbsp;</td>
-            <td colspan="2">OPD</td>
-            <td colspan="4">03.06.01. SEKRETARIAT DAERAH</td>
+            <td colspan="7" style="text-align:right;"><strong>LAMPIRAN 33</strong></td>
           </tr>
           <tr>
-            <td>&nbsp;</td>
-            <td colspan="2">KABUPATEN/KOTA</td>
-            <td colspan="4">PEMERINTAH KABUPATEN PESISIR SELATAN</td>
+            <td colspan="2">SKPD</td>
+            <td>: ...</td>
           </tr>
           <tr>
-            <td>&nbsp;</td>
+            <td colspan="2">KAB/KOTA</td>
+            <td>: ...</td>
+          </tr>
+          <tr>
             <td colspan="2">PROVINSI</td>
-            <td colspan="4">SUMATERA BARAT</td>
+            <td>: ...</td>
+            <td colspan="3" style="text-align:right; padding: 10px;">KODE LOKASI : ...</td>
           </tr>
           <tr>
-            <td colspan="7" style="text-align:center; padding: 10px;">DAFTAR BARANG INVENTARIS<br>{{ date('Y')}}</td>
+            <td colspan="7" style="text-align:center; padding: 10px;"><h3>REKAPITULASI BUKU INVENTARIS<br>(REKAP HASIL SENSUS)</h3></td>
           </tr>
         </thead>
       <thead style="text-align:center">
         <tr>
-          <th>No</th>
-          <th>Kode Golongan</th>
-          <th>Kode Bidang</th>
-          <th>Nama Bidang Barang</th>
-          <th>Jumlah Barang</th>
-          <th>Jumlah Harga Dalam Ribuan(Rp.)</th>
-          <th>Keterangan</th>
+          <th>NO<br>URT</th>
+          <th>GOLONGAN</th>
+          <th>KODE <br> BIDANG <br> BARANG</th>
+          <th>NAMA BIDANG BARANG</th>
+          <th>JUMLAH BARANG</th>
+          <th>JUMLAH HARGA <br> DLM RIBUAN <br> (Rp.)</th>
+          <th>KETERANGAN</th>
+        </tr>
+        <tr>
+          <th>1</th>
+          <th>2</th>
+          <th>3</th>
+          <th>4</th>
+          <th>5</th>
+          <th>6</th>
+          <th>7</th>
         </tr>
       </thead>
       <tbody>
         @php ($a=0)
+        @php ($golongan=0)
         @foreach ($barangs as $barang)
-        @php ($a++)
-        <tr>
-          <td class="number"><strong>{{$a}}</strong></td>
-          <td class="number">{{ $barang->golongan_barang_code}}</td>
-          <td class="number">{{ $barang->bidang_barang_code }}</td>
-          <td><strong>{{ $barang->bidang_barang_name }}</strong><br>{{ $barang->kelompok_barang_name }}</td>
-          <td class="number">{{ $barang->total_barang }}</td>
-          <td class="number">{{ number_format($barang->total_price) }}</td>
-          <td>{{ $barang->status_name}},{{$barang->kondisi_name  }}</td>
-        </tr>
+
+        @if(($barang->golongan_barang_code) == $golongan)
+          <tr>
+            <td class="number">&nbsp;</td>
+            <td class="number">&nbsp;</td>
+            <td class="number">{{$barang->bidang_barang_code}}</td>
+            <td>{{ $barang->bidang_barang_name }}</td>
+            <td class="number">{{ $barang->total_barang }}</td>
+            <td class="number">{{ number_format($barang->total_price) }}</td>
+            <td>&nbsp;</td>
+          </tr>
+        @else
+          @php ($golongan = $barang->golongan_barang_code)
+          @php ($a++)
+          <tr>
+            <td class="number"><strong>{{$a}}</strong></td>
+            <td class="number">{{$barang->golongan_barang_code}}</td>
+            <td class="number">&nbsp;</td>
+            <td><strong>{{ $barang->golongan_barang_name }}</strong></td>
+            <td class="number">&nbsp;</td>
+            <td class="number">&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td class="number">&nbsp;</strong></td>
+            <td class="number">&nbsp;</td>
+            <td class="number">{{$barang->bidang_barang_code}}</td>
+            <td>{{ $barang->bidang_barang_name }}</td>
+            <td class="number">{{ $barang->total_barang }}</td>
+            <td class="number">{{ number_format($barang->total_price) }}</td>
+            <td>&nbsp;</td>
+          </tr>
+        @endif
         @endforeach
       </tbody>
       <thead>
@@ -92,9 +126,9 @@
       </thead>
       <thead class="signature">
         <tr>
-          <td colspan="3">Mengetahui</td>
+          <td colspan="3">MENGETAHUI <br> KEPALA SKPD</td>
           <td colspan="1">&nbsp;</td>
-          <td colspan="3">PAINAN, {{ date('d M Y')}}</td>
+          <td colspan="3">........................................... <br> PENGURUS BARANG</td>
         </tr>
         <tr>
           <td colspan="3">&nbsp;</td>
@@ -102,9 +136,9 @@
           <td colspan="3">&nbsp;</td>
         </tr>
         <tr>
-          <td colspan="3">Ir. Erizon, MT <br> NIP. 19630323 199003 1 005	</td>
+          <td colspan="3">(...........................................) <br> NIP...........................................</td>
           <td colspan="1"></td>
-          <td colspan="3">WETRI MULYADEVITA, A.Md <br> NIP. 19800708 200902 2 003</td>
+          <td colspan="3">(...........................................) <br> NIP...........................................</td>
         </tr>
       </thead>
     </table>

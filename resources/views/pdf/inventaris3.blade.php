@@ -37,34 +37,49 @@
       <table class="table table-striped table-bordered">
         <thead class="atas">
           <tr>
-            <td>&nbsp;</td>
-            <td colspan="2">OPD</td>
-            <td colspan="4">03.06.01. SEKRETARIAT DAERAH</td>
+            <td colspan="10" style="text-align:right;"><strong>LAMPIRAN 37</strong></td>
           </tr>
           <tr>
-            <td>&nbsp;</td>
-            <td colspan="2">KABUPATEN/KOTA</td>
-            <td colspan="4">PEMERINTAH KABUPATEN PESISIR SELATAN</td>
+            <td colspan="2">SKPD</td>
+            <td>: ...</td>
           </tr>
           <tr>
-            <td>&nbsp;</td>
+            <td colspan="2">KAB/KOTA</td>
+            <td>: ...</td>
+          </tr>
+          <tr>
             <td colspan="2">PROVINSI</td>
-            <td colspan="4">SUMATERA BARAT</td>
+            <td>: ...</td>
+            <td colspan="6" style="text-align:right; padding: 10px;">KODE LOKASI : ...</td>
           </tr>
           <tr>
-            <td colspan="8" style="text-align:center; padding: 10px;">DAFTAR BARANG INVENTARIS<br>ASET DALAM USULAN PENGHAPUSAN</td>
+            <td colspan="10" style="text-align:center; padding: 10px;"><h3>DAFTAR USULAN BARANG YANG AKAN DIHAPUS</h3></td>
           </tr>
         </thead>
       <thead style="text-align:center">
         <tr>
           <th>No</th>
-          <th>Kode Barang</th>
-          <th>Nama Barang</th>
-          <th>Kode Lokasi</th>
-          <th>Merek / Tipe</th>
-          <th>Keadaan Barang</th>
-          <th>Status</th>
-          <th>Keterangan</th>
+          <th>NO. KODE BARANG</th>
+          <th>NAMA BARANG</th>
+          <th>NO. KODE LOKASI</th>
+          <th>MEREK/TYPE</th>
+          <th>DOKUMEN<BR> KEPEMILIKAN</th>
+          <th>TAHUN <br> BELI/PEMBELIAN</th>
+          <th>HARGA PEROLEHAN</th>
+          <th>KEADAN BARANG <br>(B,KB,RB)</th>
+          <th>KETERANGAN</th>
+        </tr>
+        <tr>
+          <th>1</th>
+          <th>2</th>
+          <th>3</th>
+          <th>4</th>
+          <th>5</th>
+          <th>6</th>
+          <th>7</th>
+          <th>8</th>
+          <th>9</th>
+          <th>10</th>
         </tr>
       </thead>
       <tbody>
@@ -77,27 +92,35 @@
           <td>{{ $barang->barang_name }}</td>
           <td class="number">{{ $barang->ruangan_code }}</td>
           <td>{{ $barang->barang_brand }}</td>
-          <td>{{ $barang->kondisi_barang_name }}</td>
-          <td>{{ $barang->status_mutasi_name }}</td>
+          <td>{{ $barang->number }}</td>
+          <td>{{ $barang->buy_year }}</td>
+          <td>{{ $barang->price }}</td>
+          @if(($barang->kondisi_barang_id) == 1)
+            <td>B</td>
+          @elseif(($barang->kondisi_barang_id) == 2)
+            <td>KB</td>
+          @elseif(($barang->kondisi_barang_id) == 3)
+            <td>RB</td>
+          @endif
           <td>{{ $barang->description }}</td>
         </tr>
         @endforeach
       </tbody>
       <thead class="signature">
         <tr>
-          <td colspan="3">Mengetahui</td>
-          <td colspan="1">&nbsp;</td>
-          <td colspan="4">PAINAN, {{ date('d M Y') }}</td>
+          <td colspan="3">MENGETAHUI <br> KEPALA SKPD</td>
+          <td colspan="4">&nbsp;</td>
+          <td colspan="3">........................................... <br> PENGURUS BARANG</td>
         </tr>
         <tr>
           <td colspan="3">&nbsp;</td>
-          <td colspan="1">&nbsp;</td>
           <td colspan="4">&nbsp;</td>
+          <td colspan="3">&nbsp;</td>
         </tr>
         <tr>
-          <td colspan="3">Ir. Erizon, MT <br> NIP. 19630323 199003 1 005	</td>
-          <td colspan="1"></td>
-          <td colspan="4">WETRI MULYADEVITA, A.Md <br> NIP. 19800708 200902 2 003</td>
+          <td colspan="3">(...........................................) <br> NIP...........................................</td>
+          <td colspan="4"></td>
+          <td colspan="3">(...........................................) <br> NIP...........................................</td>
         </tr>
       </thead>
     </table>

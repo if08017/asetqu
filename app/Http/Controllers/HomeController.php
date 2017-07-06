@@ -33,46 +33,32 @@ class HomeController extends Controller
      */
     public function index(){
       $barangs = Barang::sum('in_stock');
-      $inventory = Charts::multiDatabase('areaspline','highcharts')
-        ->dataset('barang masuk',Barangmasuk::all())
+      // $inventory = Charts::database(Barangmasuk::select('barang_masuk.quantity','barang_masuk.created_at')->get(), 'line','highcharts')
+      $in = Charts::database(Barangmasuk::all(), 'line','highcharts')
+        ->aggregateColumn('quantity', 'sum')
         ->dateFormat('j F y')
         ->title('Aktivitas Barang Masuk')
         ->elementLabel('Jumlah')
         ->dimensions(0,300)
         ->responsive(false)
         ->lastByDay(14, true);
-
-      $bhp = Charts::database(Barangkeluar::all(), 'pie', 'highcharts')
+      $out = Charts::database(Barangkeluar::all(), 'pie', 'highcharts')
+        ->aggregateColumn('quantity', 'sum')
+        ->dateFormat('j F y')
         ->title('User types')
         ->dimensions(0, 300)
         ->responsive(false)
+        ->lastByYear(1)
         ->groupBy('status_mutasi_id', null, [1 => 'Mutasi Pindah', 2 => 'Usulan penghapusan', 3 => 'Dihapus']);
-      // $bhp = Charts::multiDatabase('areaspline','highcharts')
-      //   ->dataset('Mutasi Pindah',Barangkeluar::where('status_mutasi_id','1')->get())
-      //   ->dataset('Usulan penghapusan',Barangkeluar::where('status_mutasi_id','2')->get())
-      //   ->dataset('Dihapus',Barangkeluar::where('status_mutasi_id','3')->get())
-      //   ->dateFormat('j F y')
-      //   ->title('Aktivitas Barang Keluar/Mutasi')
-      //   ->elementLabel('Jumlah')
-      //   ->dimensions(0,300)
-      //   ->responsive(false)
-      //   ->lastByDay(14, true);
-      $years = Charts::database(Barang::all(),'bar', 'highcharts')
-        ->dateFormat('j F y')
-        ->title('Grafik Tahunan')
-        ->elementLabel('Total')
-        ->dimensions(0,200)
-        ->responsive(false)
-        ->groupByYear();
-      $charts2 = Charts::database(Barang::join('golongan_barang','golongan_barang_id','=','golongan_barang.id')
-        ->select('barang.*','golongan_barang.name as golongan_barang_name')
-        ->get(),'area', 'highcharts')
-        ->title('Line Kategori')
-        ->elementLabel('Total')
-        ->dimensions(0,200)
-        ->responsive(false)
-        ->groupBy('golongan_barang_name');
-      return view('home', ['barangs' => $barangs,'inventory'=>$inventory,'bhp'=>$bhp, 'charts2'=>$charts2, 'years'=>$years]);
+        $year = Charts::database(Barang::join('golongan_barang','golongan_barang_id','=','golongan_barang.id')
+          ->select('barang.*','golongan_barang.name as golongan_barang_name')
+          ->get(),'area', 'highcharts')
+          ->title('Line Kategori')
+          ->elementLabel('Total')
+          ->dimensions(0,200)
+          ->responsive(false)
+          ->groupBy('golongan_barang_name');
+      return view('home', ['barangs' => $barangs,'in'=>$in,'out'=>$out,'year'=>$year]);
     }
     public function search(Request $request){
       //$search = \Request::get('search');
