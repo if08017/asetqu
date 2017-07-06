@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 05, 2017 at 02:17 AM
+-- Generation Time: Jul 06, 2017 at 09:35 PM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 7.1.1
 
@@ -58,59 +58,19 @@ CREATE TABLE `barang` (
 INSERT INTO `barang` (`id`, `code`, `golongan_barang_id`, `bidang_barang_id`, `kelompok_barang_id`, `sub_kelompok_barang_id`, `name`, `description`, `in_stock`, `out_stock`, `price`, `size`, `brand`, `mutation_quantity`, `request_destroy_quantity`, `satuan_name`, `kondisi_name`, `status_name`, `pegawai_id`, `created_at`, `updated_at`, `_token`) VALUES
 (1, '111.11.101', 2, 2, 4, 16, 'Iphone 7s 64GB', 'Ini hp bagus 2017', 32, 2, 10, '10', 'Iphone', NULL, NULL, 'Unit', 'Baik', 'Aktif', 6, '2017-06-01 05:05:25', '2017-07-04 16:50:54', NULL),
 (2, '111.22.11', 2, 2, 4, 17, 'iPhone 6 128 GB', 'Memori 128 GB', NULL, NULL, NULL, '', 'Iphone', NULL, NULL, 'Unit', 'Baik', 'Aktif', 6, '2017-06-05 23:13:25', '2017-07-04 13:32:16', NULL),
-(3, '222.22.123', 1, 4, 19, 33, 'Kertas A4', 'Barang Habis Pakai', 13, 3, 200, '', 'Sinar', NULL, NULL, 'Unit', 'Baik', 'Aktif', 6, '2017-06-10 08:20:03', '2017-07-04 16:37:44', NULL),
+(3, '222.22.123', 1, 4, 19, 32, 'Kertas A4', 'Barang Habis Pakai', 13, 3, 200, '', 'Sinar', NULL, NULL, 'Unit', 'Baik', 'Aktif', 6, '2017-06-10 08:20:03', '2017-07-06 13:54:19', NULL),
 (4, '192.99.88', 1, 3, 16, 57, 'Air Galon', 'Aqua Besar', NULL, NULL, NULL, '', 'Aqua', NULL, NULL, 'Unit', 'Baik', 'Aktif', 6, '2017-06-14 09:07:33', '2017-07-03 19:46:01', NULL),
 (11, '444.123.12', 2, 5, 10, 51, 'Lampu 24 warna', 'Lampu jalan', 23, 2, 300, '', 'Philips', NULL, NULL, 'Unit', NULL, 'Aktif', NULL, '2017-06-15 06:18:05', '2017-07-04 16:37:44', NULL),
 (12, '123.123.1', 2, 1, 1, 5, 'Lenovo B640i', '14 inc', 34, 18, 12, '', 'Lenovo', NULL, NULL, 'PCS', NULL, 'Aktif', NULL, '2017-06-16 06:45:25', '2017-07-04 16:37:44', NULL),
 (13, '222.222.1', 1, 4, 5, 35, 'Marker Hitam', '1mm', 20, NULL, 10, '', 'Sinar Dunia', NULL, NULL, 'PCS', NULL, 'Aktif', NULL, '2017-06-16 06:46:58', '2017-07-04 16:37:44', NULL),
 (14, '222.222.2', 1, 4, 5, 36, 'Marker Merah', '1mm', NULL, NULL, NULL, '', 'Sinar', NULL, NULL, 'PCS', NULL, 'Aktif', NULL, '2017-06-16 06:47:30', '2017-07-02 07:59:34', NULL),
 (15, '333.333.1', 1, 3, 15, 52, 'TimTam', 'Cokelat', 13, NULL, 100, '', 'Timtam', NULL, NULL, 'PCS', NULL, 'Aktif', NULL, '2017-06-16 06:48:43', '2017-07-04 16:37:44', NULL),
-(16, '111.111.1', 2, 2, 3, 12, 'Samsung S7', 'Samsung baru', NULL, NULL, NULL, '', 'Samsung', NULL, NULL, 'PCS', NULL, 'Aktif', NULL, '2017-06-16 06:56:30', '2017-07-03 09:22:36', NULL),
-(17, '333.333.2', 2, 1, 1, 10, 'Dell Inpiro 424', 'Jadul laptop', NULL, NULL, NULL, '', 'Dell', NULL, NULL, 'Paket', NULL, 'Aktif', NULL, '2017-06-16 06:58:22', '2017-06-30 07:52:20', NULL),
+(16, '111.111.1', 2, 2, 3, 12, 'Samsung S7', 'Samsung baru', 20, 13, 200, '', 'Samsung', NULL, NULL, 'PCS', NULL, 'Aktif', NULL, '2017-06-16 06:56:30', '2017-07-06 10:19:32', NULL),
+(17, '333.333.2', 2, 1, 1, 10, 'Dell Inpiro 424', 'Jadul laptop', 30, NULL, 200, '', 'Dell', NULL, NULL, 'Paket', NULL, 'Aktif', NULL, '2017-06-16 06:58:22', '2017-07-06 10:19:32', NULL),
 (18, '123.123.900', 1, 3, 16, 45, 'Gelas Plastik', 'Untuk operational', 30, 23, 90, '', 'Sinar', NULL, NULL, 'Unit', NULL, 'Aktif', NULL, '2017-06-20 09:13:46', '2017-07-04 16:37:44', NULL),
-(19, '999.00', 1, 4, 5, 36, 'Melai', 'Untuk operational', NULL, NULL, NULL, '', 'Yosinoya', NULL, NULL, 'Unit', NULL, 'Aktif', NULL, '2017-06-20 09:14:17', '2017-06-30 07:55:33', NULL);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `barang_habis_pakai`
---
-
-CREATE TABLE `barang_habis_pakai` (
-  `id` int(11) NOT NULL,
-  `mutation_id` int(11) NOT NULL,
-  `golongan_barang_id` int(11) NOT NULL,
-  `bidang_barang_id` int(11) NOT NULL,
-  `kelompok_barang_id` int(11) NOT NULL,
-  `sub_kelompok_barang_id` int(11) NOT NULL,
-  `barang_id` int(11) NOT NULL,
-  `kwitansi_id` int(11) NOT NULL,
-  `satuan_name` varchar(100) NOT NULL,
-  `kondisi_name` varchar(100) DEFAULT NULL,
-  `status_name` varchar(100) NOT NULL,
-  `ruangan_id` int(11) DEFAULT NULL,
-  `unit_kerja_id` int(11) DEFAULT NULL,
-  `pegawai_id` int(11) DEFAULT NULL,
-  `jabatan_id` int(11) DEFAULT NULL,
-  `quantity` int(11) DEFAULT NULL,
-  `source` varchar(100) DEFAULT NULL,
-  `price` int(11) DEFAULT NULL,
-  `sum` int(11) DEFAULT NULL,
-  `description` varchar(200) DEFAULT NULL,
-  `date` varchar(100) DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-  `_token` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `barang_habis_pakai`
---
-
-INSERT INTO `barang_habis_pakai` (`id`, `mutation_id`, `golongan_barang_id`, `bidang_barang_id`, `kelompok_barang_id`, `sub_kelompok_barang_id`, `barang_id`, `kwitansi_id`, `satuan_name`, `kondisi_name`, `status_name`, `ruangan_id`, `unit_kerja_id`, `pegawai_id`, `jabatan_id`, `quantity`, `source`, `price`, `sum`, `description`, `date`, `created_at`, `updated_at`, `_token`) VALUES
-(1, 1, 1, 4, 5, 36, 14, 12, 'PCS', 'Baik', 'Aktif', 1, 1, 3, 2, 5, 'PT. Kaka', 2000, 10000, 'Untuk operational', '0000-00-00', '2017-06-20 10:43:12', '2017-06-20 11:57:00', '037lDjmJ6Ssd9rD6XRqpL41xgx8ZCNFY82WT4p8V'),
-(2, 1, 1, 4, 19, 33, 1, 12, 'PCS', 'Baik', 'Aktif', 1, 2, 6, 3, 12, 'PT Kuku', 10, 120, 'Untuk operational', '0000-00-00', '2017-06-20 09:27:25', '2017-06-20 11:56:37', NULL),
-(3, 2, 1, 4, 19, 33, 3, 9010, 'PCS', 'Baik', 'Aktif', 1, 4, 5, 1, 20, 'PT. Alvin', 1000, 20000, 'Untuk minum', NULL, '2017-06-20 11:54:17', '2017-06-20 11:57:04', '037lDjmJ6Ssd9rD6XRqpL41xgx8ZCNFY82WT4p8V');
+(19, '999.00', 1, 4, 5, 36, 'Melai', 'Untuk operational', NULL, NULL, NULL, '', 'Yosinoya', NULL, NULL, 'Unit', NULL, 'Aktif', NULL, '2017-06-20 09:14:17', '2017-06-30 07:55:33', NULL),
+(20, '123.123.5', 2, 1, 1, 1, 'iMac pro', 'iMac', NULL, NULL, NULL, '', NULL, NULL, NULL, 'PCS', NULL, 'Aktif', NULL, '2017-07-06 13:41:43', '2017-07-06 13:41:43', NULL),
+(21, '123.4.123', 2, 1, 1, 10, 'iMac pro2', 'iMac', 12, NULL, NULL, '', NULL, NULL, NULL, 'Unit', NULL, 'Aktif', NULL, '2017-07-06 13:43:42', '2017-07-06 13:44:28', NULL);
 
 -- --------------------------------------------------------
 
@@ -125,6 +85,7 @@ CREATE TABLE `barang_keluar` (
   `pegawai_id` int(11) NOT NULL,
   `kondisi_barang_id` int(11) NOT NULL,
   `status_mutasi_id` int(11) NOT NULL,
+  `number` varchar(100) NOT NULL,
   `description` varchar(400) DEFAULT NULL,
   `quantity` int(11) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
@@ -135,13 +96,14 @@ CREATE TABLE `barang_keluar` (
 -- Dumping data for table `barang_keluar`
 --
 
-INSERT INTO `barang_keluar` (`id`, `barang_id`, `ruangan_id`, `pegawai_id`, `kondisi_barang_id`, `status_mutasi_id`, `description`, `quantity`, `created_at`, `updated_at`) VALUES
-(51, 1, 1, 1, 1, 1, 'Untuk ini itu', 2, '2017-07-03 19:46:01', '2017-07-04 11:18:29'),
-(52, 12, 3, 2, 1, 2, NULL, 3, '2017-07-04 06:22:16', '2017-07-04 11:25:13'),
-(78, 11, 6, 5, 3, 3, NULL, 2, '2017-07-04 12:25:35', '2017-07-04 12:29:42'),
-(79, 3, 2, 5, 2, 3, NULL, 3, '2017-07-04 12:30:19', '2017-07-04 12:30:19'),
-(80, 18, 4, 1, 2, 2, '1231', 23, '2017-07-04 15:49:56', '2017-07-04 17:20:24'),
-(81, 12, 6, 1, 2, 1, 'Oke ini', 15, '2017-07-04 16:02:16', '2017-07-04 16:28:53');
+INSERT INTO `barang_keluar` (`id`, `barang_id`, `ruangan_id`, `pegawai_id`, `kondisi_barang_id`, `status_mutasi_id`, `number`, `description`, `quantity`, `created_at`, `updated_at`) VALUES
+(51, 1, 1, 1, 1, 1, 'Doc 123', 'Untuk ini itu', 2, '2017-07-03 19:46:01', '2017-07-06 12:26:24'),
+(52, 12, 3, 2, 1, 2, 'Surat keluar', NULL, 3, '2017-07-04 06:22:16', '2017-07-06 12:26:32'),
+(78, 11, 6, 5, 3, 3, 'SSST p123', NULL, 2, '2017-07-04 12:25:35', '2017-07-06 12:27:02'),
+(79, 3, 2, 5, 2, 3, 'SST 123', NULL, 3, '2017-07-04 12:30:19', '2017-07-06 12:26:44'),
+(80, 18, 4, 1, 2, 2, 'SST 134', '1231', 23, '2017-07-04 15:49:56', '2017-07-06 12:26:48'),
+(81, 12, 6, 1, 2, 1, 'SST 32', 'Oke ini', 15, '2017-07-04 16:02:16', '2017-07-06 12:26:53'),
+(82, 16, 5, 4, 1, 2, 'SST 12/32', 'Kurang layak pakai', 13, '2017-07-05 13:11:43', '2017-07-06 12:26:59');
 
 --
 -- Triggers `barang_keluar`
@@ -202,10 +164,13 @@ INSERT INTO `barang_masuk` (`id`, `number`, `barang_id`, `ruangan_id`, `pegawai_
 (74, 'PO-12-1212', 15, 6, 6, 2, 1, 'Untuk dimakan', 13, 'Merah', '10cm', 'Coklat', 'PT. Megaark', 100, '1499181818.JPG', '2015', '2017', '2017-07-04 13:51:39', '2017-07-04 15:23:38'),
 (78, NULL, 13, 4, 1, 3, 1, NULL, 20, NULL, NULL, NULL, NULL, 10, '1499184182.png', NULL, NULL, '2017-07-04 16:03:02', '2017-07-04 16:03:02'),
 (79, NULL, 18, 6, 3, 3, 1, NULL, 30, NULL, NULL, NULL, NULL, 90, '1499184216.png', NULL, NULL, '2017-07-04 16:03:36', '2017-07-04 16:04:26'),
-(80, NULL, 11, 6, 1, 2, 1, NULL, 11, NULL, NULL, NULL, NULL, 200, '1499184305.png', NULL, NULL, '2017-07-04 16:05:05', '2017-07-04 16:37:44'),
+(80, 'po 90', 11, 6, 1, 2, 1, 'untuk itu', 11, 'red', '11cm', 'seng', 'pt. ok', 200, '1499184305.png', NULL, NULL, '2017-07-04 16:05:05', '2017-07-06 10:20:00'),
 (81, NULL, 12, 6, 1, 2, 1, NULL, 34, NULL, NULL, NULL, NULL, 12, '1499184338.png', NULL, NULL, '2017-07-04 16:05:38', '2017-07-04 16:05:38'),
 (82, NULL, 1, 4, 5, 1, 1, NULL, 32, NULL, NULL, NULL, NULL, 10, '1499184367.png', NULL, NULL, '2017-07-04 16:06:07', '2017-07-04 16:06:07'),
-(83, NULL, 3, 6, 3, 3, 1, NULL, 13, NULL, NULL, NULL, NULL, 200, '1499184394.png', NULL, NULL, '2017-07-04 16:06:34', '2017-07-04 16:06:34');
+(83, NULL, 3, 6, 3, 3, 1, NULL, 13, NULL, NULL, NULL, NULL, 200, '1499184394.png', NULL, NULL, '2017-07-04 16:06:34', '2017-07-04 16:06:34'),
+(84, NULL, 16, 5, 6, 3, 1, NULL, 20, 'Merah', NULL, NULL, NULL, 200, '1499260254.jpg', NULL, NULL, '2017-07-05 13:10:54', '2017-07-05 13:10:54'),
+(85, NULL, 17, 6, 1, 3, 1, NULL, 30, NULL, NULL, NULL, NULL, 200, '1499307366.JPG', NULL, NULL, '2017-07-06 02:16:06', '2017-07-06 02:16:06'),
+(86, NULL, 21, 3, 4, 1, 1, NULL, 12, NULL, NULL, NULL, NULL, 3000, '1499348668.png', NULL, NULL, '2017-07-06 13:44:28', '2017-07-06 13:44:28');
 
 --
 -- Triggers `barang_masuk`
@@ -257,7 +222,8 @@ INSERT INTO `bidang_barang` (`id`, `code`, `name`, `status`, `created_at`, `upda
 (4, 3, 'ATK', NULL, '2017-05-17 11:41:26', '2017-05-18 19:03:26', 1),
 (5, 4, 'Lampu', NULL, '2017-05-17 11:43:07', '2017-06-16 08:29:37', 2),
 (6, 223, 'Bahan Bakar', NULL, '2017-05-17 11:43:24', '2017-05-18 19:03:31', 1),
-(7, 12, 'TV', NULL, '2017-05-18 08:24:34', '2017-05-18 19:03:33', 2);
+(7, 12, 'TV', NULL, '2017-05-18 08:24:34', '2017-05-18 19:03:33', 2),
+(8, 323, 'Alat-alat Besar', NULL, '2017-07-06 08:54:55', '2017-07-06 08:54:55', 5);
 
 -- --------------------------------------------------------
 
@@ -279,53 +245,14 @@ CREATE TABLE `golongan_barang` (
 --
 
 INSERT INTO `golongan_barang` (`id`, `code`, `name`, `status`, `created_at`, `updated_at`) VALUES
-(1, '11.1', 'Barang Habis Pakai', NULL, '2017-05-14 09:42:59', '2017-06-30 08:45:07'),
-(2, '11.2', 'Elektronik', NULL, '2017-05-14 14:35:18', '2017-06-30 08:45:14');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `inventori_barang`
---
-
-CREATE TABLE `inventori_barang` (
-  `id` int(11) NOT NULL,
-  `golongan_barang_id` int(11) NOT NULL,
-  `bidang_barang_id` int(11) NOT NULL,
-  `kelompok_barang_id` int(11) NOT NULL,
-  `sub_kelompok_barang_id` int(11) NOT NULL,
-  `barang_id` int(11) NOT NULL,
-  `ruangan_id` int(11) NOT NULL,
-  `pegawai_id` int(11) NOT NULL,
-  `kondisi_name` varchar(200) NOT NULL DEFAULT 'Baik',
-  `status_name` varchar(200) NOT NULL,
-  `satuan_name` varchar(200) DEFAULT NULL,
-  `mutation_name` varchar(100) DEFAULT 'Masuk',
-  `quantity` int(11) DEFAULT NULL,
-  `out_stock` int(11) DEFAULT NULL,
-  `brand` varchar(200) DEFAULT NULL,
-  `color` varchar(200) DEFAULT NULL,
-  `size` varchar(200) DEFAULT NULL,
-  `material` varchar(200) DEFAULT NULL,
-  `created_year` varchar(45) DEFAULT NULL,
-  `buy_year` varchar(45) DEFAULT NULL,
-  `number` varchar(100) DEFAULT NULL,
-  `source` varchar(200) DEFAULT NULL,
-  `price` int(45) DEFAULT NULL,
-  `picture` varchar(200) DEFAULT NULL,
-  `description` varchar(400) DEFAULT NULL,
-  `tujuan` varchar(400) DEFAULT NULL,
-  `receipt_date` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `inventori_barang`
---
-
-INSERT INTO `inventori_barang` (`id`, `golongan_barang_id`, `bidang_barang_id`, `kelompok_barang_id`, `sub_kelompok_barang_id`, `barang_id`, `ruangan_id`, `pegawai_id`, `kondisi_name`, `status_name`, `satuan_name`, `mutation_name`, `quantity`, `out_stock`, `brand`, `color`, `size`, `material`, `created_year`, `buy_year`, `number`, `source`, `price`, `picture`, `description`, `tujuan`, `receipt_date`, `created_at`, `updated_at`) VALUES
-(54, 1, 2, 2, 2, 3, 3, 2, 'Baik', 'Mutasi Pindah', 'jenis', 'Masuk', 10, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-07-04 13:04:47', NULL);
+(1, '3', 'BARANG HABIS PAKAI', NULL, '2017-05-14 09:42:59', '2017-07-06 08:45:38'),
+(2, '2', 'ELEKTRONIK', NULL, '2017-05-14 14:35:18', '2017-07-06 08:45:47'),
+(3, '1', 'TANAH', NULL, '2017-07-06 08:37:50', '2017-07-06 08:45:56'),
+(5, '4', 'PERALATAN DAN MESIN', NULL, '2017-07-06 08:45:21', '2017-07-06 08:45:21'),
+(6, '5', 'GEDUNG DAN BANGUNAN', NULL, '2017-07-06 08:46:07', '2017-07-06 08:46:07'),
+(7, '6', 'JALAN, IRIGASI DAN JARINGAN', NULL, '2017-07-06 08:46:18', '2017-07-06 08:46:18'),
+(8, '10', 'ASET TETAP LAINNYA', NULL, '2017-07-06 08:46:35', '2017-07-06 08:46:35'),
+(9, '9', 'KONSTRUKSI DALAM PENGERJAAN', NULL, '2017-07-06 08:46:44', '2017-07-06 08:46:44');
 
 -- --------------------------------------------------------
 
@@ -8072,25 +7999,6 @@ INSERT INTO `kondisi_barang` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `kondisi_barang2`
---
-
-CREATE TABLE `kondisi_barang2` (
-  `name` varchar(200) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `kondisi_barang2`
---
-
-INSERT INTO `kondisi_barang2` (`name`) VALUES
-('Baik'),
-('Kurang baik'),
-('Rusak berat');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `migrations`
 --
 
@@ -8099,24 +8007,6 @@ CREATE TABLE `migrations` (
   `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `mutation`
---
-
-CREATE TABLE `mutation` (
-  `name` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `mutation`
---
-
-INSERT INTO `mutation` (`name`) VALUES
-('Keluar'),
-('Masuk');
 
 -- --------------------------------------------------------
 
@@ -8210,60 +8100,6 @@ INSERT INTO `provinsi` (`id`, `name`, `created_at`, `updated_at`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `receipt`
---
-
-CREATE TABLE `receipt` (
-  `id` int(11) NOT NULL,
-  `code` varchar(100) NOT NULL,
-  `name` varchar(200) NOT NULL,
-  `store_name` varchar(45) DEFAULT NULL,
-  `description` varchar(45) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-  `receipt_date` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `receipt`
---
-
-INSERT INTO `receipt` (`id`, `code`, `name`, `store_name`, `description`, `created_at`, `updated_at`, `receipt_date`) VALUES
-(1, 'Kwitansi P129-223', 'Belanja ATK', NULL, NULL, '2017-05-25 18:39:05', NULL, NULL),
-(3, 'PO 209-120', 'Barang Baru Lenovo', 'Pt. Eka', 'Warna Merah', '2017-05-12 07:00:13', '2017-05-25 18:35:56', '2017-05-09 17:00:00');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `report`
---
-
-CREATE TABLE `report` (
-  `id` int(11) NOT NULL,
-  `name` varchar(200) NOT NULL,
-  `description` varchar(200) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `report`
---
-
-INSERT INTO `report` (`id`, `name`, `description`, `created_at`, `updated_at`) VALUES
-(1, 'invetaris_pertahun', 'REKAPITULASI BARANG INVENTARIS', '2017-05-19 20:01:24', '2017-05-19 20:43:02'),
-(2, 'invetaris_aktif_usulan', 'ASET AKTIF + ASET DALAM USULAN PENGHAPUSAN', '2017-05-19 20:15:32', '0000-00-00 00:00:00'),
-(3, 'invetaris_usulan', 'ASET DALAM USULAN PENGHAPUSAN', '2017-05-19 20:15:32', '2017-05-19 20:43:32'),
-(4, 'invetaris_mutasi_hapus', 'ASET YANG DIMUTASIKAN PINDAH DAN ASET YANG TELAH DIHAPUS', '2017-05-19 20:15:32', '2017-05-19 20:43:25'),
-(5, 'invetaris_pengguna', 'ASET PER PENGGUNA (TIDAK TERMASUK BARANG HABIS PAKAI)', '2017-05-19 20:15:32', '2017-05-19 20:43:20'),
-(6, 'invetaris_jenis_satuan_kerja', 'BARANG HABIS PAKAI PERJENIS BARANG PER SATUAN KERJA (OPD)', '2017-05-19 20:15:32', '2017-05-19 20:43:16'),
-(7, 'invetaris_jenis_unit_kerja', 'BARANG HABIS PAKAI PERJENIS BARANG PER UNIT KERJA (BAGIAN)', '2017-05-19 20:15:32', '2017-05-19 20:43:13'),
-(8, 'invetaris_unit_kerja', 'BARANG HABIS PAKAI PER UNIT KERJA (BAGIAN)', '2017-05-19 20:15:32', '2017-05-19 20:43:11'),
-(9, 'invetaris_kartu_ruangan', 'KARTU INVENTARIS RUANGAN (PERUANGAN)', '2017-05-19 20:15:32', '2017-05-19 20:43:08');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `ruangan`
 --
 
@@ -8353,25 +8189,6 @@ INSERT INTO `satuan_kerja` (`id`, `name`, `code`, `created_at`, `updated_at`, `u
 (16, 'Koordinator Lapangan', 7, '2017-05-14 09:28:24', '2017-05-28 14:37:13', 3),
 (17, 'Kerja Taman', 6, '2017-05-14 09:28:13', '2017-05-18 19:07:55', 3),
 (18, 'Designer', 3, '2017-05-14 09:26:00', '2017-05-18 19:07:59', 2);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `status`
---
-
-CREATE TABLE `status` (
-  `name` varchar(200) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `status`
---
-
-INSERT INTO `status` (`name`) VALUES
-('Aktif'),
-('Mutasi Pindah'),
-('Tidak Aktif');
 
 -- --------------------------------------------------------
 
@@ -8533,8 +8350,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `username`, `email`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Admin Asetqu', 'admin', 'admin@kawanlabs.com', '$2y$10$aLnqv8eynQlbhWOSTiXj4.03NIGQrvcGjKpbtoQPXB6XAVTW5RbBq', 'd6pkYP12X6ZDkvN9xVZy2HntoatAUzFFxvLv4QyHoMlnsbYugmzeyH24MM0C', '2017-05-11 21:47:57', '2017-05-11 21:47:57'),
-(4, 'masto', 'masto', 'masto@kawanlabs.com', '$2y$10$iJpwZDp2JRe71ajc5oy36ejnC3pnHUiybIECWNPobUkw4DttNpGBO', 'j1GptihcbiS18IBPGJ7sgTsxFRlLTU66DtGBmFyWCR0Ii8O6kWu7iGW4DzfO', '2017-05-20 11:04:58', '2017-05-20 11:04:58'),
+(1, 'Admin Asetqu', 'admin', 'admin@kawanlabs.com', '$2y$10$aLnqv8eynQlbhWOSTiXj4.03NIGQrvcGjKpbtoQPXB6XAVTW5RbBq', 'RI7pDLaclTeJfT2OyBtKBbWHpU5iMrM82QklmPU4Mct5xKMKE5KzE4OSRv94', '2017-05-11 21:47:57', '2017-05-11 21:47:57'),
+(4, 'masto', 'masto', 'masto@kawanlabs.com', '$2y$10$iJpwZDp2JRe71ajc5oy36ejnC3pnHUiybIECWNPobUkw4DttNpGBO', '9gtRFMRXfFCIBf6238eA9uD6Q2UzQpQkKhOfXcWTxpwSoUqdjb9UBaAsEBZg', '2017-05-20 11:04:58', '2017-05-20 11:04:58'),
 (9, 'zorro', 'zorro', 'zorro@gmail.com', '$2y$10$LxzZhGJJy1DMvsQSKCkEpec8Kc8OJxTMxS189qMTAcJQBwZZZanC.', 'k56OuEwtrvMZeuRBYENqOqEjkFPNbeBnInACc4YsRGdGP7t17ESb4jEOHnNq', '2017-06-04 16:58:19', '2017-06-04 16:58:19');
 
 --
@@ -8546,12 +8363,6 @@ INSERT INTO `users` (`id`, `name`, `username`, `email`, `password`, `remember_to
 --
 ALTER TABLE `barang`
   ADD PRIMARY KEY (`id`) USING BTREE;
-
---
--- Indexes for table `barang_habis_pakai`
---
-ALTER TABLE `barang_habis_pakai`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `barang_keluar`
@@ -8590,23 +8401,6 @@ ALTER TABLE `golongan_barang`
   ADD UNIQUE KEY `id` (`code`) USING BTREE;
 
 --
--- Indexes for table `inventori_barang`
---
-ALTER TABLE `inventori_barang`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_inventori_barang_barang1_idx` (`barang_id`),
-  ADD KEY `fk_inventori_barang_golongan_barang1_idx` (`golongan_barang_id`),
-  ADD KEY `fk_inventori_barang_bidang_barang1_idx` (`bidang_barang_id`),
-  ADD KEY `fk_inventori_barang_kelompok_barang1_idx` (`kelompok_barang_id`),
-  ADD KEY `fk_inventori_barang_sub_kelompok_barang1_idx` (`sub_kelompok_barang_id`),
-  ADD KEY `fk_inventori_barang_ruangan1_idx` (`ruangan_id`),
-  ADD KEY `fk_inventori_barang_pegawai1_idx` (`pegawai_id`),
-  ADD KEY `fk_inventori_barang_status_name1_idx` (`status_name`),
-  ADD KEY `fk_inventori_barang_kondisi_name1_idx` (`kondisi_name`),
-  ADD KEY `fk_inventori_barang_satuan_name1_idx` (`satuan_name`),
-  ADD KEY `fk_inventori_barang_mutation_name1_idx` (`mutation_name`);
-
---
 -- Indexes for table `jabatan`
 --
 ALTER TABLE `jabatan`
@@ -8640,22 +8434,10 @@ ALTER TABLE `kondisi_barang`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `kondisi_barang2`
---
-ALTER TABLE `kondisi_barang2`
-  ADD PRIMARY KEY (`name`);
-
---
 -- Indexes for table `migrations`
 --
 ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `mutation`
---
-ALTER TABLE `mutation`
-  ADD PRIMARY KEY (`name`);
 
 --
 -- Indexes for table `pegawai`
@@ -8672,18 +8454,6 @@ ALTER TABLE `pegawai`
 -- Indexes for table `provinsi`
 --
 ALTER TABLE `provinsi`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `receipt`
---
-ALTER TABLE `receipt`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `report`
---
-ALTER TABLE `report`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -8704,12 +8474,6 @@ ALTER TABLE `satuan`
 ALTER TABLE `satuan_kerja`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_satuan_kerja_unit_kerja1_idx` (`unit_kerja_id`);
-
---
--- Indexes for table `status`
---
-ALTER TABLE `status`
-  ADD PRIMARY KEY (`name`);
 
 --
 -- Indexes for table `status_barang`
@@ -8750,37 +8514,27 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `barang`
 --
 ALTER TABLE `barang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
---
--- AUTO_INCREMENT for table `barang_habis_pakai`
---
-ALTER TABLE `barang_habis_pakai`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 --
 -- AUTO_INCREMENT for table `barang_keluar`
 --
 ALTER TABLE `barang_keluar`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
 --
 -- AUTO_INCREMENT for table `barang_masuk`
 --
 ALTER TABLE `barang_masuk`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
 --
 -- AUTO_INCREMENT for table `bidang_barang`
 --
 ALTER TABLE `bidang_barang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `golongan_barang`
 --
 ALTER TABLE `golongan_barang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
---
--- AUTO_INCREMENT for table `inventori_barang`
---
-ALTER TABLE `inventori_barang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `jabatan`
 --
@@ -8821,16 +8575,6 @@ ALTER TABLE `pegawai`
 --
 ALTER TABLE `provinsi`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
---
--- AUTO_INCREMENT for table `receipt`
---
-ALTER TABLE `receipt`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
---
--- AUTO_INCREMENT for table `report`
---
-ALTER TABLE `report`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `ruangan`
 --
@@ -8894,22 +8638,6 @@ ALTER TABLE `barang_masuk`
 --
 ALTER TABLE `bidang_barang`
   ADD CONSTRAINT `fk_bidang_barang_gologan_barang1` FOREIGN KEY (`golongan_barang_id`) REFERENCES `golongan_barang` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE;
-
---
--- Constraints for table `inventori_barang`
---
-ALTER TABLE `inventori_barang`
-  ADD CONSTRAINT `fk_inventori_barang_barang1` FOREIGN KEY (`barang_id`) REFERENCES `barang` (`id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_inventori_barang_bidang_barang1` FOREIGN KEY (`bidang_barang_id`) REFERENCES `bidang_barang` (`id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_inventori_barang_golongan_barang1` FOREIGN KEY (`golongan_barang_id`) REFERENCES `golongan_barang` (`id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_inventori_barang_kelompok_barang1` FOREIGN KEY (`kelompok_barang_id`) REFERENCES `kelompok_barang` (`id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_inventori_barang_kondisi_name1` FOREIGN KEY (`kondisi_name`) REFERENCES `kondisi_barang2` (`name`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_inventori_barang_mutation_name1` FOREIGN KEY (`mutation_name`) REFERENCES `mutation` (`name`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_inventori_barang_pegawai1` FOREIGN KEY (`pegawai_id`) REFERENCES `pegawai` (`id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_inventori_barang_ruangan1` FOREIGN KEY (`ruangan_id`) REFERENCES `ruangan` (`id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_inventori_barang_satuan_name1` FOREIGN KEY (`satuan_name`) REFERENCES `satuan` (`name`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_inventori_barang_status_name1` FOREIGN KEY (`status_name`) REFERENCES `status` (`name`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_inventori_barang_sub_kelompok_barang1` FOREIGN KEY (`sub_kelompok_barang_id`) REFERENCES `sub_kelompok_barang` (`id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `kabupaten`
