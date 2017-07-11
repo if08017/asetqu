@@ -74,22 +74,40 @@
       </thead>
       <tbody>
         @php ($a=0)
-        @foreach ($barangs as $barang)
+        @foreach ($barangaktifs as $barangaktif)
         @php ($a++)
         <tr>
           <td class="number"><strong>{{$a}}</strong></td>
-          <td class="number">{{ $barang->barang_code }}</td>
-          <td>{{ $barang->barang_name }}</td>
-          <td>{{ $barang->barang_brand }}</td>
-          <td class="number">{{ $barang->size }}</td>
-          <td>{{ $barang->material }}</td>
-          <td class="number">{{ $barang->created_year }}</td>
-          <td>{{ $barang->number }}</td>
-          <td>{{ $barang->source }}</td>
-          <td class="number">{{ number_format($barang->price) }}</td>
-          <td>{{ $barang->status_barang_name }}</td>
-          <td>{{ $barang->pegawai_name }}</td>
-          <td>{{ $barang->description }}</td>
+          <td class="number">{{ $barangaktif->barang_code }}</td>
+          <td>{{ $barangaktif->barang_name }}</td>
+          <td>{{ $barangaktif->barang_brand }}</td>
+          <td class="number">{{ $barangaktif->size }}</td>
+          <td>{{ $barangaktif->material }}</td>
+          <td class="number">{{ $barangaktif->created_year }}</td>
+          <td>{{ $barangaktif->number }}</td>
+          <td>{{ $barangaktif->source }}</td>
+          <td class="number">{{ number_format($barangaktif->price) }}</td>
+          <td>{{ $barangaktif->status_barang_name }}</td>
+          <td>{{ $barangaktif->pegawai_name }}</td>
+          <td>{{ $barangaktif->description }}</td>
+        </tr>
+        @endforeach
+        @foreach ($barangusulans as $barangusulan)
+        @php ($a++)
+        <tr>
+          <td class="number"><strong>{{$a}}</strong></td>
+          <td class="number">{{ $barangusulan->barang_code }}</td>
+          <td>{{ $barangusulan->barang_name }}</td>
+          <td>{{ $barangusulan->barang_brand }}</td>
+          <td class="number">{{ $barangusulan->size }}</td>
+          <td>{{ $barangusulan->material }}</td>
+          <td class="number">{{ $barangusulan->created_year }}</td>
+          <td>{{ $barangusulan->number }}</td>
+          <td>{{ $barangusulan->source }}</td>
+          <td class="number">{{ number_format($barangusulan->price) }}</td>
+          <td>{{ $barangusulan->status_mutasi_name }}</td>
+          <td>{{ $barangusulan->pegawai_name }}</td>
+          <td>{{ $barangusulan->description }}</td>
         </tr>
         @endforeach
       </tbody>

@@ -111,7 +111,7 @@ class PDFController extends Controller
   }
   public function inventaris_aktif_usulan(){
     //2
-    $barangs = Barangmasuk::join('barang','barang_id','=','barang.id')
+    $barangaktifs = Barangmasuk::join('barang','barang_id','=','barang.id')
       ->join('pegawai','barang_masuk.pegawai_id','=','pegawai.id')
       ->join('status_barang','barang_masuk.status_barang_id','=','status_barang.id')
       ->join('kondisi_barang','barang_masuk.kondisi_barang_id','=','kondisi_barang.id')
@@ -120,7 +120,16 @@ class PDFController extends Controller
       // ->orWhere('kondisi_barang.name','Dalam usulan penghapusan')
       ->orderBy('barang_code', 'asc')
       ->get();
-    $pdf=PDF::loadView('pdf.inventaris2', ['barangs' => $barangs])->setPaper('a4', 'landscape');
+    $barangusulans = Barangkeluar::join('barang','barang_id','=','barang.id')
+        ->join('pegawai','barang_keluar.pegawai_id','=','pegawai.id')
+        ->join('status_mutasi','barang_keluar.status_mutasi_id','=','status_mutasi.id')
+        ->join('kondisi_barang','barang_keluar.kondisi_barang_id','=','kondisi_barang.id')
+        ->select('barang_keluar.*','barang.code as barang_code','barang.name as barang_name','barang.brand as barang_brand','status_mutasi.name as status_mutasi_name','kondisi_barang.name as kondisi_barang_name','pegawai.name as pegawai_name','barang.code as barang_code','barang.name as barang_name')
+        ->where('status_mutasi.id','2')
+        // ->orWhere('kondisi_barang.name','Dalam usulan penghapusan')
+        ->orderBy('barang_code', 'asc')
+        ->get();
+    $pdf=PDF::loadView('pdf.inventaris2', ['barangaktifs'=>$barangaktifs,'barangusulans'=>$barangusulans])->setPaper('a4', 'landscape');
     return $pdf->stream('Inventaris Aset Aktif dan usulan penghapusan.pdf');
   }
   public function inventaris_usulan(){
