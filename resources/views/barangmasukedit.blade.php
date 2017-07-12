@@ -81,7 +81,7 @@
           <div class="form-group">
             <div class="col-sm-offset-3 col-sm-8">
               <button type="submit" class="btn btn-sm btn-primary">Simpan</button>
-              <a href="/inventori" type="submit" class="btn btn-sm btn-default">Batal</a>
+              <a href="/barang/masuk" type="submit" class="btn btn-sm btn-default">Batal</a>
             </div>
           </div>
         </div>

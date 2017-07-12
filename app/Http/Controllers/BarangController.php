@@ -236,7 +236,7 @@ class BarangController extends Controller
   }
   public function barang_masuk_edit($id){
     $satuans = Satuan::orderBy('name', 'asc')->get();
-    $statuss = Status::orderBy('name', 'asc')->get();
+    // $statuss = Status::orderBy('name', 'asc')->get();
     $kondisis = Kondisi::orderBy('name', 'asc')->get();
     $ruangans = Ruangan::orderBy('name', 'asc')->get();
     $pegawais = Pegawai::orderBy('name', 'asc')->get();
@@ -246,7 +246,7 @@ class BarangController extends Controller
       ->join('kondisi_barang','barang_masuk.kondisi_barang_id','=','kondisi_barang.id')
       ->select('barang_masuk.*','barang.name as barang_name','ruangan.name as ruangan_name','pegawai.name as pegawai_name','kondisi_barang.name as kondisi_barang_name')
       ->find($id);
-    return view('barangmasukedit', ['barang' => $barang,'ruangans' => $ruangans, 'pegawais' => $pegawais,'satuans' => $satuans,'statuss'=>$statuss,'kondisis'=>$kondisis]);
+    return view('barangmasukedit', ['barang' => $barang,'ruangans' => $ruangans, 'pegawais' => $pegawais,'satuans' => $satuans,'kondisis'=>$kondisis]);
   }
   public function barang_masuk_update($id, Request $request){
     // dd($request);
