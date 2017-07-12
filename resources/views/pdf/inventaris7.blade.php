@@ -37,22 +37,23 @@
       <table class="table table-striped table-bordered">
         <thead class="atas">
           <tr>
-            <td>&nbsp;</td>
-            <td colspan="2">OPD</td>
-            <td colspan="4">03.06.01. SEKRETARIAT DAERAH</td>
+            <td colspan="10" style="text-align:right;"><strong>LAMPIRAN X</strong></td>
           </tr>
           <tr>
-            <td>&nbsp;</td>
-            <td colspan="2">KABUPATEN/KOTA</td>
-            <td colspan="4">PEMERINTAH KABUPATEN PESISIR SELATAN</td>
+            <td colspan="2">SKPD</td>
+            <td>: ...</td>
           </tr>
           <tr>
-            <td>&nbsp;</td>
+            <td colspan="2">KAB/KOTA</td>
+            <td>: ...</td>
+          </tr>
+          <tr>
             <td colspan="2">PROVINSI</td>
-            <td colspan="4">SUMATERA BARAT</td>
+            <td>: ...</td>
+            <td colspan="7" style="text-align:right; padding: 10px;">KODE LOKASI : ...</td>
           </tr>
           <tr>
-            <td colspan="9" style="text-align:center; padding: 10px; text-transform: uppercase;">DAFTAR BARANG INVENTARIS<br>BARANG HABIS PAKAI PERJENIS BARANG PER SATUAN KERJA<br>{{ date('Y') }}</td>
+            <td colspan="10" style="text-align:center; padding: 10px;"><h3>DAFTAR BARANG INVENTARIS<br>BARANG HABIS PAKAI PERJENIS BARANG PER SATUAN KERJA</h3></td>
           </tr>
         </thead>
       <thead style="text-align:center">
@@ -81,10 +82,9 @@
           <td class="number"><strong>{{$a}}</strong></td>
           <td>{{ $barang->barang_code }}</td>
           <td>{{ $barang->barang_name }}</td>
-          <td>{{ $barang->jumlah_barang }}</td>
-          <td></td>
-          <!-- <td>{{ $barang->whereIn('mutation_name',['Keluar'])->sum('inventori_barang.quantity') }}</td> -->
-          <td class="number">{{ $barang->quantity }}</td>
+          <td>{{ $barang->barang_in_stock }}</td>
+          <td>{{ $barang->barang_out_stock }}</td>
+          <td>{{ $barang->barang_in_stock - $barang->barang_out_stock }} </td>
           <td>{{ $barang->total_harga }}</td>
           <td>{{ $barang->total_harga }}</td>
           <td>{{ $barang->total_harga }}</td>
@@ -94,19 +94,19 @@
       </tbody>
       <thead class="signature">
         <tr>
-          <td colspan="4">Mengetahui</td>
-          <td colspan="2">&nbsp;</td>
-          <td colspan="4">PAINAN, {{ date('d M Y') }}</td>
+          <td colspan="3">MENGETAHUI <br> KEPALA SKPD</td>
+          <td colspan="4">&nbsp;</td>
+          <td colspan="3">........................................... <br> PENGURUS BARANG</td>
         </tr>
         <tr>
+          <td colspan="3">&nbsp;</td>
           <td colspan="4">&nbsp;</td>
-          <td colspan="2">&nbsp;</td>
-          <td colspan="4">&nbsp;</td>
+          <td colspan="3">&nbsp;</td>
         </tr>
         <tr>
-          <td colspan="4">Ir. Erizon, MT <br> NIP. 19630323 199003 1 005	</td>
-          <td colspan="2"></td>
-          <td colspan="4">WETRI MULYADEVITA, A.Md <br> NIP. 19800708 200902 2 003</td>
+          <td colspan="3">(...........................................) <br> NIP...........................................</td>
+          <td colspan="4"></td>
+          <td colspan="3">(...........................................) <br> NIP...........................................</td>
         </tr>
       </thead>
     </table>

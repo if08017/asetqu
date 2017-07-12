@@ -86,7 +86,7 @@
                       </td>
                       </form>
                     </tr>
-                    <!-- <tr>
+                    <tr>
                       <form action="laporan/inventaris_perjenis_persatuan_kerja/pdf" method="POST">
                       {{ csrf_field() }}
                       <td>7</td>
@@ -161,7 +161,15 @@
                         <a href="/laporan/1/pdf" class="btn btn-xs btn-danger"><span class="fa fa-file-pdf-o fa-lg"></span></a>
                         <a href="/laporan/1/excel" class="btn btn-xs btn-success"><span class="fa fa-file-excel-o fa-lg"></span></a>
                       </td>
-                    </tr> -->
+                    </tr>
+                    <tr>
+                      <td>11</td>
+                      <td>BUKU BARANG INVENTARIS</td>
+                      <td>
+                        <a href="/laporan/inventaris/buku" class="btn btn-xs btn-danger"><span class="fa fa-file-pdf-o fa-lg"></span></a>
+                        <!-- <a href="/laporan/1/excel" class="btn btn-xs btn-success"><span class="fa fa-file-excel-o fa-lg"></span></a> -->
+                      </td>
+                    </tr>
                   </tbody>
                 </table>
               </div>

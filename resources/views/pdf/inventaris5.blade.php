@@ -37,71 +37,100 @@
       <table class="table table-striped table-bordered">
         <thead class="atas">
           <tr>
-            <td>&nbsp;</td>
-            <td colspan="2">OPD</td>
-            <td colspan="4">03.06.01. SEKRETARIAT DAERAH</td>
+            <td colspan="10" style="text-align:right;"><strong>LAMPIRAN X</strong></td>
           </tr>
           <tr>
-            <td>&nbsp;</td>
-            <td colspan="2">KABUPATEN/KOTA</td>
-            <td colspan="4">PEMERINTAH KABUPATEN PESISIR SELATAN</td>
+            <td colspan="2">SKPD</td>
+            <td>: ...</td>
           </tr>
           <tr>
-            <td>&nbsp;</td>
+            <td colspan="2">KAB/KOTA</td>
+            <td>: ...</td>
+          </tr>
+          <tr>
             <td colspan="2">PROVINSI</td>
-            <td colspan="4">SUMATERA BARAT</td>
+            <td>: ...</td>
+            <td colspan="6" style="text-align:right; padding: 10px;">KODE LOKASI : ...</td>
           </tr>
           <tr>
-            <td colspan="9" style="text-align:center; padding: 10px; text-transform: uppercase;">DAFTAR BARANG INVENTARIS<br>ASET DIMILIKI OLEH {{ $pegawai->name }}<br>{{ date('Y') }}</td>
+            <td colspan="10" style="text-align:center; padding: 10px;"><h3>DAFTAR BARANG INVENTARIS<br>ASET DIMILIKI OLEH {{ $pegawai->name }}</h3></td>
           </tr>
         </thead>
       <thead style="text-align:center">
         <tr>
-          <th>No</th>
-          <th>Kode Barang</th>
-          <th>Nama Barang</th>
-          <th>Merek / Tipe</th>
-          <th>Nomor / Identitas</th>
-          <th>Jumlah Unit</th>
-          <th>Satuan</th>
-          <th>Golongan</th>
-          <th>Kondisi Barang</th>
-          <th>Keterangan</th>
+          <th>NO</th>
+          <th>KODE BARANG</th>
+          <th>NAMA BARANG</th>
+          <th>MEREK / TIPE</th>
+          <th>NOMOR / IDENTITAS</th>
+          <th>JUMLAH UNIT</th>
+          <th>SATUAN</th>
+          <th>GOLONGAN</th>
+          <th>KEADAN BARANG <br>(B,KB,RB)</th>
+          <th>KETERANGAN</th>
         </tr>
       </thead>
       <tbody>
         @php ($a=0)
-        @foreach ($barangs as $barang)
+        @foreach ($barangmasuks as $barangmasuk)
         @php ($a++)
         <tr>
           <td class="number"><strong>{{$a}}</strong></td>
-          <td class="number">{{ $barang->barang_code }}</td>
-          <td>{{ $barang->barang_name }}</td>
-          <td>{{ $barang->brand }}</td>
-          <td>{{ $barang->number }}</td>
-          <td class="number">{{ $barang->quantity }}</td>
-          <td>{{ $barang->satuan_name }}</td>
-          <td>{{ $barang->golongan_name }}</td>
-          <td>{{ $barang->kondisi_name }}</td>
-          <td>{{ $barang->description }}</td>
+          <td class="number">{{ $barangmasuk->barang_code }}</td>
+          <td>{{ $barangmasuk->barang_name }}</td>
+          <td>{{ $barangmasuk->barang_brand }}</td>
+          <td>{{ $barangmasuk->number }}</td>
+          <td class="number">{{ $barangmasuk->quantity }}</td>
+          <td>{{ $barangmasuk->barang_satuan_name }}</td>
+          <td>{{ $barangmasuk->golongan_name }}</td>
+          @if(($barangmasuk->kondisi_barang_id) == 1)
+            <td>B</td>
+          @elseif(($barangmasuk->kondisi_barang_id) == 2)
+            <td>KB</td>
+          @elseif(($barangmasuk->kondisi_barang_id) == 3)
+            <td>RB</td>
+          @endif
+          <td>Barang Masuk</td>
+        </tr>
+        @endforeach
+
+        @foreach ($barangkeluars as $barangkeluar)
+        @php ($a++)
+        <tr>
+          <td class="number"><strong>{{$a}}</strong></td>
+          <td class="number">{{ $barangkeluar->barang_code }}</td>
+          <td>{{ $barangkeluar->barang_name }}</td>
+          <td>{{ $barangkeluar->barang_brand }}</td>
+          <td>{{ $barangkeluar->number }}</td>
+          <td class="number">{{ $barangkeluar->quantity }}</td>
+          <td>{{ $barangkeluar->barang_satuan_name }}</td>
+          <td>{{ $barangkeluar->golongan_name }}</td>
+          @if(($barangkeluar->kondisi_barang_id) == 1)
+            <td>B</td>
+          @elseif(($barangkeluar->kondisi_barang_id) == 2)
+            <td>KB</td>
+          @elseif(($barangkeluar->kondisi_barang_id) == 3)
+            <td>RB</td>
+          @endif
+          <td>Barang Mutasi</td>
         </tr>
         @endforeach
       </tbody>
       <thead class="signature">
         <tr>
-          <td colspan="4">Mengetahui</td>
-          <td colspan="2">&nbsp;</td>
-          <td colspan="4">PAINAN, {{ date('d M Y') }}</td>
+          <td colspan="3">MENGETAHUI <br> KEPALA SKPD</td>
+          <td colspan="4">&nbsp;</td>
+          <td colspan="3">........................................... <br> PENGURUS BARANG</td>
         </tr>
         <tr>
+          <td colspan="3">&nbsp;</td>
           <td colspan="4">&nbsp;</td>
-          <td colspan="2">&nbsp;</td>
-          <td colspan="4">&nbsp;</td>
+          <td colspan="3">&nbsp;</td>
         </tr>
         <tr>
-          <td colspan="4">Ir. Erizon, MT <br> NIP. 19630323 199003 1 005	</td>
-          <td colspan="2"></td>
-          <td colspan="4">WETRI MULYADEVITA, A.Md <br> NIP. 19800708 200902 2 003</td>
+          <td colspan="3">(...........................................) <br> NIP...........................................</td>
+          <td colspan="4"></td>
+          <td colspan="3">(...........................................) <br> NIP...........................................</td>
         </tr>
       </thead>
     </table>

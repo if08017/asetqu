@@ -147,11 +147,13 @@ class PDFController extends Controller
   }
   public function inventaris_mutasi_hapus(){
     //4
-    $barangs = Inventori::join('barang','barang_id','=','barang.id')
-      ->join('pegawai','inventori_barang.pegawai_id','=','pegawai.id')
-      ->select('inventori_barang.*','pegawai.name as pegawai_name','barang.code as barang_code','barang.name as barang_name')
-      ->where('inventori_barang.status_name','Mutasi Pindah')
-      ->orWhere('inventori_barang.status_name','Dihapuskan')
+    $barangs = Barangkeluar::join('barang','barang_id','=','barang.id')
+      ->join('ruangan','barang_keluar.ruangan_id','=','ruangan.id')
+      ->join('pegawai','barang_keluar.pegawai_id','=','pegawai.id')
+      ->join('status_mutasi','barang_keluar.status_mutasi_id','=','status_mutasi.id')
+      ->select('barang_keluar.*','pegawai.name as pegawai_name','barang.brand as barang_brand','ruangan.code as ruangan_code','barang.code as barang_code','barang.name as barang_name','status_mutasi.name as status_mutasi_name')
+      ->where('status_mutasi.id','2')
+      ->orWhere('status_mutasi.id','1')
       ->orderBy('barang_code', 'asc')
       ->get();
 
@@ -161,24 +163,38 @@ class PDFController extends Controller
   public function inventaris_perpengguna(Request $request){
     //5
     $pegawais = Pegawai::where('id', $request->pengguna)->first();
-    $barangs = Inventori::join('barang','barang_id','=','barang.id')
-      ->join('pegawai','inventori_barang.pegawai_id','=','pegawai.id')
-      ->join('golongan_barang','inventori_barang.golongan_barang_id','=','golongan_barang.id')
-      ->select('inventori_barang.*','pegawai.name as pegawai_name','barang.code as barang_code','barang.name as barang_name','golongan_barang.name as golongan_name')
-      ->where('inventori_barang.pegawai_id',$request->pengguna)
-      ->whereNotIn('inventori_barang.golongan_barang_id',[1])
+    $barangmasuks = Barangmasuk::join('barang','barang_masuk.barang_id','=','barang.id')
+      ->join('pegawai','barang_masuk.pegawai_id','=','pegawai.id')
+      ->join('golongan_barang','barang.golongan_barang_id','=','golongan_barang.id')
+      ->select('barang_masuk.*','pegawai.name as pegawai_name','barang.code as barang_code','barang.name as barang_name','barang.brand as barang_brand','barang.satuan_name as barang_satuan_name','golongan_barang.name as golongan_name')
+      ->where('barang_masuk.pegawai_id',$request->pengguna)
+      ->whereNotIn('barang.golongan_barang_id',[1])
       ->orderBy('barang_code', 'asc')
       ->get();
+    $barangkeluars = Barangkeluar::join('barang','barang_keluar.barang_id','=','barang.id')
+        ->join('pegawai','barang_keluar.pegawai_id','=','pegawai.id')
+        ->join('golongan_barang','barang.golongan_barang_id','=','golongan_barang.id')
+        ->select('barang_keluar.*','pegawai.name as pegawai_name','barang.code as barang_code','barang.name as barang_name','barang.brand as barang_brand','barang.satuan_name as barang_satuan_name','golongan_barang.name as golongan_name')
+        ->where('barang_keluar.pegawai_id',$request->pengguna)
+        ->whereNotIn('barang.golongan_barang_id',[1])
+        ->orderBy('barang_code', 'asc')
+        ->get();
 
-    $pdf=PDF::loadView('pdf.inventaris5', ['barangs' => $barangs, 'pegawai' => $pegawais])->setPaper('a4', 'landscape');
+    $pdf=PDF::loadView('pdf.inventaris5', ['barangmasuks' => $barangmasuks,'barangkeluars'=>$barangkeluars, 'pegawai' => $pegawais])->setPaper('a4', 'landscape');
     return $pdf->stream('Inventaris_Bulanan.pdf');
   }
   public function inventaris_perjenis(Request $request){
     //6
-    $barangs = Inventori::join('barang','barang_id','=','barang.id')
-      ->join('golongan_barang','inventori_barang.golongan_barang_id','=','golongan_barang.id')
-      ->select('inventori_barang.*',DB::raw('SUM(inventori_barang.quantity) as jumlah_barang'),DB::raw('SUM(inventori_barang.price) as total_harga'),'barang.code as barang_code','barang.name as barang_name','golongan_barang.name as golongan_name')
-      ->where('inventori_barang.bidang_barang_id',$request->bidang)
+    $barangs = Barangmasuk::join('barang','barang_masuk.barang_id','=','barang.id')
+      ->join('golongan_barang','barang.golongan_barang_id','=','golongan_barang.id')
+      ->select('barang_masuk.*',
+      DB::raw('SUM(barang_masuk.quantity) as jumlah_barang'),
+      DB::raw('SUM(barang_masuk.price) as total_harga'),
+      'barang.code as barang_code',
+      'barang.name as barang_name',
+      'barang.satuan_name as barang_satuan_name',
+      'golongan_barang.name as golongan_name')
+      ->where('barang.bidang_barang_id',$request->bidang)
       ->groupBy('barang_code')
       ->orderBy('barang_code', 'asc')
       ->get();
@@ -188,32 +204,22 @@ class PDFController extends Controller
   }
   public function inventaris_perjenis_persatuan_kerja(Request $request){
     //7
-    // dd($request);
-    // $bidangs = Bidang::where('id', $request->bidang)->first();
-    // $satuankerjas = Satuankerja::where('id', $request->satuan)->first();
-    // $barangs = Barang::join('bidang_barang','barang.bidang_barang_id','=','bidang_barang.id')
-    //           ->join('pegawai','pegawai_id','=','pegawai.id')
-    //           ->get();
-    // $grouped = $barangs->groupBy('golongan_barang_id')->sortBy('code')->toArray();
-    // // $total_masuk = $grouped->count();
-    // dd($grouped);
-
-    $barangs = Inventori::join('barang','barang_id','=','barang.id')
-      ->join('pegawai','inventori_barang.pegawai_id','=','pegawai.id')
+    $barangs = Barangkeluar::join('barang','barang_keluar.barang_id','=','barang.id')
+      ->join('pegawai','barang_keluar.pegawai_id','=','pegawai.id')
       ->join('satuan_kerja','pegawai.satuan_kerja_id','=','satuan_kerja.id')
-      ->join('golongan_barang','inventori_barang.golongan_barang_id','=','golongan_barang.id')
-      ->join('bidang_barang','inventori_barang.bidang_barang_id','=','bidang_barang.id')
+      ->join('golongan_barang','barang.golongan_barang_id','=','golongan_barang.id')
+      ->join('bidang_barang','barang.bidang_barang_id','=','bidang_barang.id')
       ->select(
-        'inventori_barang.*',
-        DB::raw('SUM(inventori_barang.quantity) as jumlah_barang'),
-        DB::raw('SUM(inventori_barang.price) as total_harga'),
+        'barang_keluar.*',
+        'barang.in_stock as barang_in_stock',
+        'barang.out_stock as barang_out_stock',
         'barang.code as barang_code',
         'barang.name as barang_name',
         'golongan_barang.name as golongan_barang_name',
         'bidang_barang.name as bidang_barang_name',
         'satuan_kerja.name as satuan_kerja_name')
-      ->where('inventori_barang.golongan_barang_id',[1])
-      ->where('inventori_barang.bidang_barang_id',$request->bidang)
+      ->where('barang.golongan_barang_id',[1])
+      ->where('barang.bidang_barang_id',$request->bidang)
       ->where('satuan_kerja_id',$request->satuan)
       ->groupBy('barang_code')
       ->orderBy('barang_code', 'asc')

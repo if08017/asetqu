@@ -37,22 +37,23 @@
       <table class="table table-striped table-bordered">
         <thead class="atas">
           <tr>
-            <td>&nbsp;</td>
-            <td colspan="2">OPD</td>
-            <td colspan="4">03.06.01. SEKRETARIAT DAERAH</td>
+            <td colspan="7" style="text-align:right;"><strong>LAMPIRAN X</strong></td>
           </tr>
           <tr>
-            <td>&nbsp;</td>
-            <td colspan="2">KABUPATEN/KOTA</td>
-            <td colspan="4">PEMERINTAH KABUPATEN PESISIR SELATAN</td>
+            <td colspan="2">SKPD</td>
+            <td>: ...</td>
           </tr>
           <tr>
-            <td>&nbsp;</td>
+            <td colspan="2">KAB/KOTA</td>
+            <td>: ...</td>
+          </tr>
+          <tr>
             <td colspan="2">PROVINSI</td>
-            <td colspan="4">SUMATERA BARAT</td>
+            <td>: ...</td>
+            <td colspan="4" style="text-align:right; padding: 10px;">KODE LOKASI : ...</td>
           </tr>
           <tr>
-            <td colspan="11" style="text-align:center; padding: 10px;">DAFTAR BARANG INVENTARIS<br>ASET YANG DIMUTASIKAN PINDAH DAN ASET YANG TELAH DIHAPUS<br>{{ date('Y')}}</td>
+            <td colspan="7" style="text-align:center; padding: 10px;"><h3>ASET YANG DIMUTASIKAN PINDAH DAN ASET YANG TELAH DIHAPUS</td>
           </tr>
         </thead>
       <thead style="text-align:center">
@@ -61,12 +62,7 @@
           <th>Kode Barang</th>
           <th>Nama Barang</th>
           <th>Merek / Tipe</th>
-          <th>Ukuran</th>
-          <th>Bahan</th>
-          <th>Tahun Pembuatan</th>
           <th>Nomor / Identitas</th>
-          <th>Asal Usul</th>
-          <th>Harga</th>
           <th>Pengguna</th>
           <th>Status</th>
           <th>Keterangan</th>
@@ -80,34 +76,29 @@
           <td class="number"><strong>{{$a}}</strong></td>
           <td class="number">{{ $barang->barang_code }}</td>
           <td>{{ $barang->barang_name }}</td>
-          <td>{{ $barang->brand }}</td>
-          <td>{{ $barang->size }}</td>
-          <td>{{ $barang->material }}</td>
-          <td class="number">{{ $barang->created_year }}</td>
+          <td>{{ $barang->barang_brand }}</td>
           <td>{{ $barang->number }}</td>
-          <td>{{ $barang->source }}</td>
-          <td class="number">{{ number_format($barang->price) }}</td>
           <td>{{ $barang->pegawai_name }}</td>
-          <td>{{ $barang->status_name }}</td>
+          <td>{{ $barang->status_mutasi_name }}</td>
           <td>{{ $barang->description }}</td>
         </tr>
         @endforeach
       </tbody>
       <thead class="signature">
         <tr>
-          <td colspan="4">Mengetahui</td>
-          <td colspan="5">&nbsp;</td>
-          <td colspan="4">PAINAN, {{ date('d M Y') }}</td>
+          <td colspan="3">MENGETAHUI <br> KEPALA SKPD</td>
+          <td colspan="2">&nbsp;</td>
+          <td colspan="3">........................................... <br> PENGURUS BARANG</td>
         </tr>
         <tr>
-          <td colspan="4">&nbsp;</td>
-          <td colspan="5">&nbsp;</td>
-          <td colspan="4">&nbsp;</td>
+          <td colspan="3">&nbsp;</td>
+          <td colspan="2">&nbsp;</td>
+          <td colspan="3">&nbsp;</td>
         </tr>
         <tr>
-          <td colspan="4">Ir. Erizon, MT <br> NIP. 19630323 199003 1 005	</td>
-          <td colspan="5"></td>
-          <td colspan="4">WETRI MULYADEVITA, A.Md <br> NIP. 19800708 200902 2 003</td>
+          <td colspan="3">(...........................................) <br> NIP...........................................</td>
+          <td colspan="2"></td>
+          <td colspan="3">(...........................................) <br> NIP...........................................</td>
         </tr>
       </thead>
     </table>
