@@ -229,6 +229,34 @@ class PDFController extends Controller
     $pdf=PDF::loadView('pdf.inventaris7', ['barangs'=>$barangs])->setPaper('a4', 'landscape');
     return $pdf->stream('Inventaris_Bulanan.pdf');
   }
+  public function inventaris_perruangan(Request $request){
+    //10
+    $barangs = Barangkeluar::join('barang','barang_keluar.barang_id','=','barang.id')
+      ->join('barang_masuk','barang.id','=','barang_masuk.barang_id')
+      ->select(
+        'barang_keluar.barang_id as code2',
+        'barang_masuk.color as color',
+        'barang_keluar.size as size',
+        'barang_keluar.material as material',
+        'barang_masuk.created_year as created_year',
+        'barang.name as barang_name',
+        'barang.brand as barang_brand',
+        'barang.code as barang_code',
+        'barang.satuan_name as barang_satuan_name',
+        DB::raw('(select SUM(quantity) from barang_keluar WHERE barang_id=code2 ) as jumlah_barang'),
+        DB::raw('(select SUM(quantity) from barang_keluar WHERE kondisi_barang_id=1 AND barang_id=code2 ) as total_b'),
+        DB::raw('(select SUM(quantity) from barang_keluar WHERE kondisi_barang_id=2 AND barang_id=code2 )as total_kb'),
+        DB::raw('(select SUM(quantity) from barang_keluar WHERE kondisi_barang_id=3 AND barang_id=code2 )as total_rb')
+      )
+      ->groupBy('barang_keluar.barang_id')
+      ->orderBy('code','asc')
+      ->where('barang_keluar.ruangan_id','=',$request->ruangan)
+      ->get();
+      // dd($barangs);
+
+    $pdf=PDF::loadView('pdf.inventaris10', ['barangs'=>$barangs])->setPaper('a4', 'landscape');
+    return $pdf->stream('Inventaris_Bulanan.pdf');
+  }
   public function getPDF(){
     $kategoris = Barang::all();
     $pdf=PDF::loadView('pdf.customer', ['kategoris' => $kategoris]);

@@ -106,8 +106,8 @@
                         </select>
                       </td>
                       <td>
-                        <button class="btn btn-xs btn-danger"><span class="fa fa-file-pdf-o fa-lg"></span></button>
-                        <a href="/laporan/1/excel" class="btn btn-xs btn-success"><span class="fa fa-file-excel-o fa-lg"></span></a>
+                        <button class="btn btn-xs btn-danger"><span class="fa fa-file-pdf-o fa-lg"></span> <span class="badge">locked</span></button>
+                        <!-- <a href="/laporan/1/excel" class="btn btn-xs btn-success"><span class="fa fa-file-excel-o fa-lg"></span></a> -->
                       </td>
                       </form>
                     </tr>
@@ -115,20 +115,24 @@
                       <td>8</td>
                       <td>
                         BARANG HABIS PAKAI PERJENIS BARANG PER UNIT KERJA (BAGIAN)
-                        <select class="" name="">
-                          <optgroup label="Pilih Jenis">
-                            <option value="">okso</option>
-                          </optgroup>
+                        <select class="" name="bidang" required>
+                          <option value="">Pilih Bidang Barang</option>
+                          @foreach ($bidangs_barang_habis_pakai as $bidang_barang_habis_pakai)
+                          <option value="{{ $bidang_barang_habis_pakai->id }}">{{ $bidang_barang_habis_pakai->name }}</option>
+                          @endforeach
                         </select>
-                        <select class="" name="">
-                          <optgroup label="Pilih Unit Kerja">
-                            <option value="">okso</option>
+                        <select class="from-control unitkerja" id="sel1" name="unitkerja" required>
+                          <option value="">Pilih unit kerja</option>
+                          <optgroup label="---">
+                            @foreach($unit_kerjas as $unit_kerja)
+                              <option value="{{ $unit_kerja->id }}">{{ $unit_kerja->name }}</option>
+                            @endforeach
                           </optgroup>
                         </select>
                       </td>
                       <td>
                         <a href="/laporan/1/pdf" class="btn btn-xs btn-danger"><span class="fa fa-file-pdf-o fa-lg"></span></a>
-                        <a href="/laporan/1/excel" class="btn btn-xs btn-success"><span class="fa fa-file-excel-o fa-lg"></span></a>
+                        <!-- <a href="/laporan/1/excel" class="btn btn-xs btn-success"><span class="fa fa-file-excel-o fa-lg"></span></a> -->
                       </td>
                     </tr>
 
@@ -136,30 +140,39 @@
                       <td>9</td>
                       <td>
                         BARANG HABIS PAKAI PER UNIT KERJA (BAGIAN)
-                        <select class="" name="">
-                          <optgroup label="Pilih Unit Kerja">
-                            <option value="">okso</option>
+                        <select class="from-control unitkerja" id="sel1" name="unitkerja" required>
+                          <option value="">Pilih unit kerja</option>
+                          <optgroup label="---">
+                            @foreach($unit_kerjas as $unit_kerja)
+                              <option value="{{ $unit_kerja->id }}">{{ $unit_kerja->name }}</option>
+                            @endforeach
                           </optgroup>
                         </select>
                       </td>
                       <td>
-                        <a href="/laporan/1/pdf" class="btn btn-xs btn-danger"><span class="fa fa-file-pdf-o fa-lg"></span></a>
-                        <a href="/laporan/1/excel" class="btn btn-xs btn-success"><span class="fa fa-file-excel-o fa-lg"></span></a>
+                        <a href="/laporan/1/pdf" class="btn btn-xs btn-danger"><span class="fa fa-file-pdf-o fa-lg"> </span><span class="badge">locked</span></a>
+                        <!-- <a href="/laporan/1/excel" class="btn btn-xs btn-success"><span class="fa fa-file-excel-o fa-lg"></span></a> -->
                       </td>
                     </tr>
                     <tr>
+                      <form action="laporan/inventaris_perruangan/pdf" method="POST">
+                        {{ csrf_field() }}
                       <td>10</td>
                       <td>
+
                         KARTU INVENTARIS RUANGAN (PERUANGAN)
-                        <select class="" name="">
-                          <optgroup label="Pilih Ruangan">
-                            <option value="">okso</option>
+                        <select class="from-control" id="sel1" name="ruangan" required>
+                          <option value="">Pilih ruangan</option>
+                          <optgroup label="---">
+                            @foreach($ruangans as $ruangan)
+                              <option value="{{ $ruangan->id }}">{{ $ruangan->name }}</option>
+                            @endforeach
                           </optgroup>
                         </select>
                       </td>
                       <td>
-                        <a href="/laporan/1/pdf" class="btn btn-xs btn-danger"><span class="fa fa-file-pdf-o fa-lg"></span></a>
-                        <a href="/laporan/1/excel" class="btn btn-xs btn-success"><span class="fa fa-file-excel-o fa-lg"></span></a>
+                        <button class="btn btn-xs btn-danger"><span class="fa fa-file-pdf-o fa-lg"></span></button>
+                        <!-- <a href="/laporan/1/excel" class="btn btn-xs btn-success"><span class="fa fa-file-excel-o fa-lg"></span></a> -->
                       </td>
                     </tr>
                     <tr>
